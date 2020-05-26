@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GCHomeModelStoreContainer" CdmEntityContainer="GCHomeEntities">
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="GCHomeModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="StuNumber" ColumnName="StuNumber" />
+          <ScalarProperty Name="StuName" ColumnName="StuName" />
+          <ScalarProperty Name="StuCount" ColumnName="StuCount" />
+          <ScalarProperty Name="StuPwd" ColumnName="StuPwd" />
+          <ScalarProperty Name="StuSex" ColumnName="StuSex" />
+          <ScalarProperty Name="StuAge" ColumnName="StuAge" />
+          <ScalarProperty Name="OccupancyStatus" ColumnName="OccupancyStatus" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

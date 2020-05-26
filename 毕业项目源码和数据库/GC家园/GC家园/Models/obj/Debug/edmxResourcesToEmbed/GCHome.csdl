@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GCHomeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StuID" />
+    </Key>
+    <Property Name="StuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuSex" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="StuAge" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="OccupancyStatus" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="GCHomeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Student" EntityType="Self.Student" />
+  </EntityContainer>
+</Schema>

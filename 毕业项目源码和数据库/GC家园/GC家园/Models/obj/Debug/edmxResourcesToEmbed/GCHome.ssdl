@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GCHomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StuID" />
+    </Key>
+    <Property Name="StuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuCount" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuPwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuSex" Type="nvarchar" MaxLength="2" />
+    <Property Name="StuAge" Type="nvarchar" MaxLength="2" />
+    <Property Name="OccupancyStatus" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityContainer Name="GCHomeModelStoreContainer">
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

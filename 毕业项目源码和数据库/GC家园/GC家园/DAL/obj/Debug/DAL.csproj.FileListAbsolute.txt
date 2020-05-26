@@ -1,0 +1,14 @@
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\DAL.dll
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\DAL.pdb
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\Models.dll
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\Models.pdb
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\obj\Debug\DAL.dll
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\obj\Debug\DAL.pdb
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\DAL.dll.config
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\Models.dll.config
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.SqlServer.xml
