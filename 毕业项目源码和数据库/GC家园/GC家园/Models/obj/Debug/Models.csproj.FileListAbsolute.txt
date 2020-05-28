@@ -11,3 +11,16 @@ C:\Users\Falling-Down\Desktop\GC家园\GC家园\Models\bin\Debug\zh-Hans\EntityF
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\Models\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\Models\obj\Debug\Models.csproj.CopyComplete
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\Models\obj\Debug\Models.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\Models.dll.config
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\Models.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\Models.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\EntityFramework.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\EntityFramework.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\obj\Debug\Models.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\obj\Debug\Models.csproj.CopyComplete
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\obj\Debug\Models.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\Models\obj\Debug\Models.pdb

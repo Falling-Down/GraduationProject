@@ -12,3 +12,17 @@ C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.Sq
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\Models.dll.config
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.xml
 C:\Users\Falling-Down\Desktop\GC家园\GC家园\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\DAL.dll.config
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\DAL.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\DAL.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\EntityFramework.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\Models.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\Models.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\Models.dll.config
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\EntityFramework.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.pdb
