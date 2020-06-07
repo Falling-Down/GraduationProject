@@ -13,10 +13,10 @@ namespace Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GCHomeEntities : DbContext
+    public partial class GCHomeEntitiesDB : DbContext
     {
-        public GCHomeEntities()
-            : base("name=GCHomeEntities")
+        public GCHomeEntitiesDB()
+            : base("name=GCHomeEntitiesDB")
         {
         }
     

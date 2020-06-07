@@ -19,8 +19,8 @@ namespace Models
         public string StuName { get; set; }
         public string StuCount { get; set; }
         public string StuPwd { get; set; }
-        public string StuSex { get; set; }
-        public string StuAge { get; set; }
+        public Nullable<int> StuSex { get; set; }
+        public Nullable<int> StuAge { get; set; }
         public Nullable<int> OccupancyStatus { get; set; }
         public Nullable<int> IsDelete { get; set; }
     }

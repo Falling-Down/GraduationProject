@@ -14,8 +14,8 @@
           <Property Name="StuName" Type="nvarchar" MaxLength="50" />
           <Property Name="StuCount" Type="nvarchar" MaxLength="50" />
           <Property Name="StuPwd" Type="nvarchar" MaxLength="50" />
-          <Property Name="StuSex" Type="nvarchar" MaxLength="2" />
-          <Property Name="StuAge" Type="nvarchar" MaxLength="2" />
+          <Property Name="StuSex" Type="int" />
+          <Property Name="StuAge" Type="int" />
           <Property Name="OccupancyStatus" Type="int" />
           <Property Name="IsDelete" Type="int" />
         </EntityType>
@@ -36,12 +36,12 @@
           <Property Name="StuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StuCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StuPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StuSex" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="StuAge" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="StuSex" Type="Int32" />
+          <Property Name="StuAge" Type="Int32" />
           <Property Name="OccupancyStatus" Type="Int32" />
           <Property Name="IsDelete" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="GCHomeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student" EntityType="Self.Student" />
         </EntityContainer>
       </Schema>
@@ -49,7 +49,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GCHomeModelStoreContainer" CdmEntityContainer="GCHomeEntities">
+        <EntityContainerMapping StorageEntityContainer="GCHomeModelStoreContainer" CdmEntityContainer="GCHomeEntitiesDB">
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="GCHomeModel.Student">
               <MappingFragment StoreEntitySet="Student">

@@ -9,7 +9,7 @@ namespace DAL
 {
     public class GCHomeDAL
     {
-        GCHomeEntities db = new GCHomeEntities();
+        GCHomeEntitiesDB db = new GCHomeEntitiesDB();
         public List<Student> select() {
            return db.Student.ToList();
         }

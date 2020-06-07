@@ -9,12 +9,12 @@
     <Property Name="StuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="StuCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="StuPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StuSex" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="StuAge" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="StuSex" Type="Int32" />
+    <Property Name="StuAge" Type="Int32" />
     <Property Name="OccupancyStatus" Type="Int32" />
     <Property Name="IsDelete" Type="Int32" />
   </EntityType>
-  <EntityContainer Name="GCHomeEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Student" EntityType="Self.Student" />
   </EntityContainer>
 </Schema>

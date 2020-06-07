@@ -9,8 +9,8 @@
     <Property Name="StuName" Type="nvarchar" MaxLength="50" />
     <Property Name="StuCount" Type="nvarchar" MaxLength="50" />
     <Property Name="StuPwd" Type="nvarchar" MaxLength="50" />
-    <Property Name="StuSex" Type="nvarchar" MaxLength="2" />
-    <Property Name="StuAge" Type="nvarchar" MaxLength="2" />
+    <Property Name="StuSex" Type="int" />
+    <Property Name="StuAge" Type="int" />
     <Property Name="OccupancyStatus" Type="int" />
     <Property Name="IsDelete" Type="int" />
   </EntityType>

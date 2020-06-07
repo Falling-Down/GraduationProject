@@ -4,18 +4,19 @@ StuNumber nvarchar(50), --学生学号
 StuName nvarchar(50), --学生姓名
 StuCount nvarchar(50), --学生登录账号
 StuPwd nvarchar(50), --学生登录密码
-StuSex nvarchar(2), --学生性别
-StuAge nvarchar(2), --学生年龄
+StuSex int,--0为女1为男学生性别 --学生性别
+StuAge int, --学生年龄
 OccupancyStatus int, --入住状态（0未入住1已入住2已迁出）
 IsDelete int --是否删除（0未删除1已删除）
 )
+insert into Student values('201817380104','陈柏鹏','201817380104','12345',1,19,0,0)
 create table Admin( --管理员表
 AdminID int, --管理员ID
 FloorID int, --楼宇ID
 AdminCount nvarchar(50), --管理员登录账号
 AdminPwd nvarchar(50), --管理员登录密码
-AdminSex nvarchar(2), --管理员性别
-AdminAge nvarchar(2), --管理员年龄
+AdminSex int,--0为女1为男 --管理员性别
+AdminAge int, --管理员年龄
 AdminKinds int, --管理员种类（0楼宇管理员1系统管理员）
 IsDelete int --是否删除（0未删除1已删除）
 )

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/style.css">
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+
 </head>
 <body class="user-select">
     <section class="container-fluid">
@@ -18,7 +19,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                          
+
                             <li class="dropdown">
                                 <a href="#">admin</a>
                             </li>
@@ -39,13 +40,13 @@
         <div class="row">
             <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="">首页</a></li>
+                    <li class="active"><a href="/Login/Home">首页</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">学生管理</a></li>
-                    <li><a href="">学生入住登记</a></li>
+                    <li><a href="#" onclick="nbclass()">学生管理</a></li>
+                    <li><a href="#">学生入住登记</a></li>
                     <li><a href="#">学生缺勤管理</a></li>
-                    <li><a href="">学生寝室调换</a></li>
+                    <li><a href="#">学生寝室调换</a></li>
                     <li><a href="#">学生迁出记录</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
@@ -64,9 +65,41 @@
         </div>
     </section>
 
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+    <script type="text/javascript">
+
+        //$(".row ul").on("click", "li", function () {
+        //    alert();
+        //    $(".row ul li").removeClass("active");
+        //    $(this).addClass("active");
+        //});
+        ``
+        $('.row ul li').click(function () {
+
+            $(".row ul li").removeClass("active");
+            $(this).addClass("active");
+        })
+
+        function nbclass() {
+           
+            $.ajax({
+                type: post,
+                url: "/Student/Index",
+                success: function () {
+                    alert();
+                    window.location.reload();
+                }
+            })
+        }
+    </script>
+
+
 </html>
+

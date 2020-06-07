@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+<h2>Index</h2>
+<table class="table table-bordered table-striped">
+    <thead class="bg-info">
+        <tr>
+            <th>学生学号</th>
+            <th>学生登录账号</th>
+            <th>学生登录密码</th>
+            <th>学生性别</th>
+            <th>学生年龄</th>
+            <th>入住状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.list as List<Student>)
+        {
+            <tr>
+                <td>@item.StuNumber</td>
+                <td>@item.StuName</td>
+                <td>@item.StuCount</td>
+                <td>@item.StuPwd</td>
+                <td>
+                    @if (item.StuSex == 1)
+                    {
+                        @:男
+                    }
+                    else
+                    {
+                        @:女
+                    }
+                </td>
+                <td>
+                    @if (item.OccupancyStatus == 0)
+                    {
+                        @:未入住
+                    }
+                    else if (item.OccupancyStatus == 1)
+                    {
+                        @:已入住
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
