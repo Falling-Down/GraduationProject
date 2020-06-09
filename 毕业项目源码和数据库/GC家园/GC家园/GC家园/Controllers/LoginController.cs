@@ -20,5 +20,7 @@ namespace GC家园.Controllers
         public ActionResult Home() {
             return View();
         }
+
+      
     }
 }

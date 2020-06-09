@@ -13,10 +13,17 @@ namespace GC家园.Controllers
         // GET: Student
         public ActionResult Index()
         {
+          
             ViewBag.list = db.Student.ToList();
             return View();
         }
 
-       
+        public ActionResult MoveintoFun() {
+            return View();
+        }
+
+        public ActionResult AttendanceFun() {
+            return View();
+        }
     }
 }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/style.css">
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 </head>
 <body class="user-select">
@@ -43,19 +44,19 @@
                     <li class="active"><a href="/Login/Home">首页</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#" onclick="nbclass()">学生管理</a></li>
-                    <li><a href="#">学生入住登记</a></li>
-                    <li><a href="#">学生缺勤管理</a></li>
+                    <li><a href="/Student/Index" data-ajax-update="#main" data-ajax="true">学生管理</a></li>
+                    <li><a href="/Student/MoveintoFun" data-ajax-update="#main" data-ajax="true">学生入住管理</a></li>
+                    <li><a href="/Student/AttendanceFun" data-ajax-update="#main" data-ajax="true">学生缺勤管理</a></li>
                     <li><a href="#">学生寝室调换</a></li>
                     <li><a href="#">学生迁出记录</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">楼宇管理员管理</a></li>
-                    <li><a href="">楼宇管理</a></li>
-                    <li><a href="">宿舍管理</a></li>
+                    <li><a href="#">楼宇管理员管理</a></li>
+                    <li><a href="#">楼宇管理</a></li>
+                    <li><a href="#">宿舍管理</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="">修改密码</a></li>
+                    <li><a href="#">修改密码</a></li>
                 </ul>
             </aside>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
@@ -72,34 +73,30 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
-
-    <script type="text/javascript">
-
-        //$(".row ul").on("click", "li", function () {
-        //    alert();
-        //    $(".row ul li").removeClass("active");
-        //    $(this).addClass("active");
-        //});
-        ``
-        $('.row ul li').click(function () {
-
-            $(".row ul li").removeClass("active");
-            $(this).addClass("active");
-        })
-
-        function nbclass() {
-           
-            $.ajax({
-                type: post,
-                url: "/Student/Index",
-                success: function () {
-                    alert();
-                    window.location.reload();
-                }
-            })
-        }
-    </script>
-
-
 </html>
 
+<script type="text/javascript">
+
+    //$(".row ul").on("click", "li", function () {
+    //    alert();
+    //    $(".row ul li").removeClass("active");
+    //    $(this).addClass("active");
+    //});
+
+    
+        $('.row ul li').click(function () {
+            $(".row ul li").removeClass("active");
+        $(this).addClass("active");
+    })
+
+
+        //function nbclass() {
+        //    $.ajax({
+        //    type: "post",
+        //    url: "/Student/Index",
+        //        success: function (data) {
+        //          $("#main").html(data);
+        //      }
+        //})
+        //}
+    </script>

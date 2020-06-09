@@ -1,51 +1,121 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+    Layout = null;
 }
 @using Models
-<h2>Index</h2>
-<table class="table table-bordered table-striped">
-    <thead class="bg-info">
-        <tr>
-            <th>学生学号</th>
-            <th>学生登录账号</th>
-            <th>学生登录密码</th>
-            <th>学生性别</th>
-            <th>学生年龄</th>
-            <th>入住状态</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in ViewBag.list as List<Student>)
-        {
-            <tr>
-                <td>@item.StuNumber</td>
-                <td>@item.StuName</td>
-                <td>@item.StuCount</td>
-                <td>@item.StuPwd</td>
-                <td>
-                    @if (item.StuSex == 1)
-                    {
-                        @:男
-                    }
-                    else
-                    {
-                        @:女
-                    }
-                </td>
-                <td>
-                    @if (item.OccupancyStatus == 0)
-                    {
-                        @:未入住
-                    }
-                    else if (item.OccupancyStatus == 1)
-                    {
-                        @:已入住
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<!DOCTYPE html>
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div style="width:90%;margin:10px auto">
+        <div class="">
+            <a href="" class="btn btn-primary col-lg-1" data-toggle="modal" data-target="#Add">添加学生</a>
+            <div class="form-inline  col-lg-9">
+
+                <select class="form-control col-lg-offset-4">
+                    <option>--请选择--</option>
+                    <option>未入住</option>
+                    <option>已入住</option>
+                </select>
+                <input type="text" placeholder="请输入学号" class="form-control " style="width:250px" />
+                <a href="" class="btn btn-info">查询</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>登录账号</th>
+                    <th>登录密码</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>入住状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.list as List<Student>)
+                {
+                    <tr>
+                        <td>@item.StuNumber</td>
+                        <td>@item.StuName</td>
+                        <td>@item.StuCount</td>
+                        <td>@item.StuPwd</td>
+                        <td>
+                            @if (item.StuSex == 1)
+                            {
+                                @:男
+                            }
+                            else
+                            {
+                                @:女
+                            }
+                        </td>
+                        <td>@item.StuAge</td>
+                        <td>
+                            @if (item.OccupancyStatus == 0)
+                            {
+                                @:未入住
+                            }
+                            else if (item.OccupancyStatus == 1)
+                            {
+                                @:已入住
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel" style="color:black">添加学生</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <label>学号：</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-inline">
+                        <label>姓名：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" />
+                    </div>
+                    <div class="form-inline">
+                        <label>登录账号：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" />
+                    </div>
+                    <div class="form-inline">
+                        <label>登录密码：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" />
+                    </div>
+                    <div class="form-inline">
+                        <label>性别：</label>
+                        <select class="form-control" style="margin-top:10px">
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                    </div>
+                    <div class="form-inline" style="margin-top:10px">
+                        <label>年龄：</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+</html>
