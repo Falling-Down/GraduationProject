@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -183,6 +184,11 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\MoveintoFun.cshtml" />
     <Content Include="Views\Student\AttendanceFun.cshtml" />
+    <Content Include="Views\Student\ExchangeFun.cshtml" />
+    <Content Include="Views\Student\Moveout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\FloorFun.cshtml" />
+    <Content Include="Views\Admin\DormFun.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

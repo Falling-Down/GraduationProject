@@ -25,5 +25,13 @@ namespace GC家园.Controllers
         public ActionResult AttendanceFun() {
             return View();
         }
+
+        public ActionResult ExchangeFun() {
+            return View();
+        }
+
+        public ActionResult Moveout() {
+            return View();
+        }
     }
 }

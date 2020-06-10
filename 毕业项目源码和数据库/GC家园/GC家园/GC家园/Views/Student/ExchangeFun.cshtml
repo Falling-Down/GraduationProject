@@ -8,20 +8,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AttendanceFun</title>
+    <title>ExchangeFun</title>
 </head>
 <body>
     <div style="width:90%;margin:10px auto">
         <div class="">
-            <a href="" class="btn btn-success col-lg-1" data-toggle="modal" data-target="#Add">缺勤添加</a>
+            <a href="" class="btn bg-primary col-lg-1" data-toggle="modal" data-target="#Add">寝室调换</a>
             <div class="form-inline  col-lg-9">
-
-                <select class="form-control col-lg-offset-4">
-                    <option>--请选择--</option>
-                    <option>楼宇1</option>
-                    <option>楼宇2</option>
-                </select>
-                <input type="text" placeholder="请输入学号" class="form-control " style="width:250px" />
+                <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" />
                 <a href="" class="btn btn-info">查询</a>
             </div>
         </div>
@@ -30,9 +24,10 @@
                 <tr>
                     <th>学号</th>
                     <th>姓名</th>
-                    <th>晚归日期</th>
-                    <th>晚归原因</th>
-
+                    <th>原楼宇</th>
+                    <th>现楼宇</th>
+                    <th>原宿舍</th>
+                    <th>现宿舍</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +35,5 @@
         </table>
 
     </div>
-
 </body>
 </html>
