@@ -26,5 +26,6 @@ namespace Models
         }
     
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Admin> Admin { get; set; }
     }
 }

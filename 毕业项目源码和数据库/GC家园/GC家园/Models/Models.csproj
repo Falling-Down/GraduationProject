@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="GCHome.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

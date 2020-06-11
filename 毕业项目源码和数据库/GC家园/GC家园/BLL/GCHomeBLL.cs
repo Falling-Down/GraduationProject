@@ -14,5 +14,14 @@ namespace BLL
         public List<Student> select() {
             return GCHomeDAL.select();
         }
+
+        public Admin SelectAdmin(string Count, string Password,int Role) {
+            return GCHomeDAL.SelectAdmin(Count,Password,Role);
+        }
+
+        public Student SelectStudent(string Count, string Password)
+        {
+            return GCHomeDAL.SelectStudent(Count,Password);
+        }
     }
 }

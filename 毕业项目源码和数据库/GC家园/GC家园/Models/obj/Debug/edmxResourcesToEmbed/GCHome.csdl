@@ -16,5 +16,19 @@
   </EntityType>
   <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Student" EntityType="Self.Student" />
+    <EntitySet Name="Admin" EntityType="GCHomeModel.Admin" />
   </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FloorID" Type="Int32" />
+    <Property Name="AdminCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminSex" Type="Int32" />
+    <Property Name="AdminAge" Type="Int32" />
+    <Property Name="AdminKinds" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+  </EntityType>
 </Schema>

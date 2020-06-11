@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GCHomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FloorID" Type="int" />
+    <Property Name="AdminCount" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminPwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminSex" Type="int" />
+    <Property Name="AdminAge" Type="int" />
+    <Property Name="AdminKinds" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
   <EntityType Name="Student">
     <Key>
       <PropertyRef Name="StuID" />
@@ -15,6 +28,7 @@
     <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityContainer Name="GCHomeModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

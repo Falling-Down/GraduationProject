@@ -17,6 +17,34 @@ namespace GC家园.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(string Count,string Password,int Role)
+        {
+            if (Role==0||Role==1)
+            {
+                if (GCHomeBLL.SelectAdmin(Count, Password,Role)!=null)
+                {
+                    return RedirectToAction("Home", "Login");
+                }
+                else
+                {
+                    return Content("<script>alert('用户不存在');history.back()<script>");
+                }
+            }
+            if (Role==2)
+            {
+                if (GCHomeBLL.SelectStudent(Count, Password) != null)
+                {
+                    return RedirectToAction("Home", "Login");
+                }
+                else
+                {
+                    return Content("<script>alert('用户不存在');history.back()<script>");
+                }
+            }
+            return View();
+        }
+
         public ActionResult Home() {
             return View();
         }

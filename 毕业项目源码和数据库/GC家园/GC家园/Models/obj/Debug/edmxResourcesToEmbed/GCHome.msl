@@ -16,5 +16,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="GCHomeModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AdminKinds" ColumnName="AdminKinds" />
+          <ScalarProperty Name="AdminAge" ColumnName="AdminAge" />
+          <ScalarProperty Name="AdminSex" ColumnName="AdminSex" />
+          <ScalarProperty Name="AdminPwd" ColumnName="AdminPwd" />
+          <ScalarProperty Name="AdminCount" ColumnName="AdminCount" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
