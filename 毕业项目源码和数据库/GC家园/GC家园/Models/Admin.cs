@@ -22,6 +22,7 @@ namespace Models
         public Nullable<int> AdminAge { get; set; }
         public Nullable<int> AdminKinds { get; set; }
         public Nullable<int> IsDelete { get; set; }
+        public string AdminName { get; set; }
     
         public virtual Floor Floor { get; set; }
     }

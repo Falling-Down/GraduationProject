@@ -135,9 +135,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="color:black">编辑学生</h4>
             </div>
-            <form action="/Student/Index" method="post">
+            <form action="/Student/EditStudent" method="post">
                 <div class="modal-body" style="padding-bottom:10px">
-                    <input type="hidden" name="StuID" />
+                    <input type="hidden" name="StuID" id="StuID" />
+                    <input type="hidden" name="OccupancyStatus" id="OccupancyStatus" />
+                    <input type="hidden" name="IsDelete" id="IsDelete" />
                     <div class="form-inline a_1">
                         <label>学号：</label>
                         <input type="text" class="form-control" name="StuNumber" id="StuNumber" />
@@ -202,6 +204,8 @@
                     $('.StuSex:eq(3)').attr("checked", true);
                 }
                 modal.find('#StuAge').val(data.StuAge);
+                modal.find('#OccupancyStatus').val(data.OccupancyStatus);
+                modal.find('#IsDelete').val(data.IsDelete);
             },
             error: function () {
                 alert('');

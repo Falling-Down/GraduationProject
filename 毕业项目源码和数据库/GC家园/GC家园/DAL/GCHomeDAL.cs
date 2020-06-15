@@ -53,6 +53,16 @@ namespace DAL
             return db.Student.Find(StuID);
         }
 
+        public bool EditStudent(Student stu) {
+            db.Entry(stu).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public int StuNumberOrNot(string StuNumber) {
             if (db.Student.FirstOrDefault(p => p.StuNumber == StuNumber)!=null)
             {
@@ -94,6 +104,71 @@ namespace DAL
             db.Entry(stu).State = System.Data.Entity.EntityState.Modified;
             int result = db.SaveChanges();
             if (result > 0) {
+                return true;
+            }
+            return false;
+        }
+
+        public List<Attendance> AttendanSelect() {
+            return db.Attendance.OrderByDescending(p=>p.AttendanceID).ToList();
+        }
+
+        public bool StuNumberNewOrnot(string StuNumber) {
+            if (db.Student.FirstOrDefault(p => p.StuNumber == StuNumber) != null) {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddAttendace(Attendance ad) {
+            db.Attendance.Add(ad);
+            int result = db.SaveChanges();
+            if (result>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<Admin> SelectAdmin() {
+            return db.Admin.Where(p => p.AdminKinds == 0).OrderByDescending(m => m.AdminID).ToList();
+        }
+
+        public bool AddFloor(Floor fr) {
+            db.Floor.Add(fr);
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AjaxFloorName(string FloorName) {
+            if (db.Floor.FirstOrDefault(p => p.FloorName == FloorName)==null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AjaxDorm(int FloorID, string DormName) {
+            List<Dorm> Dlist = db.Dorm.Where(p => p.FloorID == FloorID).ToList();
+            foreach (var item in Dlist as List<Dorm>)
+            {
+                if (item.DormName==DormName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool AddDorm(Dorm dm){
+            db.Dorm.Add(dm);
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
                 return true;
             }
             return false;

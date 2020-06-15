@@ -40,6 +40,13 @@ namespace GC家园.Controllers
             return Json(stu, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult EditStudent(Student stu) {
+            if (GCHomeBLL.EditStudent(stu))
+            {
+                return RedirectToAction("Index","Student");
+            }
+            return View();
+        }
 
         public ActionResult MoveintoFun() {
             ViewBag.FloorList = GCHomeBLL.FloorSelect();
@@ -80,6 +87,25 @@ namespace GC家园.Controllers
         }
 
         public ActionResult AttendanceFun() {
+            ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+            return View();
+        }
+
+        [HttpPost]
+        public int ajaxOrnotStuNumber(string StuNumber) {
+            if (GCHomeBLL.StuNumberNewOrnot(StuNumber))
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        public ActionResult AddAttendace(Attendance ad,string StuNumber) {
+            ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+            if (GCHomeBLL.AddAttendace(ad))
+            {
+                return RedirectToAction("AttendanceFun","Student");
+            }
             return View();
         }
 

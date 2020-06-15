@@ -3,27 +3,69 @@
     ViewBag.Title = "DormFun";
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
-
-    <div style="width:90%;margin:10px auto">
-        <div class="">
-            <a href="" class="btn btn-success col-lg-1" data-toggle="modal" data-target="#Add">添加宿舍</a>
-            <div class="form-inline  col-lg-9">
-                <input type="text" placeholder="请输入学号" class="form-control col-lg-offset-4" style="width:250px" />
-                <a href="" class="btn btn-info">查询</a>
+@using Models
+@{
+    List<Floor> Floorlist = ViewBag.FloorList;
+}
+<div style="width:50%;height:auto;margin:70px auto">
+    <form class="form-horizontal" role="form" action="/Admin/AddDorm">
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">楼宇</label>
+            <div class="col-sm-9">
+                <select name="FloorID" class="form-control" id="FloorID" onchange="nbclass()">
+                    @foreach (var item in Floorlist as List<Floor>)
+                    {
+                        <option value="@item.FloorID">@item.FloorName</option>
+                    }
+                </select>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>宿舍编号</th>
-                    <th>所在楼宇</th>
-                    <th>宿舍名称</th>
-                    <th>宿舍人数</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">宿舍名称</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="DormName" id="DormName" onblur="nbclass()" />
+                <p id="content" style="color:red"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">宿舍人数</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="DormPeople" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-10">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-    </div>
-
+@section scripts{
+    <script>
+        function nbclass() {
+            var FloorID = $("#FloorID").val();
+            var DormName = $("#DormName").val();
+            $.ajax({
+                type: "post",
+                url: "/Admin/AjaxDorm",
+                data: {
+                    FloorID: FloorID,
+                    "DormName": DormName
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        $("#content").html("该楼宇已有该宿舍,请重新输入！");
+                        $("#DormName").val("");
+                    } else {
+                        $("#content").html("");
+                    }
+                },
+                error: function () {
+                    $("#content").html("");
+                    $("#DormName").val("");
+                }
+            })
+        }
+    </script>
+}

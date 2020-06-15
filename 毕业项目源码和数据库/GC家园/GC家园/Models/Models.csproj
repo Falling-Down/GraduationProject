@@ -53,6 +53,9 @@
     <Compile Include="Admin.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Attendance.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="Dorm.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>

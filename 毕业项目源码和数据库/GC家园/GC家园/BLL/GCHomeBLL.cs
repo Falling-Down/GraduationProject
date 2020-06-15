@@ -37,6 +37,10 @@ namespace BLL
             return GCHomeDAL.EditStu(StuID);
         }
 
+        public bool EditStudent(Student stu) {
+            return GCHomeDAL.EditStudent(stu);
+        }
+
         public int StuNumberOrNot(string StuNumber) {
             return GCHomeDAL.StuNumberOrNot(StuNumber);
         }
@@ -59,6 +63,38 @@ namespace BLL
 
         public bool UpdateState(int? StuID) {
             return GCHomeDAL.UpdateState(StuID);
+        }
+
+        public List<Attendance> AttendanSelect() {
+            return GCHomeDAL.AttendanSelect();
+        }
+
+        public bool StuNumberNewOrnot(string StuNumber) {
+            return GCHomeDAL.StuNumberNewOrnot(StuNumber);
+        }
+
+        public bool AddAttendace(Attendance ad) {
+            return GCHomeDAL.AddAttendace(ad);
+        }
+
+        public List<Admin> SelectAdmin() {
+            return GCHomeDAL.SelectAdmin();
+        }
+
+        public bool AddFloor(Floor fr) {
+            return GCHomeDAL.AddFloor(fr);
+        }
+
+        public bool AjaxFloorName(string FloorName) {
+            return GCHomeDAL.AjaxFloorName(FloorName);
+        }
+
+        public bool AjaxDorm(int FloorID, string DormName) {
+            return GCHomeDAL.AjaxDorm(FloorID,DormName);
+        }
+
+        public bool AddDorm(Dorm dm) {
+            return GCHomeDAL.AddDorm(dm);
         }
      }
 }

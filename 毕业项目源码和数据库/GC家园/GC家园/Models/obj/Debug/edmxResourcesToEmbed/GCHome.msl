@@ -19,6 +19,7 @@
     <EntitySetMapping Name="Admin">
       <EntityTypeMapping TypeName="GCHomeModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="AdminKinds" ColumnName="AdminKinds" />
           <ScalarProperty Name="AdminAge" ColumnName="AdminAge" />
@@ -62,6 +63,16 @@
           <ScalarProperty Name="FloorID" ColumnName="FloorID" />
           <ScalarProperty Name="StuID" ColumnName="StuID" />
           <ScalarProperty Name="MoveintoID" ColumnName="MoveintoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendance">
+      <EntityTypeMapping TypeName="GCHomeModel.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="AttendanceReason" ColumnName="AttendanceReason" />
+          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

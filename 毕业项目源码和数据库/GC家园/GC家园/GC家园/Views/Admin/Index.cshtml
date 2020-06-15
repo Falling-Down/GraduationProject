@@ -3,6 +3,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
+@using Models
+@{ 
+    List<Admin> Adminlist = ViewBag.AdminList;
+}
 
 <div style="width:90%;margin:10px auto">
     <div class="">
@@ -12,18 +16,38 @@
             <a href="" class="btn btn-info">查询</a>
         </div>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
         <thead>
             <tr>
                 <th>管理的楼宇</th>
+                <th>姓名</th>
                 <th>登录账号</th>
-                <th>登录密码</th>
                 <th>性别</th>
                 <th>年龄</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Adminlist as List<Admin>)
+            {
+                <tr>
+                    <td>@item.Floor.FloorName</td>
+                    <td>@item.AdminName</td>
+                    <td>@item.AdminCount</td>
+                    <td>
+                        @if(item.AdminSex==1)
+                        {
+                            @:男
+                        }
+                        else
+                        {
+                            @:女
+                        }
+                    </td>
+                    <td>@item.AdminAge</td>
+                    <td>操作</td>
+                </tr>
+            }
         </tbody>
     </table>
 

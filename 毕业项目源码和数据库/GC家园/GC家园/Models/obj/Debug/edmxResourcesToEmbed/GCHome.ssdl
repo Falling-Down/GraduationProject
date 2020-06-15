@@ -12,6 +12,16 @@
     <Property Name="AdminAge" Type="int" />
     <Property Name="AdminKinds" Type="int" />
     <Property Name="IsDelete" Type="int" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="AttendanceID" />
+    </Key>
+    <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="AttendanceDate" Type="date" />
+    <Property Name="AttendanceReason" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Dorm">
     <Key>
@@ -71,6 +81,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Attendanc__StuID__5165187F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Dorm__FloorID__49C3F6B7">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
@@ -121,6 +143,7 @@
   </Association>
   <EntityContainer Name="GCHomeModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
@@ -128,6 +151,10 @@
     <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="Self.FK__Admin__FloorID__3F466844">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="Self.FK__Attendanc__StuID__5165187F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
     <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
       <End Role="Floor" EntitySet="Floor" />

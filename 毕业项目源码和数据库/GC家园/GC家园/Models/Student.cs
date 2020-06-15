@@ -18,6 +18,7 @@ namespace Models
         public Student()
         {
             this.Moveinto = new HashSet<Moveinto>();
+            this.Attendance = new HashSet<Attendance>();
         }
     
         public int StuID { get; set; }
@@ -32,5 +33,7 @@ namespace Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Moveinto> Moveinto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attendance> Attendance { get; set; }
     }
 }

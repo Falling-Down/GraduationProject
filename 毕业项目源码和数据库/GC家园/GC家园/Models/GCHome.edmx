@@ -17,6 +17,16 @@
           <Property Name="AdminAge" Type="int" />
           <Property Name="AdminKinds" Type="int" />
           <Property Name="IsDelete" Type="int" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StuID" Type="int" />
+          <Property Name="AttendanceDate" Type="date" />
+          <Property Name="AttendanceReason" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Dorm">
           <Key>
@@ -76,6 +86,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Attendanc__StuID__5165187F">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Dorm__FloorID__49C3F6B7">
           <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
           <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
@@ -126,6 +148,7 @@
         </Association>
         <EntityContainer Name="GCHomeModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
@@ -133,6 +156,10 @@
           <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="Self.FK__Admin__FloorID__3F466844">
             <End Role="Floor" EntitySet="Floor" />
             <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="Self.FK__Attendanc__StuID__5165187F">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
           <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
             <End Role="Floor" EntitySet="Floor" />
@@ -169,6 +196,7 @@
           <Property Name="OccupancyStatus" Type="Int32" />
           <Property Name="IsDelete" Type="Int32" />
           <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Student" ToRole="Moveinto" />
+          <NavigationProperty Name="Attendance" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Student" ToRole="Attendance" />
         </EntityType>
         <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student" EntityType="Self.Student" />
@@ -196,6 +224,11 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="Moveinto" EntitySet="Moveinto" />
           </AssociationSet>
+          <EntitySet Name="Attendance" EntityType="GCHomeModel.Attendance" />
+          <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="GCHomeModel.FK__Attendanc__StuID__5165187F">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
           <Key>
@@ -210,6 +243,7 @@
           <Property Name="AdminKinds" Type="Int32" />
           <Property Name="IsDelete" Type="Int32" />
           <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Admin__FloorID__3F466844" FromRole="Admin" ToRole="Floor" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Dorm">
           <Key>
@@ -311,6 +345,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StuID" Type="Int32" />
+          <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
+          <Property Name="AttendanceReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Attendance" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Attendanc__StuID__5165187F">
+          <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -335,6 +391,7 @@
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="GCHomeModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="AdminKinds" ColumnName="AdminKinds" />
                 <ScalarProperty Name="AdminAge" ColumnName="AdminAge" />
@@ -378,6 +435,16 @@
                 <ScalarProperty Name="FloorID" ColumnName="FloorID" />
                 <ScalarProperty Name="StuID" ColumnName="StuID" />
                 <ScalarProperty Name="MoveintoID" ColumnName="MoveintoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendance">
+            <EntityTypeMapping TypeName="GCHomeModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceReason" ColumnName="AttendanceReason" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="StuID" ColumnName="StuID" />
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -30,5 +30,6 @@ namespace Models
         public virtual DbSet<Dorm> Dorm { get; set; }
         public virtual DbSet<Floor> Floor { get; set; }
         public virtual DbSet<Moveinto> Moveinto { get; set; }
+        public virtual DbSet<Attendance> Attendance { get; set; }
     }
 }

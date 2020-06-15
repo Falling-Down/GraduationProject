@@ -15,6 +15,8 @@
         <AssociationConnector Association="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" />
         <AssociationConnector Association="GCHomeModel.FK__Moveinto__FloorI__4D94879B" />
         <AssociationConnector Association="GCHomeModel.FK__Moveinto__StuID__4CA06362" />
+        <EntityTypeShape EntityType="GCHomeModel.Attendance" Width="1.5" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="GCHomeModel.FK__Attendanc__StuID__5165187F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
