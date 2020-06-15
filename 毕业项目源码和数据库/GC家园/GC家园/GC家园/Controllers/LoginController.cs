@@ -24,22 +24,26 @@ namespace GC家园.Controllers
             {
                 if (GCHomeBLL.SelectAdmin(Count, Password,Role)!=null)
                 {
+                    Session["Role"] = Role;
+                    Session["Count"] = Count;
                     return RedirectToAction("Home", "Login");
                 }
                 else
                 {
-                    return Content("<script>alert('用户不存在');history.back()<script>");
+                    return Content("<script>alert('用户不存在');history.back()</script>");
                 }
             }
             if (Role==2)
             {
                 if (GCHomeBLL.SelectStudent(Count, Password) != null)
                 {
+                    Session["Role"] = 2;
+                    Session["Count"] = Count;
                     return RedirectToAction("Home", "Login");
                 }
                 else
                 {
-                    return Content("<script>alert('用户不存在');history.back()<script>");
+                    return Content("<script>alert('用户不存在');history.back()</script>");
                 }
             }
             return View();
@@ -49,6 +53,9 @@ namespace GC家园.Controllers
             return View();
         }
 
-      
+        public ActionResult SignOut() {
+            Session["Count"] = null;
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

@@ -7,6 +7,14 @@
       <Diagram DiagramId="ff31a1cdb7004db78bdccecb1868bdab" Name="Diagram1">
         <EntityTypeShape EntityType="GCHomeModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GCHomeModel.Admin" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GCHomeModel.Dorm" Width="1.5" PointX="3.125" PointY="4.125" />
+        <EntityTypeShape EntityType="GCHomeModel.Floor" Width="1.5" PointX="5.875" PointY="1" />
+        <EntityTypeShape EntityType="GCHomeModel.Moveinto" Width="1.5" PointX="6.875" PointY="4.125" />
+        <AssociationConnector Association="GCHomeModel.FK__Admin__FloorID__3F466844" />
+        <AssociationConnector Association="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" />
+        <AssociationConnector Association="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" />
+        <AssociationConnector Association="GCHomeModel.FK__Moveinto__FloorI__4D94879B" />
+        <AssociationConnector Association="GCHomeModel.FK__Moveinto__StuID__4CA06362" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

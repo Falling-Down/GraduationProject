@@ -30,5 +30,40 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Dorm">
+      <EntityTypeMapping TypeName="GCHomeModel.Dorm">
+        <MappingFragment StoreEntitySet="Dorm">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="DormPeople" ColumnName="DormPeople" />
+          <ScalarProperty Name="DormName" ColumnName="DormName" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="DormID" ColumnName="DormID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Floor">
+      <EntityTypeMapping TypeName="GCHomeModel.Floor">
+        <MappingFragment StoreEntitySet="Floor">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="FloorMark" ColumnName="FloorMark" />
+          <ScalarProperty Name="FloorTime" ColumnName="FloorTime" />
+          <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moveinto">
+      <EntityTypeMapping TypeName="GCHomeModel.Moveinto">
+        <MappingFragment StoreEntitySet="Moveinto">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="MoveintoPeople" ColumnName="MoveintoPeople" />
+          <ScalarProperty Name="MoveintoTime" ColumnName="MoveintoTime" />
+          <ScalarProperty Name="DormID" ColumnName="DormID" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="MoveintoID" ColumnName="MoveintoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

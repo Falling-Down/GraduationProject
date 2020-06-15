@@ -12,24 +12,26 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Floor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Floor()
         {
+            this.Admin = new HashSet<Admin>();
+            this.Dorm = new HashSet<Dorm>();
             this.Moveinto = new HashSet<Moveinto>();
         }
     
-        public int StuID { get; set; }
-        public string StuNumber { get; set; }
-        public string StuName { get; set; }
-        public string StuCount { get; set; }
-        public string StuPwd { get; set; }
-        public Nullable<int> StuSex { get; set; }
-        public Nullable<int> StuAge { get; set; }
-        public Nullable<int> OccupancyStatus { get; set; }
+        public int FloorID { get; set; }
+        public string FloorName { get; set; }
+        public Nullable<System.DateTime> FloorTime { get; set; }
+        public string FloorMark { get; set; }
         public Nullable<int> IsDelete { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Admin> Admin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dorm> Dorm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Moveinto> Moveinto { get; set; }
     }

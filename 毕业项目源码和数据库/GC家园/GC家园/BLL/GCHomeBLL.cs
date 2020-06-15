@@ -23,5 +23,42 @@ namespace BLL
         {
             return GCHomeDAL.SelectStudent(Count,Password);
         }
-    }
+
+        public bool AddStudent(Student stu) {
+            return GCHomeDAL.AddStudent(stu);
+        }
+
+        public List<Student> LikeSelect(int? State, string StuName="") {
+            return GCHomeDAL.LikeSelect(State,StuName);
+        }
+
+        public Student EditStu(int StuID)
+        {
+            return GCHomeDAL.EditStu(StuID);
+        }
+
+        public int StuNumberOrNot(string StuNumber) {
+            return GCHomeDAL.StuNumberOrNot(StuNumber);
+        }
+
+        public List<Floor> FloorSelect() {
+            return GCHomeDAL.FloorSelect();
+        }
+
+        public List<Dorm> DormSelect(int FloorID) {
+            return GCHomeDAL.DormSelect(FloorID);
+        }
+
+        public int ReturnStuIDByStuNumber(string StuNumber) {
+            return GCHomeDAL.ReturnStuIDByStuNumber(StuNumber);
+        }
+
+        public bool AddMoveinto(Moveinto moin) {
+            return GCHomeDAL.AddMoveinto(moin);
+        }
+
+        public bool UpdateState(int? StuID) {
+            return GCHomeDAL.UpdateState(StuID);
+        }
+     }
 }

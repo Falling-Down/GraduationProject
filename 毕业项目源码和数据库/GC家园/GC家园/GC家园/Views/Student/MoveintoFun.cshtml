@@ -1,46 +1,51 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "MoveintoFun";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+@{ 
+    List<Floor> Floorlist = ViewBag.FloorList;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>MoveintoFun</title>
-</head>
-<body>
     <div style="width:50%;height:auto;margin:70px auto">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" action="/Student/AddMoveinto">
             <div class="form-group">
                 <label for="firstname" class="col-sm-2 control-label">学生学号</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="firstname" placeholder="请输入学生学号">
+                    <input type="text" class="form-control" name="StuNumber" placeholder="请输入学生学号" onblur="nbclass()" id="StuNumber">
+                    <p id="content" style="color:red"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastname" class="col-sm-2 control-label">楼宇</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="lastname" placeholder="请输入楼宇">
+                    <select class="form-control" onchange="change()" id="FloorID" name="FloorID">
+                        <option value="">--请选择--</option>
+                        @foreach (var item in Floorlist as List<Floor>)
+                        {
+                            <option value="@item.FloorID">@item.FloorName</option>
+                        }
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastname" class="col-sm-2 control-label">宿舍</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="lastname" placeholder="请输入宿舍">
+                    <select class="form-control" id="DormID" name="DormID">
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastname" class="col-sm-2 control-label">入住时间</label>
                 <div class="col-sm-9">
-                    <input type="date" class="form-control" id="lastname" placeholder="请输入宿舍">
+                    <input type="date" class="form-control" name="MoveintoTime" placeholder="请输入宿舍">
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastname" class="col-sm-2 control-label">登记人</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="lastname" placeholder="请输入登记人">
+                    <input type="text" class="form-control" name="MoveintoPeople" placeholder="请输入登记人">
                 </div>
             </div>
             <div class="form-group">
@@ -51,5 +56,49 @@
         </form>
     </div>
 
-</body>
-</html>
+<script type="text/javascript">
+    function nbclass() {
+        var StuNumber = $("#StuNumber").val();
+        $.ajax({
+            type: "post",
+            url: "/Student/AjaxStuNumber",
+            data: { "StuNumber": StuNumber },
+            success: function (data) {
+                if (data == 2) {
+                    $("#content").html("该学生已入住");
+                    $("#StuNumber").val("");
+                } else if(data == 0){
+                     $("#content").html("暂未查询到该学生，请重新输入！");
+                    $("#StuNumber").val("");
+                } else {
+                    $("#content").html("");
+                }
+            }
+        })
+    }
+
+    function change() {
+
+        var FloorID = $("#FloorID").val();
+        $.ajax({
+            type: "post",
+            url: "/Student/AjaxDorm",
+            data: { FloorID: FloorID },
+            dataType: "Json",
+            success: function (data) {
+                var msg = jQuery.parseJSON(data);
+                console.log(msg);
+                var select = $("#DormID");
+                for (var i = 0; i < msg.length; i++) {
+                    var option = $('<option>' + msg[0].DormName + '</option>');
+                    option.val(msg[0].DormID);
+                    select.append(option);
+                }
+            },
+            error: function () {
+                var select = $("#DormID");
+                select.html("");
+            }
+        })
+    }
+</script>

@@ -18,6 +18,38 @@
           <Property Name="AdminKinds" Type="int" />
           <Property Name="IsDelete" Type="int" />
         </EntityType>
+        <EntityType Name="Dorm">
+          <Key>
+            <PropertyRef Name="DormID" />
+          </Key>
+          <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorID" Type="int" />
+          <Property Name="DormName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DormPeople" Type="int" />
+          <Property Name="IsDelete" Type="int" />
+        </EntityType>
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="FloorID" />
+          </Key>
+          <Property Name="FloorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FloorTime" Type="date" />
+          <Property Name="FloorMark" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="int" />
+        </EntityType>
+        <EntityType Name="Moveinto">
+          <Key>
+            <PropertyRef Name="MoveintoID" />
+          </Key>
+          <Property Name="MoveintoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StuID" Type="int" />
+          <Property Name="FloorID" Type="int" />
+          <Property Name="DormID" Type="int" />
+          <Property Name="MoveintoTime" Type="date" />
+          <Property Name="MoveintoPeople" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="int" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StuID" />
@@ -32,9 +64,92 @@
           <Property Name="OccupancyStatus" Type="int" />
           <Property Name="IsDelete" Type="int" />
         </EntityType>
+        <Association Name="FK__Admin__FloorID__3F466844">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dorm__FloorID__49C3F6B7">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+          <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Dorm">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__DormID__4E88ABD4">
+          <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
+          <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dorm">
+              <PropertyRef Name="DormID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="DormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__FloorI__4D94879B">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+          <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__StuID__4CA06362">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GCHomeModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="Self.FK__Admin__FloorID__3F466844">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Dorm" EntitySet="Dorm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="Self.FK__Moveinto__DormID__4E88ABD4">
+            <End Role="Dorm" EntitySet="Dorm" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__FloorI__4D94879B" Association="Self.FK__Moveinto__FloorI__4D94879B">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__StuID__4CA06362" Association="Self.FK__Moveinto__StuID__4CA06362">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -53,10 +168,34 @@
           <Property Name="StuAge" Type="Int32" />
           <Property Name="OccupancyStatus" Type="Int32" />
           <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Student" ToRole="Moveinto" />
         </EntityType>
         <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="Admin" EntityType="GCHomeModel.Admin" />
+          <EntitySet Name="Dorm" EntityType="GCHomeModel.Dorm" />
+          <EntitySet Name="Floor" EntityType="GCHomeModel.Floor" />
+          <EntitySet Name="Moveinto" EntityType="GCHomeModel.Moveinto" />
+          <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="GCHomeModel.FK__Admin__FloorID__3F466844">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="GCHomeModel.FK__Dorm__FloorID__49C3F6B7">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Dorm" EntitySet="Dorm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="GCHomeModel.FK__Moveinto__DormID__4E88ABD4">
+            <End Role="Dorm" EntitySet="Dorm" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__FloorI__4D94879B" Association="GCHomeModel.FK__Moveinto__FloorI__4D94879B">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moveinto__StuID__4CA06362" Association="GCHomeModel.FK__Moveinto__StuID__4CA06362">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Moveinto" EntitySet="Moveinto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
           <Key>
@@ -70,7 +209,108 @@
           <Property Name="AdminAge" Type="Int32" />
           <Property Name="AdminKinds" Type="Int32" />
           <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Admin__FloorID__3F466844" FromRole="Admin" ToRole="Floor" />
         </EntityType>
+        <EntityType Name="Dorm">
+          <Key>
+            <PropertyRef Name="DormID" />
+          </Key>
+          <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorID" Type="Int32" />
+          <Property Name="DormName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DormPeople" Type="Int32" />
+          <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Dorm" ToRole="Floor" />
+          <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Dorm" ToRole="Moveinto" />
+        </EntityType>
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="FloorID" />
+          </Key>
+          <Property Name="FloorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FloorTime" Type="DateTime" Precision="0" />
+          <Property Name="FloorMark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Admin" Relationship="GCHomeModel.FK__Admin__FloorID__3F466844" FromRole="Floor" ToRole="Admin" />
+          <NavigationProperty Name="Dorm" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Floor" ToRole="Dorm" />
+          <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__FloorI__4D94879B" FromRole="Floor" ToRole="Moveinto" />
+        </EntityType>
+        <EntityType Name="Moveinto">
+          <Key>
+            <PropertyRef Name="MoveintoID" />
+          </Key>
+          <Property Name="MoveintoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StuID" Type="Int32" />
+          <Property Name="FloorID" Type="Int32" />
+          <Property Name="DormID" Type="Int32" />
+          <Property Name="MoveintoTime" Type="DateTime" Precision="0" />
+          <Property Name="MoveintoPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Dorm" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Moveinto" ToRole="Dorm" />
+          <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Moveinto__FloorI__4D94879B" FromRole="Moveinto" ToRole="Floor" />
+          <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Moveinto" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Admin__FloorID__3F466844">
+          <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dorm__FloorID__49C3F6B7">
+          <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Dorm">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__DormID__4E88ABD4">
+          <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dorm">
+              <PropertyRef Name="DormID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="DormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__FloorI__4D94879B">
+          <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="FloorID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="FloorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moveinto__StuID__4CA06362">
+          <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Moveinto">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -103,6 +343,41 @@
                 <ScalarProperty Name="AdminCount" ColumnName="AdminCount" />
                 <ScalarProperty Name="FloorID" ColumnName="FloorID" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dorm">
+            <EntityTypeMapping TypeName="GCHomeModel.Dorm">
+              <MappingFragment StoreEntitySet="Dorm">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="DormPeople" ColumnName="DormPeople" />
+                <ScalarProperty Name="DormName" ColumnName="DormName" />
+                <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+                <ScalarProperty Name="DormID" ColumnName="DormID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Floor">
+            <EntityTypeMapping TypeName="GCHomeModel.Floor">
+              <MappingFragment StoreEntitySet="Floor">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="FloorMark" ColumnName="FloorMark" />
+                <ScalarProperty Name="FloorTime" ColumnName="FloorTime" />
+                <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+                <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moveinto">
+            <EntityTypeMapping TypeName="GCHomeModel.Moveinto">
+              <MappingFragment StoreEntitySet="Moveinto">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="MoveintoPeople" ColumnName="MoveintoPeople" />
+                <ScalarProperty Name="MoveintoTime" ColumnName="MoveintoTime" />
+                <ScalarProperty Name="DormID" ColumnName="DormID" />
+                <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+                <ScalarProperty Name="StuID" ColumnName="StuID" />
+                <ScalarProperty Name="MoveintoID" ColumnName="MoveintoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

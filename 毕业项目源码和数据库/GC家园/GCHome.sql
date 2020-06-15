@@ -9,6 +9,7 @@ StuAge int, --学生年龄
 OccupancyStatus int, --入住状态（0未入住1已入住2已迁出）
 IsDelete int --是否删除（0未删除1已删除）
 )
+update Student set  OccupancyStatus=1 where StuID='1'
 insert into Student values('201817380104','陈柏鹏','201817380104','12345',1,19,0,0)
 create table Admin( --管理员表
 AdminID int primary key identity(1,1), --管理员ID
@@ -20,7 +21,7 @@ AdminAge int, --管理员年龄
 AdminKinds int, --管理员种类（0楼宇管理员1系统管理员2学生）
 IsDelete int --是否删除（0未删除1已删除）
 )
-select * from Admin
+select * from Student
 insert into Admin(AdminCount,AdminPwd,AdminSex,AdminAge,AdminKinds,IsDelete) values('admin','1234',1,20,1,0)
 insert into Admin values(1,'余罪','1234',1,28,0,0)
 create table Floor( --楼宇表
@@ -33,21 +34,25 @@ IsDelete int --是否删除（0未删除1已删除）
 select * from Floor
 insert into Floor values('翠竹苑A栋','2000-11-15','用于学生的入住',0)
 create table Dorm( --宿舍表
-DormID int, --宿舍ID
-FloorID int, --楼宇ID
+DormID int primary key identity(1,1), --宿舍ID
+FloorID int foreign key references Floor(FloorID), --楼宇ID
 DormName nvarchar(50), --宿舍名称
 DormPeople int, --宿舍人数
 IsDelete int --是否删除（0未删除1已删除）
 )
+select * from Dorm
+insert into Dorm values(1,'201',6,0)
 create table Moveinto( --入住登记表
-MoveintoID int,--入住登记ID
-StuID int, --学生ID
-FloorID int, --楼宇ID
-DormID int, --宿舍ID
+MoveintoID int primary key identity(1,1),--入住登记ID
+StuID int foreign key references Student(StuID), --学生ID
+FloorID int foreign key references Floor(FloorID), --楼宇ID
+DormID int foreign key references Dorm(DormID), --宿舍ID
 MoveintoTime date, --入住登记时间
 MoveintoPeople nvarchar(50), --入住登记人
 IsDelete int --是否删除（0未删除1已删除）
 )
+select * from Moveinto
+insert into Moveinto values(1,1,1,'2019-1-8','翠竹苑A栋宿管',0)
 create table Exchange( --宿舍调换表
 ExchangeID int, --调换ID
 StuID int, --学生ID

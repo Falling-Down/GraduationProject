@@ -27,5 +27,8 @@ namespace Models
     
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Dorm> Dorm { get; set; }
+        public virtual DbSet<Floor> Floor { get; set; }
+        public virtual DbSet<Moveinto> Moveinto { get; set; }
     }
 }

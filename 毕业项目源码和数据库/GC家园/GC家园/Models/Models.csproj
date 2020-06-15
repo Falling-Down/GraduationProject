@@ -53,6 +53,12 @@
     <Compile Include="Admin.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dorm.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Floor.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="GCHome.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GCHome.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Moveinto.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs">

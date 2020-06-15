@@ -1,37 +1,29 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Moveout";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Moveout</title>
-</head>
-<body>
-    <div style="width:90%;margin:10px auto">
-        <div class="">
-            <a href="" class="btn btn-success col-lg-1" data-toggle="modal" data-target="#Add">学生迁出</a>
-            <div class="form-inline  col-lg-9">
-                <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" />
-                <a href="" class="btn btn-info">查询</a>
-            </div>
+<div style="width:90%;margin:10px auto">
+    <div class="">
+        <a href="" class="btn btn-success col-lg-1" data-toggle="modal" data-target="#Add">学生迁出</a>
+        <div class="form-inline  col-lg-9">
+            <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" />
+            <a href="" class="btn btn-info">查询</a>
         </div>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>学号</th>
-                    <th>姓名</th>
-                    <th>迁出时间</th>
-                    <th>备注</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
     </div>
-</body>
-</html>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>迁出时间</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</div>
+

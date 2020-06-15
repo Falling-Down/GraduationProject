@@ -12,24 +12,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Dorm
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Dorm()
         {
             this.Moveinto = new HashSet<Moveinto>();
         }
     
-        public int StuID { get; set; }
-        public string StuNumber { get; set; }
-        public string StuName { get; set; }
-        public string StuCount { get; set; }
-        public string StuPwd { get; set; }
-        public Nullable<int> StuSex { get; set; }
-        public Nullable<int> StuAge { get; set; }
-        public Nullable<int> OccupancyStatus { get; set; }
+        public int DormID { get; set; }
+        public Nullable<int> FloorID { get; set; }
+        public string DormName { get; set; }
+        public Nullable<int> DormPeople { get; set; }
         public Nullable<int> IsDelete { get; set; }
     
+        public virtual Floor Floor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Moveinto> Moveinto { get; set; }
     }

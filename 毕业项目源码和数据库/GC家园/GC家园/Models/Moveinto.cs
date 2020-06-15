@@ -12,17 +12,18 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class Moveinto
     {
-        public int AdminID { get; set; }
+        public int MoveintoID { get; set; }
+        public Nullable<int> StuID { get; set; }
         public Nullable<int> FloorID { get; set; }
-        public string AdminCount { get; set; }
-        public string AdminPwd { get; set; }
-        public Nullable<int> AdminSex { get; set; }
-        public Nullable<int> AdminAge { get; set; }
-        public Nullable<int> AdminKinds { get; set; }
+        public Nullable<int> DormID { get; set; }
+        public Nullable<System.DateTime> MoveintoTime { get; set; }
+        public string MoveintoPeople { get; set; }
         public Nullable<int> IsDelete { get; set; }
     
+        public virtual Dorm Dorm { get; set; }
         public virtual Floor Floor { get; set; }
+        public virtual Student Student { get; set; }
     }
 }
