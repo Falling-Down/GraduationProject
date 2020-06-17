@@ -6,14 +6,17 @@
 @using Models
 @{ 
     List<Admin> Adminlist = ViewBag.AdminList;
+    List<Floor> Floorlist = ViewBag.FloorList;
 }
-
+    <link href="~/Content/Myself.css" rel="stylesheet" />
 <div style="width:90%;margin:10px auto">
     <div class="">
         <a href="" class="btn btn-primary col-lg-1" data-toggle="modal" data-target="#Add">添加管理员</a>
         <div class="form-inline  col-lg-9">
-            <input type="text" placeholder="请输入学号" class="form-control col-lg-offset-4" style="width:250px" />
-            <a href="" class="btn btn-info">查询</a>
+            <form action="/Admin/Index" method="get">
+                <input type="text" placeholder="请输入姓名" class="form-control col-lg-offset-4" style="width:250px" name="AdminName" value="@ViewBag.AdminName"/>
+                <button type="submit" class="btn btn-info">查询</button>
+            </form>
         </div>
     </div>
     <table class="table table-bordered table-striped" style="transform:translateY(20px)">
@@ -45,11 +48,154 @@
                         }
                     </td>
                     <td>@item.AdminAge</td>
-                    <td>操作</td>
+                    <td><button class="btn btn-info" data-toggle="modal" data-target="#Edit" data-whatever="@item.AdminID">编辑</button></td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>
 
+<div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="color:black">添加管理员</h4>
+            </div>
+            <form action="/Admin/AddAdmin" method="post">
+                <div class="modal-body" style="padding-bottom:10px">
+                    <div class="form-inline a_1">
+                        <label>管理的楼宇：</label>
+                        <select class="form-control" name="FloorID" id="FloorID">
+                            @foreach (var item in Floorlist as List<Floor>)
+                            {
+                                <option value="@item.FloorID" >@item.FloorName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>姓名：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminName" id="AdminName" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>登录账号：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminCount" id="AdminCount" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>登录密码：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminPwd" id="AdminPwd" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>性别：</label>
+                        <input type="radio" name="AdminSex" value="1" class="AdminSex" />男
+                        <input type="radio" name="AdminSex" value="0" class="AdminSex" />女
+                    </div>
+                    <div class="form-inline a_1" style="margin-top:10px">
+                        <label>年龄：</label>
+                        <input type="text" class="form-control" name="AdminAge" id="AdminAge" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="color:black">编辑管理员</h4>
+            </div>
+            <form action="/Admin/EditAdmin" method="post">
+                <div class="modal-body" style="padding-bottom:10px">
+                    <input type="hidden" name="AdminID" id="AdminID" />
+                    <input type="hidden" name="IsDelete" id="IsDelete" />
+                    <input type="hidden" name="AdminKinds" id="AdminKinds" />
+                    <div class="form-inline a_1">
+                        <label>管理的楼宇：</label>
+                        <select class="form-control" name="FloorID" id="FloorID1">
+                            @foreach (var item in Floorlist as List<Floor>)
+                            {
+                                <option value="@item.FloorID">@item.FloorName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>姓名：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminName" id="AdminName" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>登录账号：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminCount" id="AdminCount" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>登录密码：</label>
+                        <input type="text" class="form-control" style="margin-top:10px" name="AdminPwd" id="AdminPwd" />
+                    </div>
+                    <div class="form-inline a_1">
+                        <label>性别：</label>
+                        <input type="radio" name="AdminSex" value="1" class="AdminSex" />男
+                        <input type="radio" name="AdminSex" value="0" class="AdminSex" />女
+                    </div>
+                    <div class="form-inline a_1" style="margin-top:10px">
+                        <label>年龄：</label>
+                        <input type="text" class="form-control" name="AdminAge" id="AdminAge" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+@section scripts{
+    <script>
+        $('#Edit').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var AdminID = button.data('whatever');
+            var modal = $(this)
+            $.post({
+                url: "/Admin/EditAdm",
+                data: {
+                    AdminID: AdminID
+                },
+                datatype: "json",
+                success: function (data) {
+                    console.log(data);
+                    var msg = jQuery.parseJSON(data);
+                    modal.find('#AdminID').val(msg.AdminID);
+                    var sele = $("#FloorID1 option");
+                    for (var i = 0; i < sele.length; i++) {
+                        var index = $("#FloorID1 option:eq(" + i + ")").val();
+                        if (index == msg.FloorID) {
+                            $('#FloorID1 option:eq(' + i + ')').attr("selected", true);
+                        }
+                    }
+                    modal.find('#AdminName').val(msg.AdminName);
+                    modal.find('#AdminCount').val(msg.AdminCount);
+                    modal.find('#AdminPwd').val(msg.AdminPwd);
+                    modal.find('#AdminAge').val(msg.AdminAge);
+                    if (msg.AdminSex == 1) {
+                        $('.AdminSex:eq(2)').attr("checked", true);
+                    }
+                    else {
+                        $('.AdminSex:eq(3)').attr("checked", true);
+                    }
+                    modal.find('#IsDelete').val(msg.IsDelete);
+                    modal.find('#AdminKinds').val(msg.AdminKinds);
+                },
+                error: function () {
+                    alert('');
+                }
+            })
+        })
+    </script>
+    }

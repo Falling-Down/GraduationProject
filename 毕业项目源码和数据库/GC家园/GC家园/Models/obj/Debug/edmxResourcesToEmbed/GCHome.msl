@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Dorm">
       <EntityTypeMapping TypeName="GCHomeModel.Dorm">
         <MappingFragment StoreEntitySet="Dorm">
+          <ScalarProperty Name="MoveinDormPeople" ColumnName="MoveinDormPeople" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="DormPeople" ColumnName="DormPeople" />
           <ScalarProperty Name="DormName" ColumnName="DormName" />

@@ -95,7 +95,8 @@
                 <div class="modal-body" style="padding-bottom:10px">
                     <div class="form-inline a_1">
                         <label>学号：</label>
-                        <input type="text" class="form-control" name="StuNumber" id="StuNumber" />
+                        <input type="text" class="form-control" name="StuNumber" id="StuNumber" onblur="lose()"/>
+                        <p style="color:red" id="fill"></p>
                     </div>
                     <div class="form-inline a_1">
                         <label>姓名：</label>
@@ -192,26 +193,45 @@
             },
             datatype: "json",
             success: function (data) {
-                modal.find('#StuID').val(data.StuID);
-                modal.find('#StuNumber').val(data.StuNumber);
-                modal.find('#StuName').val(data.StuName);
-                modal.find('#StuCount').val(data.StuCount);
-                modal.find('#StuPwd').val(data.StuPwd);
-                if (data.StuSex == 1) {
+                var msg = jQuery.parseJSON(data);
+                modal.find('#StuID').val(msg.StuID);
+                modal.find('#StuNumber').val(msg.StuNumber);
+                modal.find('#StuName').val(msg.StuName);
+                modal.find('#StuCount').val(msg.StuCount);
+                modal.find('#StuPwd').val(msg.StuPwd);
+                if (msg.StuSex == 1) {
                     $('.StuSex:eq(2)').attr("checked", true);
                 }
                 else {
                     $('.StuSex:eq(3)').attr("checked", true);
                 }
-                modal.find('#StuAge').val(data.StuAge);
-                modal.find('#OccupancyStatus').val(data.OccupancyStatus);
-                modal.find('#IsDelete').val(data.IsDelete);
+                modal.find('#StuAge').val(msg.StuAge);
+                modal.find('#OccupancyStatus').val(msg.OccupancyStatus);
+                modal.find('#IsDelete').val(msg.IsDelete);
             },
             error: function () {
                 alert('');
             }
         })
     })
+
+    function lose() {
+            var StuNumber = $("#StuNumber").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/ajaxOrnotStuNumber",
+                data: { "StuNumber": StuNumber },
+                success: function (data) {
+                    if (data == 1) {
+                        $("#fill").html("学号是唯一的!请重新输入");
+                        $("#StuNumber").val("");
+                    }
+                    else {
+                        $("#fill").html("");
+                    }
+                }
+            })
+        }
 </script>
 
 }

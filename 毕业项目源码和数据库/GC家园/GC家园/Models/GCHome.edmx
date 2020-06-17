@@ -37,6 +37,7 @@
           <Property Name="DormName" Type="nvarchar" MaxLength="50" />
           <Property Name="DormPeople" Type="int" />
           <Property Name="IsDelete" Type="int" />
+          <Property Name="MoveinDormPeople" Type="int" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -256,6 +257,7 @@
           <Property Name="IsDelete" Type="Int32" />
           <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Dorm" ToRole="Floor" />
           <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Dorm" ToRole="Moveinto" />
+          <Property Name="MoveinDormPeople" Type="Int32" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -406,6 +408,7 @@
           <EntitySetMapping Name="Dorm">
             <EntityTypeMapping TypeName="GCHomeModel.Dorm">
               <MappingFragment StoreEntitySet="Dorm">
+                <ScalarProperty Name="MoveinDormPeople" ColumnName="MoveinDormPeople" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="DormPeople" ColumnName="DormPeople" />
                 <ScalarProperty Name="DormName" ColumnName="DormName" />

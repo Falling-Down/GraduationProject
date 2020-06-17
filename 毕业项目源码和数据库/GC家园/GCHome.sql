@@ -41,8 +41,10 @@ DormID int primary key identity(1,1), --宿舍ID
 FloorID int foreign key references Floor(FloorID), --楼宇ID
 DormName nvarchar(50), --宿舍名称
 DormPeople int, --宿舍人数
-IsDelete int --是否删除（0未删除1已删除）
+IsDelete int, --是否删除（0未删除1已删除）
+MoveinDormPeople int--已入住人数
 )
+Alter table Dorm add 
 select * from Dorm
 insert into Dorm values(1,'201',6,0)
 create table Moveinto( --入住登记表
@@ -55,6 +57,7 @@ MoveintoPeople nvarchar(50), --入住登记人
 IsDelete int --是否删除（0未删除1已删除）
 )
 select * from Moveinto
+
 insert into Moveinto values(1,1,1,'2019-1-8','翠竹苑A栋宿管',0)
 create table Exchange( --宿舍调换表
 ExchangeID int, --调换ID

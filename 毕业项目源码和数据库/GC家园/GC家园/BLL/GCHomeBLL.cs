@@ -28,6 +28,18 @@ namespace BLL
             return GCHomeDAL.AddStudent(stu);
         }
 
+        public int? ReturnPeople(int? FloorID, int? DormID) {
+            return GCHomeDAL.ReturnPeople(FloorID,DormID);
+        }
+
+        public int? ReturnMoinPeople(int? FloorID, int? DormID) {
+            return GCHomeDAL.ReturnMoinPeople(FloorID,DormID);
+        }
+
+        public int? UpdateMoinPeople(int? FloorID, int? DormID) {
+            return GCHomeDAL.UpdateMoinPeople(FloorID,DormID);
+        }
+
         public List<Student> LikeSelect(int? State, string StuName="") {
             return GCHomeDAL.LikeSelect(State,StuName);
         }
@@ -65,6 +77,10 @@ namespace BLL
             return GCHomeDAL.UpdateState(StuID);
         }
 
+        public int AttendanReturnStuID(string NumberOrName) {
+            return GCHomeDAL.AttendanReturnStuID(NumberOrName);
+        }
+
         public List<Attendance> AttendanSelect() {
             return GCHomeDAL.AttendanSelect();
         }
@@ -73,12 +89,19 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
+        public List<Attendance> AttendanSelectNew(int? StuID) {
+            return GCHomeDAL.AttendanSelectNew(StuID);
+        }
         public bool AddAttendace(Attendance ad) {
             return GCHomeDAL.AddAttendace(ad);
         }
 
         public List<Admin> SelectAdmin() {
             return GCHomeDAL.SelectAdmin();
+        }
+
+        public List<Admin> LikeAdmin(string AdminName = "") {
+            return GCHomeDAL.LikeAdmin(AdminName);
         }
 
         public bool AddFloor(Floor fr) {
@@ -95,6 +118,18 @@ namespace BLL
 
         public bool AddDorm(Dorm dm) {
             return GCHomeDAL.AddDorm(dm);
+        }
+
+        public bool AddAdmin(Admin ad) {
+            return GCHomeDAL.AddAdmin(ad);
+        }
+
+        public Admin EditAdm(int AdminID) {
+            return GCHomeDAL.EditAdm(AdminID);
+        }
+
+        public bool EditAdmin(Admin adm) {
+            return GCHomeDAL.EditAdmin(adm);
         }
      }
 }

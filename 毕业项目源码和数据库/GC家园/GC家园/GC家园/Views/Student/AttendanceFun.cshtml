@@ -12,13 +12,10 @@
     <div style="width:90%;margin:10px auto" id="first">
         <div class="">
             <div class="form-inline">
-                <select class="form-control col-lg-offset-4">
-                    <option>--请选择--</option>
-                    <option>楼宇1</option>
-                    <option>楼宇2</option>
-                </select>
-                <input type="text" placeholder="请输入学号" class="form-control" style="width:250px" />
-                <a href="" class="btn btn-info">查询</a>
+                <form action="/Student/AttendanceFun" method="post">
+                    <input type="text" placeholder="请输入学号/姓名" class="form-control col-lg-offset-4" style="width:250px" name="NumberOrName" value="@ViewBag.Name"/>
+                    <button type="submit" class="btn btn-info">查询</button>
+                </form>
             </div>
         </div>
         <table class="table table-bordered table-striped" style="transform:translateY(20px)">

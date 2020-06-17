@@ -13,6 +13,11 @@ namespace GC家园.Controllers
     public class StudentController : Controller
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();
+        public ActionResult Peopleicon(int People) {
+            ViewBag.People = People;
+            return View();
+        }
+
         // GET: Student
         public ActionResult Index(int? State, string StuName="")
         {
@@ -37,7 +42,10 @@ namespace GC家园.Controllers
         public JsonResult EditStu(int StuID)
         {
             Student stu = GCHomeBLL.EditStu(StuID);
-            return Json(stu, JsonRequestBehavior.AllowGet);
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string ret = JsonConvert.SerializeObject(stu, jsSettings);
+            return Json(ret, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EditStudent(Student stu) {
@@ -76,18 +84,34 @@ namespace GC家园.Controllers
         public ActionResult AddMoveinto(Moveinto moin,string StuNumber) {
             moin.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
             moin.IsDelete = 0;
-            if (GCHomeBLL.AddMoveinto(moin))
+            if (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID)!=GCHomeBLL.ReturnMoinPeople(moin.FloorID,moin.DormID))
             {
-                if (GCHomeBLL.UpdateState(moin.StuID))
+                if (GCHomeBLL.AddMoveinto(moin))
                 {
-                    return RedirectToAction("Index");
+                    if (GCHomeBLL.UpdateState(moin.StuID))
+                    {
+                        if (GCHomeBLL.UpdateMoinPeople(moin.FloorID, moin.DormID) != null)
+                        {
+                            return RedirectToAction("Peopleicon", "Student",new { People= (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID) - (GCHomeBLL.ReturnMoinPeople(moin.FloorID, moin.DormID)))}) ;
+                        }
+                        return RedirectToAction("Index");
+                    }
                 }
             }
-            return View();
+            return Content("<script>alert('入住失败')</script>");
         }
 
         public ActionResult AttendanceFun() {
             ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AttendanceFun(string NumberOrName)
+        {
+            int StuID = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+            ViewBag.AttendanList = GCHomeBLL.AttendanSelectNew(StuID);
+            ViewBag.Name = NumberOrName;
             return View();
         }
 

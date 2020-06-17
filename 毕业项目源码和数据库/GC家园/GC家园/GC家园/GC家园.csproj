@@ -149,6 +149,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\8541.jpg" />
+    <Content Include="images\成功.png" />
+    <Content Include="images\成功2.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -190,6 +192,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\FloorFun.cshtml" />
     <Content Include="Views\Admin\DormFun.cshtml" />
+    <Content Include="Views\Admin\icon.cshtml" />
+    <Content Include="Views\Student\Peopleicon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

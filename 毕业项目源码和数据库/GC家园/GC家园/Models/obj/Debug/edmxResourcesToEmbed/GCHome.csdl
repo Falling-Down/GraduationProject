@@ -74,6 +74,7 @@
     <Property Name="IsDelete" Type="Int32" />
     <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Dorm" ToRole="Floor" />
     <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Dorm" ToRole="Moveinto" />
+    <Property Name="MoveinDormPeople" Type="Int32" />
   </EntityType>
   <EntityType Name="Floor">
     <Key>

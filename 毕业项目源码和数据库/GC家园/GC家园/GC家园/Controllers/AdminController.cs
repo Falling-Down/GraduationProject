@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models;
 using BLL;
+using Newtonsoft.Json;
 
 namespace GC家园.Controllers
 {
@@ -12,9 +13,16 @@ namespace GC家园.Controllers
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();
         // GET: Admin
-        public ActionResult Index()
+
+        public ActionResult icon() {
+            return View();
+        }
+
+        public ActionResult Index(string AdminName="")
         {
-            ViewBag.AdminList = GCHomeBLL.SelectAdmin();
+            ViewBag.FloorList = GCHomeBLL.FloorSelect();
+            ViewBag.AdminList = GCHomeBLL.LikeAdmin(AdminName);
+            ViewBag.AdminName = AdminName;
             return View();
         }
 
@@ -26,8 +34,7 @@ namespace GC家园.Controllers
             fr.IsDelete = 0;
             if (GCHomeBLL.AddFloor(fr))
             {
-                //return RedirectToAction("FloorFun","Admin");
-                return Content("<script>alert('添加成功');history.back()</script>");
+                return RedirectToAction("icon","Admin");
             }
             return View();
         }
@@ -57,9 +64,38 @@ namespace GC家园.Controllers
 
         public ActionResult AddDorm(Dorm dm) {
             dm.IsDelete = 0;
+            dm.MoveinDormPeople = 0;
             if (GCHomeBLL.AddDorm(dm))
             {
-                return Content("<script>alert('添加成功');history.back()</script>");
+                return RedirectToAction("icon", "Admin");
+            }
+            return View();
+        }
+
+        public ActionResult AddAdmin(Admin ad) {
+            ad.IsDelete = 0;
+            ad.AdminKinds = 0;
+            if (GCHomeBLL.AddAdmin(ad))
+            {
+                return RedirectToAction("Index","Admin");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult EditAdm(int AdminID)
+        {
+            Admin adm = GCHomeBLL.EditAdm(AdminID);
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string ret = JsonConvert.SerializeObject(adm, jsSettings);
+            return Json(ret, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditAdmin(Admin adm) {
+            if (GCHomeBLL.EditAdmin(adm))
+            {
+                return RedirectToAction("Index", "Admin");
             }
             return View();
         }
