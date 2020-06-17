@@ -59,6 +59,9 @@
     <Compile Include="Dorm.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Exchange.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="Floor.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>

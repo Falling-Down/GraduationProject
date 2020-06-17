@@ -60,12 +60,13 @@ select * from Moveinto
 
 insert into Moveinto values(1,1,1,'2019-1-8','翠竹苑A栋宿管',0)
 create table Exchange( --宿舍调换表
-ExchangeID int, --调换ID
-StuID int, --学生ID
+ExchangeID int primary key identity(1,1), --调换ID
+StuID int foreign key references Student(StuID), --学生ID
 OldFloorID int, --原楼宇ID
 OldDormID int, --原宿舍ID
 NewFloorID int, --新楼宇ID
-NewDormID int --新宿舍ID
+NewDormID int, --新宿舍ID
+IsDelete int --是否删除（0未删除1已删除）
 )
 create table Moveout( --迁出表
 MoveoutID int, --迁出ID
@@ -78,6 +79,9 @@ create table Attendance( --考勤表
 AttendanceID int primary key identity(1,1), --考勤ID
 StuID int foreign key references Student(StuID), --学生ID
 AttendanceDate date, --晚归日期
-AttendanceReason nvarchar(50) --晚归原因
+AttendanceReason nvarchar(50), --晚归原因
+IsDelete int --是否删除（0未删除1已删除）
 )
+select * from attendance
+alter table Attendance add IsDelete int
 insert into Attendance values(1,'2020-6-15','忘记时间')

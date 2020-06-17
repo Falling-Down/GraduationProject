@@ -31,5 +31,6 @@ namespace Models
         public virtual DbSet<Floor> Floor { get; set; }
         public virtual DbSet<Moveinto> Moveinto { get; set; }
         public virtual DbSet<Attendance> Attendance { get; set; }
+        public virtual DbSet<Exchange> Exchange { get; set; }
     }
 }

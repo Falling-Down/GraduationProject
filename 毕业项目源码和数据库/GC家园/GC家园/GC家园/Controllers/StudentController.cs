@@ -114,9 +114,22 @@ namespace GC家园.Controllers
         [HttpPost]
         public ActionResult AttendanceFun(string NumberOrName)
         {
-            int StuID = GCHomeBLL.AttendanReturnStuID(NumberOrName);
-            ViewBag.AttendanList = GCHomeBLL.AttendanSelectNew(StuID);
-            ViewBag.Name = NumberOrName;
+            if (GCHomeBLL.AttendanReturnStuID(NumberOrName)==null)
+            {
+                ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+                ViewBag.Name = NumberOrName;
+            }
+            else
+            {
+                List<Attendance> alist = new List<Attendance>();
+                foreach (var item in GCHomeBLL.AttendanReturnStuID(NumberOrName))
+                {
+                    Attendance ad = GCHomeBLL.AttendanSelectNew(item);
+                    alist.Add(ad);
+                }
+                ViewBag.AttendanList = alist;
+                ViewBag.Name = NumberOrName;
+            }
             return View();
         }
 
@@ -129,11 +142,28 @@ namespace GC家园.Controllers
             return 0;
         }
 
+        [HttpPost]
+        public JsonResult ajaxFloorAndDorm(string StuNumber) {
+            var moin = GCHomeBLL.ajaxFloorAndDorm(StuNumber);
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string ret = JsonConvert.SerializeObject(moin, jsSettings);
+            return Json(ret, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult AddAttendace(Attendance ad,string StuNumber) {
             ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
             if (GCHomeBLL.AddAttendace(ad))
             {
                 return RedirectToAction("AttendanceFun","Student");
+            }
+            return View();
+        }
+
+        public ActionResult DelAttendance(int id) {
+            if (GCHomeBLL.DelAttendance(id))
+            {
+                return RedirectToAction("AttendanceFun", "Student");
             }
             return View();
         }

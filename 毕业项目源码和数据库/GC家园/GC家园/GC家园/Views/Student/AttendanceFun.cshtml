@@ -25,6 +25,7 @@
                     <th>姓名</th>
                     <th>晚归日期</th>
                     <th>晚归原因</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +36,7 @@
                         <td>@item.Student.StuName</td>
                         <td>@string.Format("{0:D}",item.AttendanceDate) </td>
                         <td>@item.AttendanceReason</td>
+                        <td><a href="/Student/DelAttendance/@item.AttendanceID" class="btn btn-default" onclick="return confirm('确定删除吗')">删除</a></td>
                     </tr>
                 }
             </tbody>

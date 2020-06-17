@@ -27,6 +27,7 @@
           <Property Name="StuID" Type="int" />
           <Property Name="AttendanceDate" Type="date" />
           <Property Name="AttendanceReason" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="int" />
         </EntityType>
         <EntityType Name="Dorm">
           <Key>
@@ -38,6 +39,18 @@
           <Property Name="DormPeople" Type="int" />
           <Property Name="IsDelete" Type="int" />
           <Property Name="MoveinDormPeople" Type="int" />
+        </EntityType>
+        <EntityType Name="Exchange">
+          <Key>
+            <PropertyRef Name="ExchangeID" />
+          </Key>
+          <Property Name="ExchangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StuID" Type="int" />
+          <Property Name="OldFloorID" Type="int" />
+          <Property Name="OldDormID" Type="int" />
+          <Property Name="NewFloorID" Type="int" />
+          <Property Name="NewDormID" Type="int" />
+          <Property Name="IsDelete" Type="int" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -111,6 +124,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Exchange__StuID__5535A963">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Exchange">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Moveinto__DormID__4E88ABD4">
           <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
           <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
@@ -151,6 +176,7 @@
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
@@ -165,6 +191,10 @@
           <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
             <End Role="Floor" EntitySet="Floor" />
             <End Role="Dorm" EntitySet="Dorm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exchange__StuID__5535A963" Association="Self.FK__Exchange__StuID__5535A963">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Exchange" EntitySet="Exchange" />
           </AssociationSet>
           <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="Self.FK__Moveinto__DormID__4E88ABD4">
             <End Role="Dorm" EntitySet="Dorm" />
@@ -198,6 +228,7 @@
           <Property Name="IsDelete" Type="Int32" />
           <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Student" ToRole="Moveinto" />
           <NavigationProperty Name="Attendance" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Student" ToRole="Attendance" />
+          <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Student" ToRole="Exchange" />
         </EntityType>
         <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student" EntityType="Self.Student" />
@@ -229,6 +260,11 @@
           <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="GCHomeModel.FK__Attendanc__StuID__5165187F">
             <End Role="Student" EntitySet="Student" />
             <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <EntitySet Name="Exchange" EntityType="GCHomeModel.Exchange" />
+          <AssociationSet Name="FK__Exchange__StuID__5535A963" Association="GCHomeModel.FK__Exchange__StuID__5535A963">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Exchange" EntitySet="Exchange" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -356,6 +392,7 @@
           <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
           <Property Name="AttendanceReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Attendance" ToRole="Student" />
+          <Property Name="IsDelete" Type="Int32" />
         </EntityType>
         <Association Name="FK__Attendanc__StuID__5165187F">
           <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
@@ -365,6 +402,31 @@
               <PropertyRef Name="StuID" />
             </Principal>
             <Dependent Role="Attendance">
+              <PropertyRef Name="StuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Exchange">
+          <Key>
+            <PropertyRef Name="ExchangeID" />
+          </Key>
+          <Property Name="ExchangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StuID" Type="Int32" />
+          <Property Name="OldFloorID" Type="Int32" />
+          <Property Name="OldDormID" Type="Int32" />
+          <Property Name="NewFloorID" Type="Int32" />
+          <Property Name="NewDormID" Type="Int32" />
+          <Property Name="IsDelete" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Exchange" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Exchange__StuID__5535A963">
+          <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StuID" />
+            </Principal>
+            <Dependent Role="Exchange">
               <PropertyRef Name="StuID" />
             </Dependent>
           </ReferentialConstraint>
@@ -444,10 +506,24 @@
           <EntitySetMapping Name="Attendance">
             <EntityTypeMapping TypeName="GCHomeModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="AttendanceReason" ColumnName="AttendanceReason" />
                 <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
                 <ScalarProperty Name="StuID" ColumnName="StuID" />
                 <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exchange">
+            <EntityTypeMapping TypeName="GCHomeModel.Exchange">
+              <MappingFragment StoreEntitySet="Exchange">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="NewDormID" ColumnName="NewDormID" />
+                <ScalarProperty Name="NewFloorID" ColumnName="NewFloorID" />
+                <ScalarProperty Name="OldDormID" ColumnName="OldDormID" />
+                <ScalarProperty Name="OldFloorID" ColumnName="OldFloorID" />
+                <ScalarProperty Name="StuID" ColumnName="StuID" />
+                <ScalarProperty Name="ExchangeID" ColumnName="ExchangeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

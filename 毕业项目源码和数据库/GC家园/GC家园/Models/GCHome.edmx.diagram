@@ -17,6 +17,8 @@
         <AssociationConnector Association="GCHomeModel.FK__Moveinto__StuID__4CA06362" />
         <EntityTypeShape EntityType="GCHomeModel.Attendance" Width="1.5" PointX="3" PointY="7.25" />
         <AssociationConnector Association="GCHomeModel.FK__Attendanc__StuID__5165187F" />
+        <EntityTypeShape EntityType="GCHomeModel.Exchange" Width="1.5" PointX="3" PointY="10.125" />
+        <AssociationConnector Association="GCHomeModel.FK__Exchange__StuID__5535A963" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

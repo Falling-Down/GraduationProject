@@ -77,7 +77,7 @@ namespace BLL
             return GCHomeDAL.UpdateState(StuID);
         }
 
-        public int AttendanReturnStuID(string NumberOrName) {
+        public int[] AttendanReturnStuID(string NumberOrName) {
             return GCHomeDAL.AttendanReturnStuID(NumberOrName);
         }
 
@@ -89,11 +89,19 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
-        public List<Attendance> AttendanSelectNew(int? StuID) {
+        public Moveinto ajaxFloorAndDorm(string StuNumber) {
+            return GCHomeDAL.ajaxFloorAndDorm(StuNumber);
+        }
+
+        public Attendance AttendanSelectNew(int? StuID) {
             return GCHomeDAL.AttendanSelectNew(StuID);
         }
         public bool AddAttendace(Attendance ad) {
             return GCHomeDAL.AddAttendace(ad);
+        }
+
+        public bool DelAttendance(int id) {
+            return GCHomeDAL.DelAttendance(id);
         }
 
         public List<Admin> SelectAdmin() {

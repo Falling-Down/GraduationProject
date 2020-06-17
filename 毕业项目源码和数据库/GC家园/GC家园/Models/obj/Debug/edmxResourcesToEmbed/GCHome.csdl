@@ -15,6 +15,7 @@
     <Property Name="IsDelete" Type="Int32" />
     <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Student" ToRole="Moveinto" />
     <NavigationProperty Name="Attendance" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Student" ToRole="Attendance" />
+    <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Student" ToRole="Exchange" />
   </EntityType>
   <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Student" EntityType="Self.Student" />
@@ -46,6 +47,11 @@
     <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="GCHomeModel.FK__Attendanc__StuID__5165187F">
       <End Role="Student" EntitySet="Student" />
       <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <EntitySet Name="Exchange" EntityType="GCHomeModel.Exchange" />
+    <AssociationSet Name="FK__Exchange__StuID__5535A963" Association="GCHomeModel.FK__Exchange__StuID__5535A963">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Admin">
@@ -173,6 +179,7 @@
     <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
     <Property Name="AttendanceReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Attendance" ToRole="Student" />
+    <Property Name="IsDelete" Type="Int32" />
   </EntityType>
   <Association Name="FK__Attendanc__StuID__5165187F">
     <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
@@ -182,6 +189,31 @@
         <PropertyRef Name="StuID" />
       </Principal>
       <Dependent Role="Attendance">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="OldFloorID" Type="Int32" />
+    <Property Name="OldDormID" Type="Int32" />
+    <Property Name="NewFloorID" Type="Int32" />
+    <Property Name="NewDormID" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Exchange" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK__Exchange__StuID__5535A963">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Exchange">
         <PropertyRef Name="StuID" />
       </Dependent>
     </ReferentialConstraint>

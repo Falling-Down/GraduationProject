@@ -70,10 +70,24 @@
     <EntitySetMapping Name="Attendance">
       <EntityTypeMapping TypeName="GCHomeModel.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="AttendanceReason" ColumnName="AttendanceReason" />
           <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
           <ScalarProperty Name="StuID" ColumnName="StuID" />
           <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exchange">
+      <EntityTypeMapping TypeName="GCHomeModel.Exchange">
+        <MappingFragment StoreEntitySet="Exchange">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="NewDormID" ColumnName="NewDormID" />
+          <ScalarProperty Name="NewFloorID" ColumnName="NewFloorID" />
+          <ScalarProperty Name="OldDormID" ColumnName="OldDormID" />
+          <ScalarProperty Name="OldFloorID" ColumnName="OldFloorID" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="ExchangeID" ColumnName="ExchangeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

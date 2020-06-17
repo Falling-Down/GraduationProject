@@ -18,6 +18,7 @@ namespace Models
         public Nullable<int> StuID { get; set; }
         public Nullable<System.DateTime> AttendanceDate { get; set; }
         public string AttendanceReason { get; set; }
+        public Nullable<int> IsDelete { get; set; }
     
         public virtual Student Student { get; set; }
     }

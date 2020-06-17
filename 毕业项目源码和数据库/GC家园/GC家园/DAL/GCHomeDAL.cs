@@ -106,6 +106,11 @@ namespace DAL
             return 0;
         }
 
+        public Moveinto ajaxFloorAndDorm(string StuNumber) {
+           Student stu = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber);
+           return db.Moveinto.FirstOrDefault(p => p.StuID == stu.StuID);
+        }
+
         public List<Floor> FloorSelect() {
            return  db.Floor.ToList();
         }
@@ -139,25 +144,29 @@ namespace DAL
             return false;
         }
 
-        public int AttendanReturnStuID(string NumberOrName) {
+        public int[] AttendanReturnStuID(string NumberOrName) {
             if (NumberOrName==""|| db.Student.FirstOrDefault(p => p.StuNumber == NumberOrName || p.StuName.Contains(NumberOrName))==null)
             {
-                return 0;
+                return null;
             }
-            return db.Student.FirstOrDefault(p => p.StuNumber == NumberOrName || p.StuName.Contains(NumberOrName)).StuID;
+            List<Student> stu = db.Student.Where(p => p.StuNumber == NumberOrName || p.StuName.Contains(NumberOrName)).ToList();
+            int[] a = new int[stu.Count()] ;
+            int i = 0;
+            foreach (var item in stu as List<Student>)
+            {
+                a[i] = item.StuID;
+                i++;
+            }
+            return a;
         }
 
         public List<Attendance> AttendanSelect() {
-                return db.Attendance.OrderByDescending(p => p.AttendanceID).ToList();
+                return db.Attendance.OrderByDescending(p => p.AttendanceID).Where(p=>p.IsDelete==0).ToList();
         }
 
-        public List<Attendance> AttendanSelectNew(int? StuID)
+        public Attendance AttendanSelectNew(int? StuID)
         {
-            if (StuID==0||StuID==null)
-            {
-                return db.Attendance.OrderByDescending(p => p.AttendanceID).ToList();
-            }
-            return db.Attendance.Where(p=>p.StuID==StuID).OrderByDescending(p => p.AttendanceID).ToList();
+            return db.Attendance.FirstOrDefault(p=>p.StuID==StuID&&p.IsDelete==0);
         }
 
         public bool StuNumberNewOrnot(string StuNumber) {
@@ -168,9 +177,23 @@ namespace DAL
         }
 
         public bool AddAttendace(Attendance ad) {
+            ad.IsDelete = 0;
             db.Attendance.Add(ad);
             int result = db.SaveChanges();
             if (result>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool DelAttendance(int id)
+        {
+            Attendance ad = db.Attendance.Find(id);
+            ad.IsDelete = 1;
+            db.Entry(ad).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
             {
                 return true;
             }

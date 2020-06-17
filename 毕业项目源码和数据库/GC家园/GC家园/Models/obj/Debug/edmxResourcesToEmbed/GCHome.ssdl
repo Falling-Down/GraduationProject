@@ -22,6 +22,7 @@
     <Property Name="StuID" Type="int" />
     <Property Name="AttendanceDate" Type="date" />
     <Property Name="AttendanceReason" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="Dorm">
     <Key>
@@ -33,6 +34,18 @@
     <Property Name="DormPeople" Type="int" />
     <Property Name="IsDelete" Type="int" />
     <Property Name="MoveinDormPeople" Type="int" />
+  </EntityType>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="OldFloorID" Type="int" />
+    <Property Name="OldDormID" Type="int" />
+    <Property Name="NewFloorID" Type="int" />
+    <Property Name="NewDormID" Type="int" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="Floor">
     <Key>
@@ -106,6 +119,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Exchange__StuID__5535A963">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Moveinto__DormID__4E88ABD4">
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
     <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
@@ -146,6 +171,7 @@
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
@@ -160,6 +186,10 @@
     <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Dorm" EntitySet="Dorm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__StuID__5535A963" Association="Self.FK__Exchange__StuID__5535A963">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
     <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="Self.FK__Moveinto__DormID__4E88ABD4">
       <End Role="Dorm" EntitySet="Dorm" />
