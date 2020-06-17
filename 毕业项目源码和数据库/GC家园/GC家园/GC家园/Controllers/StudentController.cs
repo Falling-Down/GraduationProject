@@ -18,6 +18,11 @@ namespace GC家园.Controllers
             return View();
         }
 
+        public ActionResult Failicon()
+        {
+            return View();
+        }
+
         // GET: Student
         public ActionResult Index(int? State, string StuName="")
         {
@@ -84,7 +89,7 @@ namespace GC家园.Controllers
         public ActionResult AddMoveinto(Moveinto moin,string StuNumber) {
             moin.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
             moin.IsDelete = 0;
-            if (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID)!=GCHomeBLL.ReturnMoinPeople(moin.FloorID,moin.DormID))
+            if (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID)>GCHomeBLL.ReturnMoinPeople(moin.FloorID,moin.DormID))
             {
                 if (GCHomeBLL.AddMoveinto(moin))
                 {
@@ -98,7 +103,7 @@ namespace GC家园.Controllers
                     }
                 }
             }
-            return Content("<script>alert('入住失败')</script>");
+            return RedirectToAction("Failicon","Student");
         }
 
         public ActionResult AttendanceFun() {
