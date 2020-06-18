@@ -169,10 +169,26 @@ namespace GC家园.Controllers
         }
 
         public ActionResult ExchangeFun() {
+            ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
+            ViewBag.FloorList = GCHomeBLL.FloorSelect();
+            return View();
+        }
+
+        public ActionResult AddExchange(Exchange ex, string StuNumber) {
+            ex.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+            if (GCHomeBLL.AddExchange(ex))
+            {
+                if (GCHomeBLL.UpdateMoinFloorAndDorm(ex))
+                {
+                    return RedirectToAction("ExchangeFun", "Student");
+                }
+            }
             return View();
         }
 
         public ActionResult Moveout() {
+            ViewBag.StuList = GCHomeBLL.StuSelect();
+            ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect();
             return View();
         }
     }

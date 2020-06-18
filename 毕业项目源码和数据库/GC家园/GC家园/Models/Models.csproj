@@ -83,6 +83,9 @@
     <Compile Include="Moveinto.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Moveout.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs">
       <DependentUpon>GCHome.tt</DependentUpon>

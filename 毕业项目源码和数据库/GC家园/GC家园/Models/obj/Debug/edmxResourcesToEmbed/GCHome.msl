@@ -91,5 +91,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Moveout">
+      <EntityTypeMapping TypeName="GCHomeModel.Moveout">
+        <MappingFragment StoreEntitySet="Moveout">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="MoveoutMark" ColumnName="MoveoutMark" />
+          <ScalarProperty Name="MoveoutDate" ColumnName="MoveoutDate" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="MoveoutID" ColumnName="MoveoutID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -57,24 +57,25 @@ MoveintoPeople nvarchar(50), --入住登记人
 IsDelete int --是否删除（0未删除1已删除）
 )
 select * from Moveinto
-
+select * from Exchange
 insert into Moveinto values(1,1,1,'2019-1-8','翠竹苑A栋宿管',0)
 create table Exchange( --宿舍调换表
 ExchangeID int primary key identity(1,1), --调换ID
 StuID int foreign key references Student(StuID), --学生ID
-OldFloorID int, --原楼宇ID
-OldDormID int, --原宿舍ID
-NewFloorID int, --新楼宇ID
-NewDormID int, --新宿舍ID
+OldFloorID int foreign key references Floor(FloorID), --原楼宇ID
+OldDormID int foreign key references Dorm(DormID), --原宿舍ID
+NewFloorID int foreign key references Floor(FloorID), --新楼宇ID
+NewDormID int foreign key references Dorm(DormID), --新宿舍ID
 IsDelete int --是否删除（0未删除1已删除）
 )
 create table Moveout( --迁出表
-MoveoutID int, --迁出ID
-StuID int, --学生ID
+MoveoutID int primary key identity(1,1), --迁出ID
+StuID int foreign key references Student(StuID), --学生ID
 MoveoutDate date, --迁出时间
 MoveoutMark nvarchar(50), --备注
 IsDelete int --是否删除（0未删除1已删除）
 )
+insert into Moveout values(1,'2020-6-11','还有东西再宿舍',0)
 create table Attendance( --考勤表
 AttendanceID int primary key identity(1,1), --考勤ID
 StuID int foreign key references Student(StuID), --学生ID

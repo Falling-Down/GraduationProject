@@ -63,19 +63,23 @@ namespace DAL
             return null;
         }
 
+        public List<Student> StuSelect() {
+            return db.Student.Where(p => p.OccupancyStatus == 1).ToList();
+        }
+
         public List<Student> LikeSelect(int? State,string StuName="") {
+            List<Student> list = db.Student.Where(p => p.OccupancyStatus == 0 || p.OccupancyStatus == 1).ToList();
             if (State==0)
             {
-               return  db.Student.Where(p => p.OccupancyStatus == 0 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
+               return  list.Where(p => p.OccupancyStatus == 0 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
             }
             else if(State==1)
             {
-                return db.Student.Where(p => p.OccupancyStatus == 1 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
+                return list.Where(p => p.OccupancyStatus == 1 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
             }
             else
             {
-               
-                return db.Student.Where(p => p.StuName.Contains(StuName) || p.StuName == null || p.StuName=="").OrderBy(p=>p.StuNumber).ToList();
+                return list.Where(p=>p.StuName.Contains(StuName) || p.StuName == null || p.StuName=="").OrderBy(p=>p.StuNumber).ToList();
             }
         }
 
@@ -187,6 +191,36 @@ namespace DAL
             return false;
         }
 
+        public bool AddExchange(Exchange ex)
+        {
+            ex.IsDelete = 0;
+            db.Exchange.Add(ex);
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<Exchange> ExchangeSelect()
+        {
+            return db.Exchange.OrderByDescending(p => p.ExchangeID).Where(p => p.IsDelete == 0).ToList();
+        }
+
+        public bool UpdateMoinFloorAndDorm(Exchange ex) {
+            Moveinto moin = db.Moveinto.FirstOrDefault(p => p.StuID == ex.StuID);
+            moin.FloorID = ex.NewFloorID;
+            moin.DormID = ex.NewDormID;
+            db.Entry(moin).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool DelAttendance(int id)
         {
             Attendance ad = db.Attendance.Find(id);
@@ -198,6 +232,11 @@ namespace DAL
                 return true;
             }
             return false;
+        }
+
+        public List<Moveout> MoveoutSelect()
+        {
+            return db.Moveout.ToList();
         }
 
         public List<Admin> SelectAdmin() {

@@ -19,6 +19,12 @@
         <AssociationConnector Association="GCHomeModel.FK__Attendanc__StuID__5165187F" />
         <EntityTypeShape EntityType="GCHomeModel.Exchange" Width="1.5" PointX="3" PointY="10.125" />
         <AssociationConnector Association="GCHomeModel.FK__Exchange__StuID__5535A963" />
+        <AssociationConnector Association="GCHomeModel.FK__Exchange__NewDor__5BE2A6F2" />
+        <AssociationConnector Association="GCHomeModel.FK__Exchange__OldDor__59FA5E80" />
+        <AssociationConnector Association="GCHomeModel.FK__Exchange__NewFlo__5AEE82B9" />
+        <AssociationConnector Association="GCHomeModel.FK__Exchange__OldFlo__59063A47" />
+        <EntityTypeShape EntityType="GCHomeModel.Moveout" Width="1.5" PointX="3" PointY="14.375" />
+        <AssociationConnector Association="GCHomeModel.FK__Moveout__StuID__5EBF139D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

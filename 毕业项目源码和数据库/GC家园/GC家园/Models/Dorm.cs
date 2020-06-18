@@ -18,6 +18,8 @@ namespace Models
         public Dorm()
         {
             this.Moveinto = new HashSet<Moveinto>();
+            this.Exchange = new HashSet<Exchange>();
+            this.Exchange1 = new HashSet<Exchange>();
         }
     
         public int DormID { get; set; }
@@ -30,5 +32,9 @@ namespace Models
         public virtual Floor Floor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Moveinto> Moveinto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exchange> Exchange { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exchange> Exchange1 { get; set; }
     }
 }

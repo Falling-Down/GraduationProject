@@ -40,6 +40,10 @@ namespace BLL
             return GCHomeDAL.UpdateMoinPeople(FloorID,DormID);
         }
 
+        public List<Student> StuSelect() {
+            return GCHomeDAL.StuSelect();
+        }
+
         public List<Student> LikeSelect(int? State, string StuName="") {
             return GCHomeDAL.LikeSelect(State,StuName);
         }
@@ -96,12 +100,29 @@ namespace BLL
         public Attendance AttendanSelectNew(int? StuID) {
             return GCHomeDAL.AttendanSelectNew(StuID);
         }
+
         public bool AddAttendace(Attendance ad) {
             return GCHomeDAL.AddAttendace(ad);
         }
 
+        public bool UpdateMoinFloorAndDorm(Exchange ex) {
+            return GCHomeDAL.UpdateMoinFloorAndDorm(ex);
+        }
+
+        public List<Exchange> ExchangeSelect() {
+            return GCHomeDAL.ExchangeSelect();
+        }
+
+        public bool AddExchange(Exchange ex) {
+            return GCHomeDAL.AddExchange(ex);
+        }
+
         public bool DelAttendance(int id) {
             return GCHomeDAL.DelAttendance(id);
+        }
+
+        public List<Moveout> MoveoutSelect() {
+            return GCHomeDAL.MoveoutSelect();
         }
 
         public List<Admin> SelectAdmin() {
