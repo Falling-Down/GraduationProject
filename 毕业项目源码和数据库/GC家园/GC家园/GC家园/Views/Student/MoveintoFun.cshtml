@@ -7,9 +7,15 @@
 @{
     List<Floor> Floorlist = ViewBag.FloorList;
 }
-
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<style>
+    label.error {
+        color: red;
+    }
+</style>
 <div style="width:50%;height:auto;margin:70px auto">
-    <form class="form-horizontal" role="form" action="/Student/AddMoveinto">
+    <form class="form-horizontal" role="form" action="/Student/AddMoveinto" id="AddValidate">
         <div class="form-group">
             <label for="firstname" class="col-sm-2 control-label">学生学号</label>
             <div class="col-sm-9">
@@ -104,3 +110,18 @@
         }
     </script>
 }
+
+<script type="text/javascript">
+    $("#AddValidate").validate({
+        rules: {
+            StuNumber: { required: true },
+            FloorID: { required: true },
+            DormID: { required: true }
+        },
+        messages: {
+            StuNumber: { required: "学号必填" },
+            FloorID: { required: "请选择楼宇" },
+            DormID: { required: "请选择宿舍" }
+        }
+    })
+</script>

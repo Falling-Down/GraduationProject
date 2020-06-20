@@ -143,6 +143,19 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
+        public int ajaxOrnotStuNumberandMoin(string StuNumber) {
+            if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber)==0)
+            {
+                return 0;
+            }
+            else if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber) == 1)
+            {
+                return 1;
+            }
+            return 2;
+        }
+
+        [HttpPost]
         public JsonResult ajaxFloorAndDorm(string StuNumber) {
             var moin = GCHomeBLL.ajaxFloorAndDorm(StuNumber);
             JsonSerializerSettings jsSettings = new JsonSerializerSettings();
@@ -180,7 +193,13 @@ namespace GC家园.Controllers
             {
                 if (GCHomeBLL.UpdateMoinFloorAndDorm(ex))
                 {
-                    return RedirectToAction("ExchangeFun", "Student");
+                    if (GCHomeBLL.ExchangeMoveinDormPeople(ex))
+                    {
+                        if (GCHomeBLL.ExchangePeople(ex))
+                        {
+                            return RedirectToAction("ExchangeFun", "Student");
+                        }
+                    }
                 }
             }
             return View();

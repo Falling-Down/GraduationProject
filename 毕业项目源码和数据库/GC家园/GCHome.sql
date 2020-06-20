@@ -44,6 +44,7 @@ DormPeople int, --宿舍人数
 MoveinDormPeople int,--已入住人数
 IsDelete int --是否删除（0未删除1已删除）
 )
+select * from Exchange
 select * from Dorm
 drop table Admin
 insert into Dorm values(1,'201',6,0)
@@ -68,6 +69,7 @@ NewFloorID int foreign key references Floor(FloorID), --新楼宇ID
 NewDormID int foreign key references Dorm(DormID), --新宿舍ID
 IsDelete int --是否删除（0未删除1已删除）
 )
+select * from Exchange
 create table Moveout( --迁出表
 MoveoutID int primary key identity(1,1), --迁出ID
 StuID int foreign key references Student(StuID), --学生ID

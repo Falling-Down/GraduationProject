@@ -5,6 +5,13 @@
 }
 @using Models
 <link href="~/Content/Myself.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<style>
+    label.error {
+        color: red;
+    }
+</style>
 <div style="width:90%;margin:10px auto">
     <div class="">
         <a href="" class="btn btn-primary col-lg-1" data-toggle="modal" data-target="#Add">添加学生</a>
@@ -30,7 +37,8 @@
                         <option value="1">已入住</option>
                     }
                 </select>
-                <input type="text" placeholder="请输入姓名" class="form-control " style="width:250px" name="StuName" value="@ViewBag.StuName" />
+                <input type="text" placeholder="请输入姓名" class="form-control " style="        width: 250px
+" name="StuName" value="@ViewBag.StuName" />
                 <a href="#" class="btn btn-info" onclick="nbclass()">查询</a>
             </div>
         </form>
@@ -91,11 +99,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="color:black">添加学生</h4>
             </div>
-            <form action="/Student/Index" method="post">
+            <form action="/Student/Index" method="post" id="AddValidate">
                 <div class="modal-body" style="padding-bottom:10px">
                     <div class="form-inline a_1">
                         <label>学号：</label>
-                        <input type="text" class="form-control" name="StuNumber" id="StuNumber" onblur="lose()"/>
+                        <input type="text" class="form-control" name="StuNumber" id="StuNumber" onblur="lose()" />
                         <p style="color:red" id="fill"></p>
                     </div>
                     <div class="form-inline a_1">
@@ -112,7 +120,7 @@
                     </div>
                     <div class="form-inline a_1">
                         <label>性别：</label>
-                        <input type="radio" name="StuSex" value="1" class="StuSex" />男
+                        <input type="radio" name="StuSex" value="1" class="StuSex" checked="checked"/>男
                         <input type="radio" name="StuSex" value="0" class="StuSex" />女
                     </div>
                     <div class="form-inline a_1" style="margin-top:10px">
@@ -136,7 +144,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel" style="color:black">编辑学生</h4>
             </div>
-            <form action="/Student/EditStudent" method="post">
+            <form action="/Student/EditStudent" method="post" id="EditValidate">
                 <div class="modal-body" style="padding-bottom:10px">
                     <input type="hidden" name="StuID" id="StuID" />
                     <input type="hidden" name="OccupancyStatus" id="OccupancyStatus" />
@@ -176,46 +184,46 @@
     </div><!-- /.modal -->
 </div>
 
-@section scripts{ 
-<script>
-    function nbclass() {
-        $("#nb").submit();
-    }
+@section scripts{
+    <script>
+        function nbclass() {
+            $("#nb").submit();
+        }
 
-    $('#Edit').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var StuID = button.data('whatever');
-        var modal = $(this)
-        $.post({
-            url: "/Student/EditStu",
-            data: {
-                StuID: StuID
-            },
-            datatype: "json",
-            success: function (data) {
-                var msg = jQuery.parseJSON(data);
-                modal.find('#StuID').val(msg.StuID);
-                modal.find('#StuNumber').val(msg.StuNumber);
-                modal.find('#StuName').val(msg.StuName);
-                modal.find('#StuCount').val(msg.StuCount);
-                modal.find('#StuPwd').val(msg.StuPwd);
-                if (msg.StuSex == 1) {
-                    $('.StuSex:eq(2)').attr("checked", true);
+        $('#Edit').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var StuID = button.data('whatever');
+            var modal = $(this)
+            $.post({
+                url: "/Student/EditStu",
+                data: {
+                    StuID: StuID
+                },
+                datatype: "json",
+                success: function (data) {
+                    var msg = jQuery.parseJSON(data);
+                    modal.find('#StuID').val(msg.StuID);
+                    modal.find('#StuNumber').val(msg.StuNumber);
+                    modal.find('#StuName').val(msg.StuName);
+                    modal.find('#StuCount').val(msg.StuCount);
+                    modal.find('#StuPwd').val(msg.StuPwd);
+                    if (msg.StuSex == 1) {
+                        $('.StuSex:eq(2)').attr("checked", true);
+                    }
+                    else {
+                        $('.StuSex:eq(3)').attr("checked", true);
+                    }
+                    modal.find('#StuAge').val(msg.StuAge);
+                    modal.find('#OccupancyStatus').val(msg.OccupancyStatus);
+                    modal.find('#IsDelete').val(msg.IsDelete);
+                },
+                error: function () {
+                    alert('');
                 }
-                else {
-                    $('.StuSex:eq(3)').attr("checked", true);
-                }
-                modal.find('#StuAge').val(msg.StuAge);
-                modal.find('#OccupancyStatus').val(msg.OccupancyStatus);
-                modal.find('#IsDelete').val(msg.IsDelete);
-            },
-            error: function () {
-                alert('');
-            }
+            })
         })
-    })
 
-    function lose() {
+        function lose() {
             var StuNumber = $("#StuNumber").val();
             $.ajax({
                 type: "post",
@@ -232,9 +240,58 @@
                 }
             })
         }
-</script>
-
+    </script>
 }
+
+<script type="text/javascript">
+    $("#AddValidate").validate({
+        rules: {
+            StuNumber: { required: true, maxlength: 30 },
+            StuName: { required: true },
+            StuCount: { required: true },
+            StuPwd: { required: true },
+            StuSex: { required: true },
+            //StuCount: { required: true, equalTo: "#Password" },
+            StuAge: { required: true }
+        },
+        messages: {
+            StuNumber: { required: "学号必填", maxlength: "账号输入内容不能超过30字" },
+            StuName: { required: "姓名必填" },
+            StuCount: { required: "账号必填" },
+            StuPwd: { required: "密码必填" },
+            StuSex: { required: "请选择性别" },
+            //StuCount: { required: "请重新输入密码", equalTo: "与密码输入不一致" },
+            StuAge: { required: "年龄必填" }
+        }
+    })
+
+   $("#EditValidate").validate({
+        rules: {
+            StuNumber: { required: true, maxlength: 30 },
+            StuName: { required: true },
+            StuCount: { required: true },
+            StuPwd: { required: true },
+            StuSex: { required: true },
+            //StuCount: { required: true, equalTo: "#Password" },
+            StuAge: { required: true }
+        },
+        messages: {
+            StuNumber: { required: "学号必填", maxlength: "账号输入内容不能超过30字" },
+            StuName: { required: "姓名必填" },
+            StuCount: { required: "账号必填" },
+            StuPwd: { required: "密码必填" },
+            StuSex: { required: "请选择性别" },
+            //StuCount: { required: "请重新输入密码", equalTo: "与密码输入不一致" },
+            StuAge: { required: "年龄必填" }
+        }
+    })
+
+
+    $.validator.addMethod("checkPwd", function (value, e) {
+        var reg = /^[A-Za-z0-9]{6,12}$/;
+        return reg.test(value);
+    })
+</script>
 @*<script type="text/javascript">
         function nbclass() {
             var StuNumber = $("#StuNumber").val();

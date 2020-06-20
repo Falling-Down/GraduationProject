@@ -180,6 +180,20 @@ namespace DAL
             return false;
         }
 
+        public int ajaxOrnotStuNumberandMoin(string StuNumber)
+        {
+            Student stu = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber);
+            if (stu!= null)
+            {
+                if (db.Moveinto.FirstOrDefault(p=>p.StuID==stu.StuID)==null)
+                {
+                    return 1;
+                }
+                return 2;
+            }
+            return 0;
+        }
+
         public bool AddAttendace(Attendance ad) {
             ad.IsDelete = 0;
             db.Attendance.Add(ad);
@@ -235,6 +249,32 @@ namespace DAL
             Moveinto moin = db.Moveinto.FirstOrDefault(p => p.StuID == StuID);
             Dorm dm = db.Dorm.FirstOrDefault(p => p.FloorID == moin.FloorID && p.DormID == moin.DormID);
             dm.MoveinDormPeople -= 1;
+            db.Entry(dm).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool ExchangeMoveinDormPeople(Exchange ex)
+        {
+            Dorm dm = db.Dorm.FirstOrDefault(p => p.FloorID == ex.OldFloorID && p.DormID == ex.OldDormID);
+            dm.MoveinDormPeople -= 1;
+            db.Entry(dm).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool ExchangePeople(Exchange ex)
+        {
+            Dorm dm = db.Dorm.FirstOrDefault(p => p.FloorID == ex.NewFloorID && p.DormID == ex.NewDormID);
+            dm.MoveinDormPeople += 1;
             db.Entry(dm).State = System.Data.Entity.EntityState.Modified;
             int result = db.SaveChanges();
             if (result > 0)

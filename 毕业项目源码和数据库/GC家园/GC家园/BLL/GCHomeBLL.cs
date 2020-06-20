@@ -93,6 +93,18 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
+        public bool ExchangeMoveinDormPeople(Exchange ex) {
+            return GCHomeDAL.ExchangeMoveinDormPeople(ex);
+        }
+
+        public bool ExchangePeople(Exchange ex) {
+            return GCHomeDAL.ExchangePeople(ex);
+        }
+
+        public int ajaxOrnotStuNumberandMoin(string StuNumber) {
+            return GCHomeDAL.ajaxOrnotStuNumberandMoin(StuNumber);
+        }
+
         public Moveinto ajaxFloorAndDorm(string StuNumber) {
             return GCHomeDAL.ajaxFloorAndDorm(StuNumber);
         }

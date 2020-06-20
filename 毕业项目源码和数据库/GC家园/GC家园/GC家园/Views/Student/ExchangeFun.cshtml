@@ -3,14 +3,22 @@
     ViewBag.Title = "ExchangeFun";
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
 @using Models
 @{
     List<Floor> Floorlist = ViewBag.FloorList;
     List<Exchange> Exchangelist = ViewBag.ExchangeList;
 }
+
+<style>
+    label.error {
+        color: red;
+    }
+</style>
 <button class="btn bg-primary " style="margin-left:60px" onclick="change()">寝室调换</button>
 <div style="width:90%;margin:10px auto" id="first">
-   
+
     <table class="table table-bordered table-striped" style="transform:translateY(20px)">
         <thead>
             <tr>
@@ -25,21 +33,21 @@
         <tbody>
             @foreach (var item in Exchangelist as List<Exchange>)
             {
-            <tr>
-                <td>@item.Student.StuNumber</td>
-                <td>@item.Student.StuName</td>
-                <td>@item.Floor1.FloorName</td>
-                <td>@item.Dorm1.DormName</td>
-                <td>@item.Floor.FloorName</td>
-                <td>@item.Dorm.DormName</td>
-            </tr>
+                <tr>
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@item.Floor1.FloorName</td>
+                    <td>@item.Dorm1.DormName</td>
+                    <td>@item.Floor.FloorName</td>
+                    <td>@item.Dorm.DormName</td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 
 <div style="width:50%;height:auto;margin:70px auto" id="second" class="hidden">
-    <form class="form-horizontal" role="form" action="/Student/AddExchange">
+    <form class="form-horizontal" role="form" action="/Student/AddExchange" id="AddValidate">
         <div class="form-group">
             <label for="lastname" class="col-sm-2 control-label">学号</label>
             <div class="col-sm-9">
@@ -51,14 +59,15 @@
         <div class="form-group">
             <label for="lastname" class="col-sm-2 control-label">原楼宇</label>
             <div class="col-sm-9">
-                <p id="OldFloorName" style="margin-top:7px"></p>
+                <label id="OldFloorName" style="margin-top:7px" name="OldFloorName"></label>
                 <input type="hidden" class="form-control" name="OldFloorID" id="OldFloorID" />
+                <p style="color:red" id="tixing"></p>
             </div>
         </div>
         <div class="form-group">
             <label for="lastname" class="col-sm-2 control-label">原宿舍</label>
             <div class="col-sm-9">
-                <p id="OldDormName" style="margin-top:7px"></p>
+                <label id="OldDormName" style="margin-top:7px"></label>
                 <input type="hidden" class="form-control" name="OldDormID" id="OldDormID" />
             </div>
         </div>
@@ -91,6 +100,7 @@
 
 @section scripts{
     <script>
+
         function change() {
             if ($("#first").is(":visible")) {
                 $("#first").addClass("hidden");
@@ -108,12 +118,19 @@
             var StuNumber = $("#StuNumber").val();
             $.ajax({
                 type: "post",
-                url: "/Student/ajaxOrnotStuNumber",
+                url: "/Student/ajaxOrnotStuNumberandMoin",
                 data: { "StuNumber": StuNumber },
                 async: false,
                 success: function (data) {
+                    console.log("123");
                     if (data == 0) {
                         $("#fill").html("没有该学生!请重新输入");
+                        $("#OldFloorName").html("");
+                        $("#OldDormName").html("");
+                        $("#StuNumber").val("");
+                    }
+                    else if (data == 1) {
+                        $("#fill").html("该学生暂未入住!请重新输入");
                         $("#OldFloorName").html("");
                         $("#OldDormName").html("");
                         $("#StuNumber").val("");
@@ -143,7 +160,9 @@
         }
 
         function Newchange() {
+
             var FloorID = $("#NewFloorID").val();
+            alert(FloorID);
             $.ajax({
                 type: "post",
                 url: "/Student/AjaxDorm",
@@ -169,3 +188,17 @@
     </script>
 }
 
+<script type="text/javascript">
+    $("#AddValidate").validate({
+        rules: {
+            StuNumber: { required: true },
+            NewFloorID: { required: true },
+            NewDormID: { required: true }
+        },
+        messages: {
+            StuNumber: { required: "学号必填" },
+            NewFloorID: { required: "请选择现楼宇" },
+            NewDormID: { required: "请选择现宿舍" }
+        }
+    })
+</script>
