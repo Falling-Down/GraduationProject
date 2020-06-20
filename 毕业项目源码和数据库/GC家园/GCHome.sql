@@ -16,16 +16,16 @@ AdminID int primary key identity(1,1), --管理员ID
 FloorID int foreign key references Floor(FloorID), --楼宇ID
 AdminCount nvarchar(50), --管理员登录账号
 AdminPwd nvarchar(50), --管理员登录密码
+AdminName nvarchar(50),--管理员姓名
 AdminSex int,--0为女1为男 --管理员性别
 AdminAge int, --管理员年龄
 AdminKinds int, --管理员种类（0楼宇管理员1系统管理员2学生）
-IsDelete int, --是否删除（0未删除1已删除）
-AdminName nvarchar(50)--管理员姓名
+IsDelete int --是否删除（0未删除1已删除）
 )
 alter table Admin add AdminName nvarchar(50)
 select * from Admin
 select * from Student
-insert into Admin(AdminCount,AdminPwd,AdminSex,AdminAge,AdminKinds,IsDelete) values('admin','1234',1,20,1,0)
+insert into Admin(AdminCount,AdminPwd,AdminName,AdminSex,AdminAge,AdminKinds,IsDelete) values('admin','1234','admin',1,20,1,0)
 insert into Admin values(1,'余罪','1234',1,28,0,0)
 create table Floor( --楼宇表
 FloorID int primary key identity(1,1), --楼宇ID
@@ -41,11 +41,11 @@ DormID int primary key identity(1,1), --宿舍ID
 FloorID int foreign key references Floor(FloorID), --楼宇ID
 DormName nvarchar(50), --宿舍名称
 DormPeople int, --宿舍人数
-IsDelete int, --是否删除（0未删除1已删除）
-MoveinDormPeople int--已入住人数
+MoveinDormPeople int,--已入住人数
+IsDelete int --是否删除（0未删除1已删除）
 )
-Alter table Dorm add 
 select * from Dorm
+drop table Admin
 insert into Dorm values(1,'201',6,0)
 create table Moveinto( --入住登记表
 MoveintoID int primary key identity(1,1),--入住登记ID
@@ -75,6 +75,7 @@ MoveoutDate date, --迁出时间
 MoveoutMark nvarchar(50), --备注
 IsDelete int --是否删除（0未删除1已删除）
 )
+select * from Moveout
 insert into Moveout values(1,'2020-6-11','还有东西再宿舍',0)
 create table Attendance( --考勤表
 AttendanceID int primary key identity(1,1), --考勤ID

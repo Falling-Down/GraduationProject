@@ -208,6 +208,42 @@ namespace DAL
             return db.Exchange.OrderByDescending(p => p.ExchangeID).Where(p => p.IsDelete == 0).ToList();
         }
 
+        public bool AddMoveout(Moveout moout) {
+            db.Moveout.Add(moout);
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateStuOccState(int? StuID)
+        {
+            Student stu = db.Student.FirstOrDefault(p => p.StuID == StuID);
+            stu.OccupancyStatus = 2;
+            db.Entry(stu).State=System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateDormMoveinDormPeople(int? StuID) {
+            Moveinto moin = db.Moveinto.FirstOrDefault(p => p.StuID == StuID);
+            Dorm dm = db.Dorm.FirstOrDefault(p => p.FloorID == moin.FloorID && p.DormID == moin.DormID);
+            dm.MoveinDormPeople -= 1;
+            db.Entry(dm).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool UpdateMoinFloorAndDorm(Exchange ex) {
             Moveinto moin = db.Moveinto.FirstOrDefault(p => p.StuID == ex.StuID);
             moin.FloorID = ex.NewFloorID;
@@ -234,9 +270,14 @@ namespace DAL
             return false;
         }
 
-        public List<Moveout> MoveoutSelect()
+        public List<Moveout> MoveoutSelect(string StuNumber)
         {
-            return db.Moveout.ToList();
+            if (db.Student.FirstOrDefault(p => p.StuNumber == StuNumber) != null)
+            {
+                int StuID = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber).StuID;
+                return db.Moveout.Where(p => p.StuID == StuID).ToList();
+            }
+            return db.Moveout.OrderByDescending(p => p.MoveoutID).ToList();
         }
 
         public List<Admin> SelectAdmin() {

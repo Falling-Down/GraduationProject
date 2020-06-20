@@ -186,9 +186,31 @@ namespace GC家园.Controllers
             return View();
         }
 
-        public ActionResult Moveout() {
+        public ActionResult Moveout(string StuNumber) {
             ViewBag.StuList = GCHomeBLL.StuSelect();
-            ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect();
+            ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect(StuNumber);
+            ViewBag.StuNumber = StuNumber;
+            return View();
+        }
+
+        public ActionResult AddMoveout(int id) {
+            ViewBag.ID = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddMoveout(Moveout moout)
+        {
+            if (GCHomeBLL.AddMoveout(moout))
+            {
+                if (GCHomeBLL.UpdateStuOccState(moout.StuID))
+                {
+                    if (GCHomeBLL.UpdateDormMoveinDormPeople(moout.StuID))
+                    {
+                        return RedirectToAction("Moveout","Student");
+                    }
+                }
+            }
             return View();
         }
     }

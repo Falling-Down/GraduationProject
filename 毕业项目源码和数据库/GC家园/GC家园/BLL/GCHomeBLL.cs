@@ -121,8 +121,20 @@ namespace BLL
             return GCHomeDAL.DelAttendance(id);
         }
 
-        public List<Moveout> MoveoutSelect() {
-            return GCHomeDAL.MoveoutSelect();
+        public List<Moveout> MoveoutSelect(string StuNumber) {
+            return GCHomeDAL.MoveoutSelect(StuNumber);
+        }
+
+        public bool AddMoveout(Moveout moout){
+            return GCHomeDAL.AddMoveout(moout);
+        }
+
+        public bool UpdateStuOccState(int? StuID){
+            return GCHomeDAL.UpdateStuOccState(StuID);
+        }
+
+        public bool UpdateDormMoveinDormPeople(int? StuID) {
+            return GCHomeDAL.UpdateDormMoveinDormPeople(StuID);
         }
 
         public List<Admin> SelectAdmin() {

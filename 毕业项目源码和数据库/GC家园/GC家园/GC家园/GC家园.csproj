@@ -198,6 +198,7 @@
     <Content Include="Views\Admin\icon.cshtml" />
     <Content Include="Views\Student\Peopleicon.cshtml" />
     <Content Include="Views\Student\Failicon.cshtml" />
+    <Content Include="Views\Student\AddMoveout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

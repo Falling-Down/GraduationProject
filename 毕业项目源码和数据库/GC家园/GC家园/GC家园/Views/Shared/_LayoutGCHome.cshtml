@@ -23,9 +23,9 @@
 
                             <li class="dropdown">
                                 <a href="#">
-                                    @if (Session["Count"] != null)
+                                    @if (Session["Name"] != null)
                                     {
-                                        @Session["Count"].ToString()
+                                        @Session["Name"].ToString()
                                     }
                                 </a>
                             </li>
@@ -97,7 +97,7 @@
                             {
                                 <li><a href="/Student/ExchangeFun">学生寝室调换</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout")
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout"||ViewContext.RouteData.Values["action"].ToString() == "AddMoveout")
                             {
                                 <li class="active"><a href="/Student/Moveout">学生迁出记录</a></li>
                             }

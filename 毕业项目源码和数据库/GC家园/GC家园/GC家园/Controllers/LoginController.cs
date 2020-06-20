@@ -26,6 +26,7 @@ namespace GC家园.Controllers
                 {
                     Session["Role"] = Role;
                     Session["Count"] = Count;
+                    Session["Name"] = GCHomeBLL.SelectAdmin(Count, Password, Role).AdminName;
                     return RedirectToAction("Home", "Login");
                 }
                 else
@@ -39,6 +40,7 @@ namespace GC家园.Controllers
                 {
                     Session["Role"] = 2;
                     Session["Count"] = Count;
+                    Session["Name"] = GCHomeBLL.SelectStudent(Count, Password).StuName;
                     return RedirectToAction("Home", "Login");
                 }
                 else
