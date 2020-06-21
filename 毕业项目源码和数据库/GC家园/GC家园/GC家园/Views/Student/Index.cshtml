@@ -1,9 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
 @using Models
+@model PagedList.IPagedList<Student>
+@using PagedList.Mvc;
+
 <link href="~/Content/Myself.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -56,7 +58,7 @@
             </tr>
         </thead>
         <tbody id="nb">
-            @foreach (var item in ViewBag.list as List<Student>)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.StuNumber</td>
@@ -88,8 +90,32 @@
             }
         </tbody>
     </table>
-
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, uname = Request.QueryString["uname"] }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
 </div>
+
+@*<nav aria-label="Page navigation" style="position:relative;left:38%;transform:translateY(350px)">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>*@
 
 
 <div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -120,7 +146,7 @@
                     </div>
                     <div class="form-inline a_1">
                         <label>性别：</label>
-                        <input type="radio" name="StuSex" value="1" class="StuSex" checked="checked"/>男
+                        <input type="radio" name="StuSex" value="1" class="StuSex" checked="checked" />男
                         <input type="radio" name="StuSex" value="0" class="StuSex" />女
                     </div>
                     <div class="form-inline a_1" style="margin-top:10px">
@@ -265,7 +291,7 @@
         }
     })
 
-   $("#EditValidate").validate({
+    $("#EditValidate").validate({
         rules: {
             StuNumber: { required: true, maxlength: 30 },
             StuName: { required: true },

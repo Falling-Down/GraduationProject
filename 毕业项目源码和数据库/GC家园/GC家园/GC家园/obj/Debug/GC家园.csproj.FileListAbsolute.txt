@@ -194,3 +194,7 @@ D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\De
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Debug\GC家园.csproj.CopyComplete
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Debug\GC家园.dll
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Debug\GC家园.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.Mvc.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.Mvc.xml

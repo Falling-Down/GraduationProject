@@ -7,6 +7,7 @@ using Models;
 using BLL;
 using System.Web.Helpers;
 using Newtonsoft.Json;
+using PagedList;
 
 namespace GC家园.Controllers
 {
@@ -24,12 +25,15 @@ namespace GC家园.Controllers
         }
 
         // GET: Student
-        public ActionResult Index(int? State, string StuName="")
+        public ActionResult Index(int? page,int? State, string StuName="")
         {
-            ViewBag.list = GCHomeBLL.LikeSelect(State, StuName);
+            List<Student> stulist = GCHomeBLL.LikeSelect(State, StuName);
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
             ViewBag.State = State;
             ViewBag.StuName = StuName;
-            return View();
+            return View(pagedList);
         }
 
         [HttpPost]

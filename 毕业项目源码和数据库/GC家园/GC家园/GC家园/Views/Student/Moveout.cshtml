@@ -4,16 +4,17 @@
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
 @using Models
-@{ 
+@{
     List<Moveout> Moveoutlist = ViewBag.MoveoutList;
     List<Student> Stulist = ViewBag.StuList;
 }
-    <button class="btn btn-success" style="margin-left:60px" onclick="change()">学生迁出</button>
+
+<button class="btn btn-success" style="margin-left:60px" onclick="change()">学生迁出</button>
 <div style="width:90%;margin:10px auto" id="first">
     <div class="">
         <form action="/Student/Moveout">
             <div class="form-inline">
-                <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" name="StuNumber" value="@ViewBag.StuNumber"/>
+                <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" name="StuNumber" value="@ViewBag.StuNumber" />
                 <button class="btn btn-info">查询</button>
             </div>
         </form>
@@ -30,12 +31,12 @@
         <tbody>
             @foreach (var item in Moveoutlist as List<Moveout>)
             {
-            <tr>
-                <td>@item.Student.StuNumber</td>
-                <td>@item.Student.StuName</td>
-                <td>@string.Format("{0:D}",item.MoveoutDate)</td>
-                <td>@item.MoveoutMark</td>
-            </tr>
+                <tr>
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@string.Format("{0:D}", item.MoveoutDate)</td>
+                    <td>@item.MoveoutMark</td>
+                </tr>
             }
         </tbody>
     </table>
@@ -98,8 +99,9 @@
             if ($("#first").is(":hidden")) {
                 $("#first").addClass("show").removeClass("hidden");
                 $("#second").addClass("hidden").removeClass("show");
-                
+
             }
         }
     </script>
-    }
+}
+

@@ -3,14 +3,14 @@
     ViewBag.Title = "ExchangeFun";
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
+
 @using Models
 @{
     List<Floor> Floorlist = ViewBag.FloorList;
     List<Exchange> Exchangelist = ViewBag.ExchangeList;
 }
-
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
 <style>
     label.error {
         color: red;
@@ -160,9 +160,7 @@
         }
 
         function Newchange() {
-
             var FloorID = $("#NewFloorID").val();
-            alert(FloorID);
             $.ajax({
                 type: "post",
                 url: "/Student/AjaxDorm",
