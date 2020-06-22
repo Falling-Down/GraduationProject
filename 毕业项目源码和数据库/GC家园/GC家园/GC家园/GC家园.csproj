@@ -156,6 +156,14 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\8541.jpg" />
+    <Content Include="images\nbclass\img-163eb623c229e24da98b953772be44a9.jpg" />
+    <Content Include="images\nbclass\img-378b325c9b11539004155d7366e1f1d7.jpg" />
+    <Content Include="images\nbclass\img-39d37cbd3b796db2684fcae6e66c4702.jpg" />
+    <Content Include="images\nbclass\img-6d2d8d2f18ba59c45285057940b2249f.jpg" />
+    <Content Include="images\nbclass\img-80bcfeeeebd97131748dff7e53feca03.jpg" />
+    <Content Include="images\nbclass\img-d6299742ceb2e749552b7ad58a05f59b.jpg" />
+    <Content Include="images\nbclass\img-ec6e06b78209e5e1acb949cd5c5cac2d.jpg" />
+    <Content Include="images\nbclass\img-ff02252331fce558682de0d664011e7e.jpg" />
     <Content Include="images\失败.png" />
     <Content Include="images\失败表情 2.png" />
     <Content Include="images\失败表情.png" />
