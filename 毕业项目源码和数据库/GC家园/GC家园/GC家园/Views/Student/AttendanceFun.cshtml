@@ -35,15 +35,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Attendanlist as List<Attendance>)
+            @if (Attendanlist!=null)
             {
-                <tr>
-                    <td>@item.Student.StuNumber</td>
-                    <td>@item.Student.StuName</td>
-                    <td>@string.Format("{0:D}", item.AttendanceDate) </td>
-                    <td>@item.AttendanceReason</td>
-                    <td><a href="/Student/DelAttendance/@item.AttendanceID" class="btn btn-default" onclick="return confirm('确定删除吗')">删除</a></td>
-                </tr>
+                foreach (var item in Attendanlist as List<Attendance>)
+                {
+                    <tr>
+                        <td>@item.Student.StuNumber</td>
+                        <td>@item.Student.StuName</td>
+                        <td>@string.Format("{0:D}", item.AttendanceDate) </td>
+                        <td>@item.AttendanceReason</td>
+                        <td><a href="/Student/DelAttendance/@item.AttendanceID" class="btn btn-default" onclick="return confirm('确定删除吗')">删除</a></td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

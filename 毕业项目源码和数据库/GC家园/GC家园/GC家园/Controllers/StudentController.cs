@@ -118,7 +118,8 @@ namespace GC家园.Controllers
         [HttpPost]
         public ActionResult AttendanceFun(string NumberOrName)
         {
-            if (GCHomeBLL.AttendanReturnStuID(NumberOrName)==null)
+            int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+            if (a == null)
             {
                 ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
                 ViewBag.Name = NumberOrName;
@@ -126,10 +127,13 @@ namespace GC家园.Controllers
             else
             {
                 List<Attendance> alist = new List<Attendance>();
-                foreach (var item in GCHomeBLL.AttendanReturnStuID(NumberOrName))
+                foreach (var item in a)
                 {
-                    Attendance ad = GCHomeBLL.AttendanSelectNew(item);
-                    alist.Add(ad);
+                    if (GCHomeBLL.AttendanSelectNew(item)!=null)
+                    {
+                        Attendance ad = GCHomeBLL.AttendanSelectNew(item);
+                        alist.Add(ad);
+                    }             
                 }
                 ViewBag.AttendanList = alist;
                 ViewBag.Name = NumberOrName;

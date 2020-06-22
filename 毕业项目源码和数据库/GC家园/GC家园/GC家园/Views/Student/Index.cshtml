@@ -39,8 +39,7 @@
                         <option value="1">已入住</option>
                     }
                 </select>
-                <input type="text" placeholder="请输入姓名" class="form-control " style="        width: 250px
-" name="StuName" value="@ViewBag.StuName" />
+                <input type="text" placeholder="请输入姓名" class="form-control " style="width: 250px" name="StuName" value="@ViewBag.StuName" />
                 <a href="#" class="btn btn-info" onclick="nbclass()">查询</a>
             </div>
         </form>
@@ -58,35 +57,38 @@
             </tr>
         </thead>
         <tbody id="nb">
-            @foreach (var item in Model)
+            @if (Model != null)
             {
-                <tr>
-                    <td>@item.StuNumber</td>
-                    <td>@item.StuName</td>
-                    <td>@item.StuCount</td>
-                    <td>
-                        @if (item.StuSex == 1)
-                        {
-                            @:男
-                        }
-                        else
-                        {
-                            @:女
-                        }
-                    </td>
-                    <td>@item.StuAge</td>
-                    <td>
-                        @if (item.OccupancyStatus == 0)
-                        {
-                            @:未入住
-                        }
-                        else if (item.OccupancyStatus == 1)
-                        {
-                            @:已入住
-                        }
-                    </td>
-                    <td><button class="btn btn-info" data-toggle="modal" data-target="#Edit" data-whatever="@item.StuID">编辑</button></td>
-                </tr>
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.StuNumber</td>
+                        <td>@item.StuName</td>
+                        <td>@item.StuCount</td>
+                        <td>
+                            @if (item.StuSex == 1)
+                            {
+                                @:男
+                            }
+                            else
+                            {
+                                @:女
+                            }
+                        </td>
+                        <td>@item.StuAge</td>
+                        <td>
+                            @if (item.OccupancyStatus == 0)
+                            {
+                                @:未入住
+                            }
+                            else if (item.OccupancyStatus == 1)
+                            {
+                                @:已入住
+                            }
+                        </td>
+                        <td><button class="btn btn-info" data-toggle="modal" data-target="#Edit" data-whatever="@item.StuID">编辑</button></td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
