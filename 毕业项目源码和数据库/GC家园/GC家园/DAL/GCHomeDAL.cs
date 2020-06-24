@@ -180,6 +180,15 @@ namespace DAL
             return false;
         }
 
+        public bool StuNumberNewOrnot1(string StuNumber)
+        {
+            if (db.Student.FirstOrDefault(p => p.StuNumber == StuNumber&&p.OccupancyStatus==1) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public int ajaxOrnotStuNumberandMoin(string StuNumber)
         {
             Student stu = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber);

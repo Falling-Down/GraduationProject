@@ -143,7 +143,7 @@ namespace GC家园.Controllers
 
         [HttpPost]
         public int ajaxOrnotStuNumber(string StuNumber) {
-            if (GCHomeBLL.StuNumberNewOrnot(StuNumber))
+            if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
             {
                 return 1;
             }

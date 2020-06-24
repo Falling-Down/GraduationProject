@@ -93,6 +93,11 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
+        public bool StuNumberNewOrnot1(string StuNumber)
+        {
+            return GCHomeDAL.StuNumberNewOrnot1(StuNumber);
+        }
+
         public bool ExchangeMoveinDormPeople(Exchange ex) {
             return GCHomeDAL.ExchangeMoveinDormPeople(ex);
         }
