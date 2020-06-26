@@ -164,6 +164,9 @@
     <Content Include="images\nbclass\img-d6299742ceb2e749552b7ad58a05f59b.jpg" />
     <Content Include="images\nbclass\img-ec6e06b78209e5e1acb949cd5c5cac2d.jpg" />
     <Content Include="images\nbclass\img-ff02252331fce558682de0d664011e7e.jpg" />
+    <Content Include="images\下载.png" />
+    <Content Include="images\卡片背景6.jpg" />
+    <Content Include="images\卡片背景7.jpg" />
     <Content Include="images\失败.png" />
     <Content Include="images\失败表情 2.png" />
     <Content Include="images\失败表情.png" />
@@ -214,6 +217,7 @@
     <Content Include="Views\Student\Peopleicon.cshtml" />
     <Content Include="Views\Student\Failicon.cshtml" />
     <Content Include="Views\Student\AddMoveout.cshtml" />
+    <Content Include="Views\Student\Important.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

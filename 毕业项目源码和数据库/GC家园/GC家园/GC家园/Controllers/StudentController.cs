@@ -17,8 +17,15 @@ namespace GC家园.Controllers
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();
         public ActionResult Peopleicon(int People) {
-            ViewBag.People = People;
-            return View();
+            try
+            {
+                ViewBag.People = People;
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public ActionResult Failicon()
@@ -60,216 +67,385 @@ namespace GC家园.Controllers
         // GET: Student
         public ActionResult Index(int? page,int? State, string StuName="")
         {
-            List<Student> stulist = GCHomeBLL.LikeSelect(State, StuName);
-            var pageSize = 5;
-            var pageNumber = page ?? 1;
-            IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
-            ViewBag.State = State;
-            ViewBag.StuName = StuName;
-            return View(pagedList);
+            try
+            {
+                List<Student> stulist = GCHomeBLL.LikeSelect(State, StuName);
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
+                ViewBag.State = State;
+                ViewBag.StuName = StuName;
+                return View(pagedList);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public ActionResult Index(Student stu) {
-            stu.OccupancyStatus = 0;
-            stu.IsDelete = 0;
-            if (GCHomeBLL.AddStudent(stu))
+            try
             {
-                return RedirectToAction("Index");
+                stu.OccupancyStatus = 0;
+                stu.IsDelete = 0;
+                if (GCHomeBLL.AddStudent(stu))
+                {
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
-            return View() ;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public JsonResult EditStu(int StuID)
         {
-            Student stu = GCHomeBLL.EditStu(StuID);
-            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
-            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            string ret = JsonConvert.SerializeObject(stu, jsSettings);
-            return Json(ret, JsonRequestBehavior.AllowGet);
+            try
+            {
+                Student stu = GCHomeBLL.EditStu(StuID);
+                JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+                jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                string ret = JsonConvert.SerializeObject(stu, jsSettings);
+                return Json(ret, JsonRequestBehavior.AllowGet);     
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult EditStudent(Student stu) {
-            if (GCHomeBLL.EditStudent(stu))
+            try
             {
-                return RedirectToAction("Index","Student");
+                if (GCHomeBLL.EditStudent(stu))
+                {
+                    return RedirectToAction("Index", "Student");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult MoveintoFun() {
-            ViewBag.FloorList = GCHomeBLL.FloorSelect();
-            return View();
+            try
+            {
+                ViewBag.FloorList = GCHomeBLL.FloorSelect();
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int AjaxStuNumber(string StuNumber) {
-            if (GCHomeBLL.StuNumberOrNot(StuNumber)==2) {
-                return 2;
-            }
-            else if(GCHomeBLL.StuNumberOrNot(StuNumber) == 1)
+            try
             {
-                return 1;
+                if (GCHomeBLL.StuNumberOrNot(StuNumber) == 2)
+                {
+                    return 2;
+                }
+                else if (GCHomeBLL.StuNumberOrNot(StuNumber) == 1)
+                {
+                    return 1;
+                }
+                return 0;
             }
-            return 0;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public JsonResult AjaxDorm(int FloorID) {
-            var Dormlist = GCHomeBLL.DormSelect(FloorID);
-            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
-            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            string ret = JsonConvert.SerializeObject(Dormlist, jsSettings);
-            return Json(ret, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var Dormlist = GCHomeBLL.DormSelect(FloorID);
+                JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+                jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                string ret = JsonConvert.SerializeObject(Dormlist, jsSettings);
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult AddMoveinto(Moveinto moin,string StuNumber) {
-            moin.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
-            moin.IsDelete = 0;
-            if (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID)>GCHomeBLL.ReturnMoinPeople(moin.FloorID,moin.DormID))
+            try
             {
-                if (GCHomeBLL.AddMoveinto(moin))
+                moin.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                moin.IsDelete = 0;
+                if (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID) > GCHomeBLL.ReturnMoinPeople(moin.FloorID, moin.DormID))
                 {
-                    if (GCHomeBLL.UpdateState(moin.StuID))
+                    if (GCHomeBLL.AddMoveinto(moin))
                     {
-                        if (GCHomeBLL.UpdateMoinPeople(moin.FloorID, moin.DormID) != null)
+                        if (GCHomeBLL.UpdateState(moin.StuID))
                         {
-                            return RedirectToAction("Peopleicon", "Student",new { People= (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID) - (GCHomeBLL.ReturnMoinPeople(moin.FloorID, moin.DormID)))}) ;
+                            if (GCHomeBLL.UpdateMoinPeople(moin.FloorID, moin.DormID) != null)
+                            {
+                                return RedirectToAction("Peopleicon", "Student", new { People = (GCHomeBLL.ReturnPeople(moin.FloorID, moin.DormID) - (GCHomeBLL.ReturnMoinPeople(moin.FloorID, moin.DormID))) });
+                            }
+                            return RedirectToAction("Index");
                         }
-                        return RedirectToAction("Index");
                     }
                 }
+                return RedirectToAction("Failicon", "Student");
             }
-            return RedirectToAction("Failicon","Student");
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult AttendanceFun() {
-            ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
-            return View();
+            try
+            {
+                ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public ActionResult AttendanceFun(string NumberOrName)
         {
-            int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
-            if (a == null)
+            try
             {
-                ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
-                ViewBag.Name = NumberOrName;
-            }
-            else
-            {
-                List<Attendance> alist = new List<Attendance>();
-                foreach (var item in a)
+                int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+                if (a == null)
                 {
-                    if (GCHomeBLL.AttendanSelectNew(item)!=null)
-                    {
-                        Attendance ad = GCHomeBLL.AttendanSelectNew(item);
-                        alist.Add(ad);
-                    }             
+                    ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+                    ViewBag.Name = NumberOrName;
                 }
-                ViewBag.AttendanList = alist;
-                ViewBag.Name = NumberOrName;
+                else
+                {
+                    List<Attendance> alist = new List<Attendance>();
+                    foreach (var item in a)
+                    {
+                        if (GCHomeBLL.AttendanSelectNew(item) != null)
+                        {
+                            Attendance ad = GCHomeBLL.AttendanSelectNew(item);
+                            alist.Add(ad);
+                        }
+                    }
+                    ViewBag.AttendanList = alist;
+                    ViewBag.Name = NumberOrName;
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public int ajaxOrnotStuNumber(string StuNumber) {
-            if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
+            try
             {
-                return 1;
+                if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
+                {
+                    return 1;
+                }
+                return 0;
             }
-            return 0;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public int ajaxOrnotStuNumberandMoin(string StuNumber) {
-            if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber)==0)
+            try
             {
-                return 0;
+                if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber) == 0)
+                {
+                    return 0;
+                }
+                else if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber) == 1)
+                {
+                    return 1;
+                }
+                return 2;
             }
-            else if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber) == 1)
+            catch (Exception)
             {
-                return 1;
+
+                throw;
             }
-            return 2;
         }
 
         [HttpPost]
         public JsonResult ajaxFloorAndDorm(string StuNumber) {
-            var moin = GCHomeBLL.ajaxFloorAndDorm(StuNumber);
-            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
-            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            string ret = JsonConvert.SerializeObject(moin, jsSettings);
-            return Json(ret, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var moin = GCHomeBLL.ajaxFloorAndDorm(StuNumber);
+                JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+                jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                string ret = JsonConvert.SerializeObject(moin, jsSettings);
+                return Json(ret, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult AddAttendace(Attendance ad,string StuNumber) {
-            ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
-            if (GCHomeBLL.AddAttendace(ad))
+            try
             {
-                return RedirectToAction("AttendanceFun","Student");
+                ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                if (GCHomeBLL.AddAttendace(ad))
+                {
+                    return RedirectToAction("AttendanceFun", "Student");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult DelAttendance(int id) {
-            if (GCHomeBLL.DelAttendance(id))
+            try
             {
-                return RedirectToAction("AttendanceFun", "Student");
+                if (GCHomeBLL.DelAttendance(id))
+                {
+                    return RedirectToAction("AttendanceFun", "Student");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult ExchangeFun() {
-            ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
-            ViewBag.FloorList = GCHomeBLL.FloorSelect();
-            return View();
+            try
+            {
+                ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
+                ViewBag.FloorList = GCHomeBLL.FloorSelect();
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult AddExchange(Exchange ex, string StuNumber) {
-            ex.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
-            if (GCHomeBLL.AddExchange(ex))
+            try
             {
-                if (GCHomeBLL.UpdateMoinFloorAndDorm(ex))
+                ex.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                if (GCHomeBLL.AddExchange(ex))
                 {
-                    if (GCHomeBLL.ExchangeMoveinDormPeople(ex))
+                    if (GCHomeBLL.UpdateMoinFloorAndDorm(ex))
                     {
-                        if (GCHomeBLL.ExchangePeople(ex))
+                        if (GCHomeBLL.ExchangeMoveinDormPeople(ex))
                         {
-                            return RedirectToAction("ExchangeFun", "Student");
+                            if (GCHomeBLL.ExchangePeople(ex))
+                            {
+                                return RedirectToAction("ExchangeFun", "Student");
+                            }
                         }
                     }
                 }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult Moveout(string StuNumber) {
-            ViewBag.StuList = GCHomeBLL.StuSelect();
-            ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect(StuNumber);
-            ViewBag.StuNumber = StuNumber;
-            return View();
+            try
+            {
+                ViewBag.StuList = GCHomeBLL.StuSelect();
+                ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect(StuNumber);
+                ViewBag.StuNumber = StuNumber;
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ActionResult AddMoveout(int id) {
-            ViewBag.ID = id;
-            return View();
+            try
+            {
+                ViewBag.ID = id;
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
         public ActionResult AddMoveout(Moveout moout)
         {
-            if (GCHomeBLL.AddMoveout(moout))
+            try
             {
-                if (GCHomeBLL.UpdateStuOccState(moout.StuID))
+                if (GCHomeBLL.AddMoveout(moout))
                 {
-                    if (GCHomeBLL.UpdateDormMoveinDormPeople(moout.StuID))
+                    if (GCHomeBLL.UpdateStuOccState(moout.StuID))
                     {
-                        return RedirectToAction("Moveout","Student");
+                        if (GCHomeBLL.UpdateDormMoveinDormPeople(moout.StuID))
+                        {
+                            return RedirectToAction("Moveout", "Student");
+                        }
                     }
                 }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ActionResult Important(string StuNumber) {
+            if (StuNumber!=null)
+            {
+
             }
             return View();
         }
