@@ -198,3 +198,12 @@ D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\Pa
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.Mvc.dll
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.xml
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\PagedList.Mvc.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\NPOI.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\NPOI.OOXML.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\ICSharpCode.SharpZipLib.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\BouncyCastle.Crypto.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\NPOI.OpenXml4Net.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\NPOI.OpenXmlFormats.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\ICSharpCode.SharpZipLib.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\ICSharpCode.SharpZipLib.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\bin\BouncyCastle.Crypto.xml

@@ -26,3 +26,12 @@ D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\D
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.dll
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\obj\Debug\DAL.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\BouncyCastle.Crypto.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\NPOI.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\NPOI.OOXML.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\NPOI.OpenXml4Net.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\BouncyCastle.Crypto.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\DAL\bin\Debug\ICSharpCode.SharpZipLib.xml

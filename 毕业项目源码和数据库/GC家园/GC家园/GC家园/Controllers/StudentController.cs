@@ -8,6 +8,8 @@ using BLL;
 using System.Web.Helpers;
 using Newtonsoft.Json;
 using PagedList;
+using System.Data;
+using System.IO;
 
 namespace GC家园.Controllers
 {
@@ -22,6 +24,37 @@ namespace GC家园.Controllers
         public ActionResult Failicon()
         {
             return View();
+        }
+
+        public ActionResult ExcelToUpload()
+        {  //用来存储excel表中读出来的数据
+            DataTable excelTable = new DataTable();
+            string msg = "";
+            if (Request.Files.Count > 0) //request.files.count客户端传过来几个文件
+            {
+                try
+                {
+                    HttpPostedFileBase mypost = Request.Files[0];//取客户端传过来多个文件的第一个
+                    string fileName = Path.GetFileName(mypost.FileName);//通过文件流取文件名称
+                    string serverpath = Server.MapPath(
+                    string.Format("~/{0}", "ExcelFiles")); //获取要存入的服务器上的地址
+                    string path = Path.Combine(serverpath, fileName); //将定义的服务器路径和文件名结合，形成完整路径
+                    mypost.SaveAs(path); //将文件保存
+                    msg = "文件上传成功！";
+                    excelTable = GCHomeBLL.GetExcelDataTable(path);//获得表数据
+                    msg = GCHomeBLL.InsertDataToDB(excelTable);// 写入基础数据
+
+                }
+                catch (Exception ex)
+                {
+                    msg = ex.Message;
+                }
+            }
+            else
+            {
+                msg = "请选择文件";
+            }
+            return Json(msg);
         }
 
         // GET: Student

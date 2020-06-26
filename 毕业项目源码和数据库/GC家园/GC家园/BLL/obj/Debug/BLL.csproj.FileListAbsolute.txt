@@ -32,3 +32,12 @@ D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\obj\Debug\B
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\obj\Debug\BLL.csproj.CopyComplete
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\obj\Debug\BLL.dll
 D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\obj\Debug\BLL.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\NPOI.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\NPOI.OOXML.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\BouncyCastle.Crypto.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\NPOI.OpenXml4Net.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\ICSharpCode.SharpZipLib.xml
+D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\BLL\bin\Debug\BouncyCastle.Crypto.xml

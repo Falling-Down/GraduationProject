@@ -17,6 +17,13 @@
 <div style="width:90%;margin:10px auto">
     <div class="">
         <a href="" class="btn btn-primary col-lg-1" data-toggle="modal" data-target="#Add">添加学生</a>
+        <form class="col-lg-offset-7 col-lg-1" id="gameGroup">
+            <div class="form-inline">
+                <input name="submit" type="button" id="btn-excel" class="btn btn-info" value="批量导入" />
+                <input name="file" type="file" id="file" style="transform:translate(100px,-30px)" />
+
+            </div>
+        </form>
         <form action="/Student/Index" method="get" id="nb">
             <div class="form-inline  col-lg-9">
                 <select class="form-control col-lg-offset-4" name="State">
@@ -214,6 +221,39 @@
 
 @section scripts{
     <script>
+         $("#btn-excel").click(function () {
+            //通过FormData构造函数创建一个空对象，存储格式为键，值
+            var formData = new FormData();
+            //将$("#file")jquery对象转换成$("#file")[0]js对象，还可以使用.get(0)，
+            //这样才能取得js对象的属性和方法
+            //multiple="multiple" 可上传多个文件，files[0] 取第一个
+                var filename = $("#file")[0].files[0];
+            	if (filename == null || filename == "") {
+                	alert("请选择要导入的文件");
+                	return;
+            	}
+            	if (filename != null) {
+                	formData.append('file', filename); //将文件转成二进制形式
+                	$.ajax({
+                    	type: "post",
+                    	url: "/Student/ExcelToUpload",//"/控制器名/控制器内方法"
+                    	async: false,
+                    	contentType: false, //这个一定要写
+                    	processData: false, //这个也一定要写，不然会报错,序列化配合formData使用
+                    	data: formData,
+                    	dataType: 'json', //返回类型，有json，text，HTML。这里并没有jsonp格式，所以别妄想能用jsonp做跨域了。
+                    	success: function (data) {
+                            window.location.reload();
+                    	},
+                    	error: function (errorThrown) {
+                        	alert(errorThrown);
+                    	}
+                	});
+            	} else {
+
+            	}
+        	});
+
         function nbclass() {
             $("#nb").submit();
         }

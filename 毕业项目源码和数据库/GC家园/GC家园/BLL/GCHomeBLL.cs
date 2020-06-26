@@ -5,12 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
     public class GCHomeBLL
     {
         GCHomeDAL GCHomeDAL = new GCHomeDAL();
+        ImportExcel im = new ImportExcel();
+        SaveExcelToDB sa = new SaveExcelToDB();
+        public DataTable GetExcelDataTable(string filePath) {
+            return im.GetExcelDataTable(filePath);
+        }
+
+        public string InsertDataToDB(DataTable dt) {
+            return sa.InsertDataToDB(dt);
+        }
+
         public List<Student> select() {
             return GCHomeDAL.select();
         }
