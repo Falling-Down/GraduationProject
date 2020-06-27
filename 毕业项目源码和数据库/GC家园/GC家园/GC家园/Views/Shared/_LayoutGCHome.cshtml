@@ -159,14 +159,6 @@
                             {
                                 <li><a href="/Student/Index">学生管理</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun")
-                            {
-                                <li class="active"><a href="/Student/MoveintoFun">学生入住管理</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="/Student/MoveintoFun">学生入住管理</a></li>
-                            }
                             @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "AttendanceFun")
                             {
                                 <li class="active"><a href="/Student/AttendanceFun">学生缺勤管理</a></li>
@@ -174,22 +166,6 @@
                             else
                             {
                                 <li><a href="/Student/AttendanceFun">学生缺勤管理</a></li>
-                            }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun")
-                            {
-                                <li class="active"><a href="/Student/ExchangeFun">学生寝室调换</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="/Student/ExchangeFun">学生寝室调换</a></li>
-                            }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout")
-                            {
-                                <li class="active"><a href="/Student/Moveout">学生迁出记录</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="/Student/Moveout">学生迁出记录</a></li>
                             }
                         </ul>
                     }
