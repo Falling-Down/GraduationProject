@@ -59,7 +59,12 @@ namespace BLL
             return GCHomeDAL.LikeSelect(State,StuName);
         }
 
-        public Student EditStu(int StuID)
+        public Student SelectStu(int StuID)
+        {
+            return GCHomeDAL.SelectStu(StuID);
+        }
+
+            public Student EditStu(int StuID)
         {
             return GCHomeDAL.EditStu(StuID);
         }
@@ -82,6 +87,10 @@ namespace BLL
 
         public int ReturnStuIDByStuNumber(string StuNumber) {
             return GCHomeDAL.ReturnStuIDByStuNumber(StuNumber);
+        }
+
+        public Moveinto SelectMoveinto(int StuID) {
+            return GCHomeDAL.SelectMoveinto(StuID);
         }
 
         public bool AddMoveinto(Moveinto moin) {

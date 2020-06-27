@@ -10,6 +10,7 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 </head>
+
 <body class="user-select">
     <section class="container-fluid">
         <header>
@@ -33,7 +34,7 @@
                         </ul>
                         <form action="/Student/Important" method="post" class="navbar-form navbar-right" role="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" autocomplete="off" placeholder="请输入学生学号" maxlength="15" name="StuNumber">
+                                <input type="text" class="form-control" autocomplete="off" placeholder="请输入学生学号" maxlength="15" name="StuNumber" value="@ViewBag.tishi">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">搜索</button>
                                 </span>
@@ -60,7 +61,8 @@
                             {
                                 <li class="active"><a href="/Login/Home">首页</a></li>
                             }
-                            else { 
+                            else
+                            {
                                 <li><a href="/Login/Home">首页</a></li>
                             }
                         </ul>
@@ -97,7 +99,7 @@
                             {
                                 <li><a href="/Student/ExchangeFun">学生寝室调换</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout"||ViewContext.RouteData.Values["action"].ToString() == "AddMoveout")
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout" || ViewContext.RouteData.Values["action"].ToString() == "AddMoveout")
                             {
                                 <li class="active"><a href="/Student/Moveout">学生迁出记录</a></li>
                             }

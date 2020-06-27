@@ -24,7 +24,7 @@ namespace GC家园.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -80,7 +80,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -99,7 +99,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -133,7 +133,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -146,7 +146,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -211,7 +211,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -224,7 +224,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -258,7 +258,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -330,7 +330,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -346,7 +346,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -360,7 +360,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -386,7 +386,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -401,7 +401,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -414,7 +414,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -437,17 +437,38 @@ namespace GC家园.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
         public ActionResult Important(string StuNumber) {
-            if (StuNumber!=null)
+            try
             {
-
+                if (StuNumber != null && StuNumber != "")
+                {
+                    ViewBag.tishi = StuNumber;
+                    int StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                    Student stu = GCHomeBLL.SelectStu(StuID);
+                    if (stu != null)
+                    {
+                        ViewBag.Sst = stu;
+                        Moveinto into = GCHomeBLL.SelectMoveinto(stu.StuID);
+                        if (into != null)
+                        {
+                            ViewBag.Mst = into;
+                            ViewBag.People = GCHomeBLL.ReturnMoinPeople(into.FloorID, into.DormID);
+                            return View();
+                        }
+                        return View();
+                    }
+                    return RedirectToAction("Index", "Student");
+                }
+                return RedirectToAction("Index", "Student");
             }
-            return View();
+            catch (Exception)
+            {
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
     }
 }

@@ -155,6 +155,10 @@ namespace DAL
             }
         }
 
+        public Student SelectStu(int StuID) {
+            return db.Student.FirstOrDefault(p => p.StuID == StuID);
+        }
+
         public Student EditStu(int StuID) {
             try
             {
@@ -247,6 +251,18 @@ namespace DAL
             try
             {
                 return db.Student.FirstOrDefault(p => p.StuNumber == StuNumber).StuID;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public Moveinto SelectMoveinto(int StuID)
+        {
+            try
+            {
+               return db.Moveinto.FirstOrDefault(p=>p.StuID==StuID);
             }
             catch (Exception)
             {
