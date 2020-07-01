@@ -22,7 +22,6 @@ AdminAge int, --管理员年龄
 AdminKinds int, --管理员种类（0楼宇管理员1系统管理员2学生）
 IsDelete int --是否删除（0未删除1已删除）
 )
-alter table Admin add AdminName nvarchar(50)
 select * from Admin
 select * from Student
 insert into Admin(AdminCount,AdminPwd,AdminName,AdminSex,AdminAge,AdminKinds,IsDelete) values('admin','1234','admin',1,20,1,0)
@@ -46,7 +45,6 @@ IsDelete int --是否删除（0未删除1已删除）
 )
 select * from Exchange
 select * from Dorm
-drop table Admin
 insert into Dorm values(1,'201',6,0)
 create table Moveinto( --入住登记表
 MoveintoID int primary key identity(1,1),--入住登记ID
@@ -89,3 +87,4 @@ IsDelete int --是否删除（0未删除1已删除）
 select * from attendance
 alter table Attendance add IsDelete int
 insert into Attendance values(1,'2020-6-15','忘记时间')
+create table 
