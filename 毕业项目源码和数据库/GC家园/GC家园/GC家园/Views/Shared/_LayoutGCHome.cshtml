@@ -75,13 +75,13 @@
                             {
                                 <li><a href="/Student/Index">学生管理</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun")
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun1"||ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun")
                             {
-                                <li class="active"><a href="/Student/MoveintoFun">学生入住管理</a></li>
+                                <li class="active"><a href="/Student/MoveintoFun1">学生入住管理</a></li>
                             }
                             else
                             {
-                                <li><a href="/Student/MoveintoFun">学生入住管理</a></li>
+                                <li><a href="/Student/MoveintoFun1">学生入住管理</a></li>
                             }
                             @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "AttendanceFun")
                             {

@@ -33,6 +33,11 @@ namespace GC家园.Controllers
             return View();
         }
 
+        public ActionResult Failibeijing()
+        {
+            return View();
+        }
+
         public ActionResult ExcelToUpload()
         {  //用来存储excel表中读出来的数据
             DataTable excelTable = new DataTable();
@@ -137,9 +142,19 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult MoveintoFun() {
+        public ActionResult MoveintoFun1(int? page,string StuNumber="") {
+            List<Student> stulist = GCHomeBLL.LikeStudent(StuNumber);
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
+            ViewBag.StuNumber = StuNumber;
+            return View(pagedList);
+        }
+
+        public ActionResult MoveintoFun(string StuNumber) {
             try
             {
+                ViewBag.StuNumber = StuNumber;
                 ViewBag.FloorList = GCHomeBLL.FloorSelect();
                 return View();
             }
@@ -444,26 +459,26 @@ namespace GC家园.Controllers
         public ActionResult Important(string StuNumber) {
             try
             {
+                ViewBag.tishi = StuNumber;
                 if (StuNumber != null && StuNumber != "")
                 {
-                    ViewBag.tishi = StuNumber;
                     int StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
-                    Student stu = GCHomeBLL.SelectStu(StuID);
-                    if (stu != null)
+                    if (StuID != 0)
                     {
+                        Student stu = GCHomeBLL.SelectStu(StuID);
                         ViewBag.Sst = stu;
                         Moveinto into = GCHomeBLL.SelectMoveinto(stu.StuID);
                         if (into != null)
                         {
                             ViewBag.Mst = into;
-                            ViewBag.People = GCHomeBLL.ReturnMoinPeople(into.FloorID, into.DormID);
+                            ViewBag.People = GCHomeBLL.ReturnMoinPeople1(into.FloorID, into.DormID);
                             return View();
                         }
                         return View();
                     }
-                    return RedirectToAction("Index", "Student");
+                    return RedirectToAction("Failibeijing", "Student");
                 }
-                return RedirectToAction("Index", "Student");
+                return RedirectToAction("Failibeijing", "Student");
             }
             catch (Exception)
             {

@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="firstname" class="col-sm-2 control-label">学生学号</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="StuNumber" placeholder="请输入学生学号" onblur="nbclass()" id="StuNumber">
+                <input type="text" class="form-control" name="StuNumber" placeholder="请输入学生学号" onblur="nbclass()" id="StuNumber" value="@ViewBag.StuNumber">
                 <p id="content" style="color:red"></p>
             </div>
         </div>
@@ -64,6 +64,7 @@
 
 @section scripts{
     <script type="text/javascript">
+
         function nbclass() {
             var StuNumber = $("#StuNumber").val();
             $.ajax({

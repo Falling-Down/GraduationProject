@@ -22,7 +22,22 @@ namespace DAL
                 throw ex;
             }
         }
-   
+
+        public List<Student> selectStudent()
+        {
+            try
+            {
+                return db.Student.OrderBy(p => p.StuNumber).Where(p=>p.OccupancyStatus==0).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Student> LikeStudent(string StuNumber="") {
+            return db.Student.Where(p => p.OccupancyStatus == 0 && (p.StuNumber.Contains(StuNumber) || p.StuNumber == "")).ToList();
+        }
 
         public Admin SelectAdmin(string Count, string Password,int Role) {
             try
@@ -98,6 +113,23 @@ namespace DAL
             }
         }
 
+        public int? ReturnMoinPeople1(int? FloorID, int? DormID)
+        {
+            try
+            {
+                if (db.Dorm.FirstOrDefault(p => p.FloorID == FloorID && p.DormID == DormID) != null)
+                {
+                    return db.Dorm.FirstOrDefault(p => p.FloorID == FloorID && p.DormID == DormID).DormPeople;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int? UpdateMoinPeople(int? FloorID, int? DormID)
         {
             try
@@ -137,11 +169,11 @@ namespace DAL
                 List<Student> list = db.Student.Where(p => p.OccupancyStatus == 0 || p.OccupancyStatus == 1).ToList();
                 if (State == 0)
                 {
-                    return list.Where(p => p.OccupancyStatus == 0 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
+                    return list.Where(p => p.OccupancyStatus == 0 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
                 }
                 else if (State == 1)
                 {
-                    return list.Where(p => p.OccupancyStatus == 1 && p.StuName.Contains(StuName) || p.StuName == "").ToList();
+                    return list.Where(p => p.OccupancyStatus == 1 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
                 }
                 else
                 {
@@ -156,7 +188,7 @@ namespace DAL
         }
 
         public Student SelectStu(int StuID) {
-            return db.Student.FirstOrDefault(p => p.StuID == StuID);
+            return db.Student.FirstOrDefault(p => p.StuID == StuID&&(p.OccupancyStatus==0||p.OccupancyStatus==1));
         }
 
         public Student EditStu(int StuID) {
@@ -250,7 +282,12 @@ namespace DAL
         public int ReturnStuIDByStuNumber(string StuNumber) {
             try
             {
-                return db.Student.FirstOrDefault(p => p.StuNumber == StuNumber).StuID;
+                Student stu = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber);
+                if (stu!=null)
+                {
+                    return stu.StuID;
+                }
+                return 0;
             }
             catch (Exception)
             {
@@ -643,7 +680,7 @@ namespace DAL
         {
             try
             {
-                return db.Admin.Where(p => p.AdminKinds == 0 && p.AdminName.Contains(AdminName) || p.AdminName == "").OrderByDescending(m => m.AdminID).ToList();
+                return db.Admin.Where(p => p.AdminKinds == 0 && (p.AdminName.Contains(AdminName) || p.AdminName == "")).OrderByDescending(m => m.AdminID).ToList();
             }
             catch (Exception)
             {

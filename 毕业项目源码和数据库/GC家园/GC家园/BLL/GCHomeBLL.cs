@@ -47,12 +47,24 @@ namespace BLL
             return GCHomeDAL.ReturnMoinPeople(FloorID,DormID);
         }
 
+        public int? ReturnMoinPeople1(int? FloorID, int? DormID) {
+            return GCHomeDAL.ReturnMoinPeople1(FloorID,DormID);
+        }
+
         public int? UpdateMoinPeople(int? FloorID, int? DormID) {
             return GCHomeDAL.UpdateMoinPeople(FloorID,DormID);
         }
 
         public List<Student> StuSelect() {
             return GCHomeDAL.StuSelect();
+        }
+
+        public List<Student> selectStudent() {
+            return GCHomeDAL.selectStudent();
+        }
+
+        public List<Student> LikeStudent(string StuNumber="") {
+            return GCHomeDAL.LikeStudent(StuNumber);
         }
 
         public List<Student> LikeSelect(int? State, string StuName="") {

@@ -103,7 +103,7 @@
     每页 @Model.PageSize 条，
     共 @Model.PageCount 页，
     当前第 @Model.PageNumber 页
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, uname = Request.QueryString["uname"] }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, State = ViewBag.State,StuName=ViewBag.StuName }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
 </div>
 
 @*<nav aria-label="Page navigation" style="position:relative;left:38%;transform:translateY(350px)">
