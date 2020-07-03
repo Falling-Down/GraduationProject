@@ -91,7 +91,7 @@
                             {
                                 <li><a href="/Student/AttendanceFun">学生缺勤管理</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && (ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun"||ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun1"))
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && (ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun" || ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun1"))
                             {
                                 <li class="active"><a href="/Student/ExchangeFun">学生寝室调换</a></li>
                             }
@@ -142,9 +142,6 @@
                                 <li><a href="/Admin/DormFun">宿舍管理</a></li>
                             }
                         </ul>
-                        <ul class="nav nav-sidebar">
-                            <li><a href="#">修改密码</a></li>
-                        </ul>
                     }
                     if (Session["Role"].ToString() == "0")
                     {
@@ -174,6 +171,16 @@
                             else
                             {
                                 <li><a href="/Student/AttendanceFunAdmin">学生缺勤管理</a></li>
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "UpdatePwd")
+                            {
+                                <li class="active"><a href="/Student/UpdatePwd">修改密码</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/UpdatePwd">修改密码</a></li>
                             }
                         </ul>
                     }

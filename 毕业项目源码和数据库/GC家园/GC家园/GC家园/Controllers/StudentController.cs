@@ -691,5 +691,9 @@ namespace GC家园.Controllers
             ViewBag.MoveinList = GCHomeBLL.SelectMoveinto();
             return View();
         }
+
+        public ActionResult UpdatePwd() {
+            return View();
+        }
     }
 }

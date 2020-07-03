@@ -228,6 +228,7 @@
     <Content Include="Views\Student\AttendanceFunAdmin.cshtml" />
     <Content Include="Views\Student\AttendanceFunAdminAddIndex.cshtml" />
     <Content Include="Views\Student\ExchangeFun1.cshtml" />
+    <Content Include="Views\Student\UpdatePwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
