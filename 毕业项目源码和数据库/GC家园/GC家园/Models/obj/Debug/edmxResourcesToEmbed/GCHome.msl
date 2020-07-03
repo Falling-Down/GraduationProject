@@ -102,5 +102,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Fix">
+      <EntityTypeMapping TypeName="GCHomeModel.Fix">
+        <MappingFragment StoreEntitySet="Fix">
+          <ScalarProperty Name="XsReason" ColumnName="XsReason" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="FixState" ColumnName="FixState" />
+          <ScalarProperty Name="FixReason" ColumnName="FixReason" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="FixID" ColumnName="FixID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -87,4 +87,14 @@ IsDelete int --是否删除（0未删除1已删除）
 select * from attendance
 alter table Attendance add IsDelete int
 insert into Attendance values(1,'2020-6-15','忘记时间')
-create table 
+create table Fix( --修理表
+FixID int primary key identity(1,1), --修理ID
+StuID int foreign key references Student(StuID),--学生ID
+FixReason nvarchar(100),--上报原因
+XsReason nvarchar(100),--申诉理由
+FixState int,--处理状态(0未受理1已受理)
+IsDelete int --是否删除(0未删除1已删除)
+)
+
+insert into Fix values(12,'寝室的风扇坏了','',0,0)
+select * from Fix

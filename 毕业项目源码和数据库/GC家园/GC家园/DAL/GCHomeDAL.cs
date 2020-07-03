@@ -39,6 +39,11 @@ namespace DAL
             return db.Student.Where(p => p.OccupancyStatus == 0 && (p.StuNumber.Contains(StuNumber) || p.StuNumber == "")).ToList();
         }
 
+        public List<Student> LikeStudent1(string StuNumber = "")
+        {
+            return db.Student.Where(p => p.OccupancyStatus == 1 && (p.StuNumber.Contains(StuNumber) || p.StuNumber == "")).ToList();
+        }
+
         public Admin SelectAdmin(string Count, string Password,int Role) {
             try
             {
@@ -49,6 +54,11 @@ namespace DAL
                 throw e;
             }
         }
+
+        public List<Moveinto> SelectStudentByFloorID(int? FloorID) {
+            return db.Moveinto.Where(p => p.FloorID == FloorID).ToList();
+        }
+
 
         public Student SelectStudent(string Count, string Password)
         {
@@ -187,6 +197,21 @@ namespace DAL
             }
         }
 
+        public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "") {
+            if (State == 1)
+            {
+                return stus.Where(p => p.OccupancyStatus == 1 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
+            }
+            else if (State == 2)
+            {
+                return stus.Where(p => p.OccupancyStatus == 2 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
+            }
+            else
+            {
+                return stus.Where(p => p.StuName.Contains(StuName) || p.StuName == null || p.StuName == "").OrderBy(p => p.StuNumber).ToList();
+            }
+        }
+
         public Student SelectStu(int StuID) {
             return db.Student.FirstOrDefault(p => p.StuID == StuID&&(p.OccupancyStatus==0||p.OccupancyStatus==1));
         }
@@ -295,6 +320,19 @@ namespace DAL
             }
         }
 
+        public List<Moveinto> SelectMoveinto()
+        {
+            try
+            {
+                return db.Moveinto.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Moveinto SelectMoveinto(int StuID)
         {
             try
@@ -387,6 +425,19 @@ namespace DAL
             try
             {
                 return db.Attendance.FirstOrDefault(p => p.StuID == StuID && p.IsDelete == 0);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Attendance> AttendanSelectNew1(int? StuID)
+        {
+            try
+            {
+                return db.Attendance.Where(p => p.StuID == StuID && p.IsDelete == 0).ToList();
             }
             catch (Exception)
             {
@@ -810,6 +861,10 @@ namespace DAL
 
                 throw;
             }
+        }
+
+        public List<Fix> SelectFix() {
+            return db.Fix.ToList();
         }
     }
 }

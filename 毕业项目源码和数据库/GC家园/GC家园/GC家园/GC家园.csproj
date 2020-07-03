@@ -220,6 +220,14 @@
     <Content Include="Views\Student\Important.cshtml" />
     <Content Include="Views\Student\MoveintoFun1.cshtml" />
     <Content Include="Views\Student\Failibeijing.cshtml" />
+    <Content Include="Views\Student\FixFun.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdminGCHome.cshtml" />
+    <Content Include="Views\Student\Index1.cshtml" />
+    <Content Include="Views\Student\ImportantAdmin.cshtml" />
+    <Content Include="Views\Login\Home1.cshtml" />
+    <Content Include="Views\Student\AttendanceFunAdmin.cshtml" />
+    <Content Include="Views\Student\AttendanceFunAdminAddIndex.cshtml" />
+    <Content Include="Views\Student\ExchangeFun1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

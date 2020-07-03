@@ -17,6 +17,7 @@
     <NavigationProperty Name="Attendance" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Student" ToRole="Attendance" />
     <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Student" ToRole="Exchange" />
     <NavigationProperty Name="Moveout" Relationship="GCHomeModel.FK__Moveout__StuID__5EBF139D" FromRole="Student" ToRole="Moveout" />
+    <NavigationProperty Name="Fix" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Student" ToRole="Fix" />
   </EntityType>
   <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Student" EntityType="Self.Student" />
@@ -74,6 +75,11 @@
     <AssociationSet Name="FK__Moveout__StuID__5EBF139D" Association="GCHomeModel.FK__Moveout__StuID__5EBF139D">
       <End Role="Student" EntitySet="Student" />
       <End Role="Moveout" EntitySet="Moveout" />
+    </AssociationSet>
+    <EntitySet Name="Fix" EntityType="GCHomeModel.Fix" />
+    <AssociationSet Name="FK__Fix__StuID__160F4887" Association="GCHomeModel.FK__Fix__StuID__160F4887">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Fix" EntitySet="Fix" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Admin">
@@ -315,6 +321,30 @@
         <PropertyRef Name="StuID" />
       </Principal>
       <Dependent Role="Moveout">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Fix">
+    <Key>
+      <PropertyRef Name="FixID" />
+    </Key>
+    <Property Name="FixID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="FixReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FixState" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Fix" ToRole="Student" />
+    <Property Name="XsReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__Fix__StuID__160F4887">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Fix" Role="Fix" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Fix">
         <PropertyRef Name="StuID" />
       </Dependent>
     </ReferentialConstraint>

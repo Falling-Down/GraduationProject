@@ -21,6 +21,7 @@ namespace Models
             this.Attendance = new HashSet<Attendance>();
             this.Exchange = new HashSet<Exchange>();
             this.Moveout = new HashSet<Moveout>();
+            this.Fix = new HashSet<Fix>();
         }
     
         public int StuID { get; set; }
@@ -41,5 +42,7 @@ namespace Models
         public virtual ICollection<Exchange> Exchange { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Moveout> Moveout { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fix> Fix { get; set; }
     }
 }

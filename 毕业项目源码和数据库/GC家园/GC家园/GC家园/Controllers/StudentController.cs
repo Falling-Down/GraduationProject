@@ -16,7 +16,8 @@ namespace GC家园.Controllers
     public class StudentController : Controller
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();
-        public ActionResult Peopleicon(int People) {
+        public ActionResult Peopleicon(int People)
+        {
             try
             {
                 ViewBag.People = People;
@@ -70,7 +71,7 @@ namespace GC家园.Controllers
         }
 
         // GET: Student
-        public ActionResult Index(int? page,int? State, string StuName="")
+        public ActionResult Index(int? page, int? State, string StuName = "")
         {
             try
             {
@@ -90,7 +91,8 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Student stu) {
+        public ActionResult Index(Student stu)
+        {
             try
             {
                 stu.OccupancyStatus = 0;
@@ -108,6 +110,31 @@ namespace GC家园.Controllers
             }
         }
 
+        public ActionResult Index1(int? page, int? State, string StuName = "")
+        {
+            Admin ad = Session["Adminst"] as Admin;
+            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+            List<Student> stu = GCHomeBLL.select();
+            List<Student> stus = new List<Student> { };
+            foreach (var item in moin)
+            {
+                foreach (var item1 in stu)
+                {
+                    if (item.StuID == item1.StuID)
+                    {
+                        stus.Add(item1);
+                    }
+                }
+            }
+            List<Student> stulist = GCHomeBLL.LikeSelect1(stus, State, StuName);
+            ViewBag.State = State;
+            ViewBag.StuName = StuName;
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
+            return View(pagedList);
+        }
+
         [HttpPost]
         public JsonResult EditStu(int StuID)
         {
@@ -117,7 +144,7 @@ namespace GC家园.Controllers
                 JsonSerializerSettings jsSettings = new JsonSerializerSettings();
                 jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 string ret = JsonConvert.SerializeObject(stu, jsSettings);
-                return Json(ret, JsonRequestBehavior.AllowGet);     
+                return Json(ret, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -126,7 +153,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult EditStudent(Student stu) {
+        public ActionResult EditStudent(Student stu)
+        {
             try
             {
                 if (GCHomeBLL.EditStudent(stu))
@@ -142,7 +170,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult MoveintoFun1(int? page,string StuNumber="") {
+        public ActionResult MoveintoFun1(int? page, string StuNumber = "")
+        {
             List<Student> stulist = GCHomeBLL.LikeStudent(StuNumber);
             var pageSize = 5;
             var pageNumber = page ?? 1;
@@ -151,7 +180,8 @@ namespace GC家园.Controllers
             return View(pagedList);
         }
 
-        public ActionResult MoveintoFun(string StuNumber) {
+        public ActionResult MoveintoFun(string StuNumber)
+        {
             try
             {
                 ViewBag.StuNumber = StuNumber;
@@ -165,7 +195,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public int AjaxStuNumber(string StuNumber) {
+        public int AjaxStuNumber(string StuNumber)
+        {
             try
             {
                 if (GCHomeBLL.StuNumberOrNot(StuNumber) == 2)
@@ -186,7 +217,8 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public JsonResult AjaxDorm(int FloorID) {
+        public JsonResult AjaxDorm(int FloorID)
+        {
             try
             {
                 var Dormlist = GCHomeBLL.DormSelect(FloorID);
@@ -202,7 +234,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AddMoveinto(Moveinto moin,string StuNumber) {
+        public ActionResult AddMoveinto(Moveinto moin, string StuNumber)
+        {
             try
             {
                 moin.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
@@ -230,7 +263,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AttendanceFun() {
+        public ActionResult AttendanceFun()
+        {
             try
             {
                 ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
@@ -278,7 +312,47 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public int ajaxOrnotStuNumber(string StuNumber) {
+        public ActionResult AttendanceFunAdmin(int? page, string NumberOrName)
+        {
+            Admin ad = Session["Adminst"] as Admin;
+            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+            int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+            List<Attendance> alist = new List<Attendance>();
+            if (a == null)
+            {
+                ViewBag.Name = NumberOrName;
+                return RedirectToAction("AttendanceFunAdmin", "Student");
+            }
+            else
+            {
+                foreach (var item in a)
+                {
+                    foreach (var item1 in moin)
+                    {
+                        if (item1.StuID == item)
+                        {
+                            if (GCHomeBLL.AttendanSelectNew(item) != null)
+                            {
+                                List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item);
+                                foreach (var item3 in at)
+                                {
+                                    alist.Add(item3);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            ViewBag.Name = NumberOrName;
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Attendance> pagedList = alist.ToPagedList(pageNumber, pageSize);
+            return View(pagedList);
+        }
+
+        [HttpPost]
+        public int ajaxOrnotStuNumber(string StuNumber)
+        {
             try
             {
                 if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
@@ -295,7 +369,8 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public int ajaxOrnotStuNumberandMoin(string StuNumber) {
+        public int ajaxOrnotStuNumberandMoin(string StuNumber)
+        {
             try
             {
                 if (GCHomeBLL.ajaxOrnotStuNumberandMoin(StuNumber) == 0)
@@ -316,7 +391,8 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public JsonResult ajaxFloorAndDorm(string StuNumber) {
+        public JsonResult ajaxFloorAndDorm(string StuNumber)
+        {
             try
             {
                 var moin = GCHomeBLL.ajaxFloorAndDorm(StuNumber);
@@ -332,7 +408,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AddAttendace(Attendance ad,string StuNumber) {
+        public ActionResult AddAttendace(Attendance ad, string StuNumber)
+        {
             try
             {
                 ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
@@ -349,7 +426,26 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult DelAttendance(int id) {
+        public ActionResult AddAttendaceAdmin(Attendance ad, string StuNumber)
+        {
+            try
+            {
+                ad.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                if (GCHomeBLL.AddAttendace(ad))
+                {
+                    return RedirectToAction("AttendanceFunAdmin", "Student");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult DelAttendance(int id)
+        {
             try
             {
                 if (GCHomeBLL.DelAttendance(id))
@@ -365,11 +461,14 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult ExchangeFun() {
+        public ActionResult DelAttendanceAdmin(int id)
+        {
             try
             {
-                ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
-                ViewBag.FloorList = GCHomeBLL.FloorSelect();
+                if (GCHomeBLL.DelAttendance(id))
+                {
+                    return RedirectToAction("AttendanceFunAdmin", "Student");
+                }
                 return View();
             }
             catch (Exception)
@@ -379,7 +478,43 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AddExchange(Exchange ex, string StuNumber) {
+        public ActionResult ExchangeFun(int? page,string StuNumber="")
+        {
+            try
+            {
+                ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
+                ViewBag.FloorList = GCHomeBLL.FloorSelect();
+                List<Student> stulist = GCHomeBLL.LikeStudent1(StuNumber);
+                var pageSize = 3;
+                var pageNumber = page ?? 1;
+                IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
+                ViewBag.StuNumber = StuNumber;
+                return View(pagedList);
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult ExchangeFun1(string StuNumber) {
+            try
+            {
+                ViewBag.ExchangeList = GCHomeBLL.ExchangeSelect();
+                ViewBag.FloorList = GCHomeBLL.FloorSelect();
+                ViewBag.StuNumber = StuNumber;
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult AddExchange(Exchange ex, string StuNumber)
+        {
             try
             {
                 ex.StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
@@ -405,7 +540,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult Moveout(string StuNumber) {
+        public ActionResult Moveout(string StuNumber)
+        {
             try
             {
                 ViewBag.StuList = GCHomeBLL.StuSelect();
@@ -420,7 +556,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AddMoveout(int id) {
+        public ActionResult AddMoveout(int id)
+        {
             try
             {
                 ViewBag.ID = id;
@@ -456,7 +593,8 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult Important(string StuNumber) {
+        public ActionResult Important(string StuNumber)
+        {
             try
             {
                 ViewBag.tishi = StuNumber;
@@ -478,12 +616,80 @@ namespace GC家园.Controllers
                     }
                     return RedirectToAction("Failibeijing", "Student");
                 }
-                return RedirectToAction("Failibeijing", "Student");
+                return RedirectToAction("Index", "Student");
             }
             catch (Exception)
             {
                 return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
+        }
+
+        public ActionResult ImportantAdmin(string StuNumber)
+        {
+            try
+            {
+                ViewBag.tishi = StuNumber;
+                if (StuNumber != null && StuNumber != "")
+                {
+                    Admin ad = Session["Adminst"] as Admin;
+                    List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+                    int StuID = GCHomeBLL.ReturnStuIDByStuNumber(StuNumber);
+                    if (StuID != 0)
+                    {
+                        Student stu = GCHomeBLL.SelectStu(StuID);
+                        ViewBag.Sst = stu;
+                        Moveinto into = moin.FirstOrDefault(p => p.StuID == stu.StuID);
+                        if (into != null)
+                        {
+                            ViewBag.Mst = into;
+                            ViewBag.People = GCHomeBLL.ReturnMoinPeople1(into.FloorID, into.DormID);
+                            return View();
+                        }
+                        return RedirectToAction("Failibeijing", "Student");
+                    }
+                    return RedirectToAction("Failibeijing", "Student");
+                }
+                return RedirectToAction("Index1", "Student");
+            }
+            catch (Exception)
+            {
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult AttendanceFunAdmin(int? page)
+        {
+            Admin ad = Session["Adminst"] as Admin;
+            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+            List<Attendance> atlist = new List<Attendance> { };
+            foreach (var item in moin)
+            {
+                List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item.StuID);
+                if (at != null)
+                {
+                    foreach (var item1 in at)
+                    {
+                        atlist.Add(item1);
+                    }
+                }
+            }
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
+            return View(pagedList);
+        }
+
+        public ActionResult AttendanceFunAdminAddIndex(string StuNumber)
+        {
+            ViewBag.StuNumber = StuNumber;
+            return View();
+        }
+
+        public ActionResult FixFun()
+        {
+            ViewBag.FixList = GCHomeBLL.SelectFix();
+            ViewBag.MoveinList = GCHomeBLL.SelectMoveinto();
+            return View();
         }
     }
 }

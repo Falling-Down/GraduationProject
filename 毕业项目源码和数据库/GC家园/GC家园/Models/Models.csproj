@@ -62,6 +62,9 @@
     <Compile Include="Exchange.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>
+    <Compile Include="Fix.cs">
+      <DependentUpon>GCHome.tt</DependentUpon>
+    </Compile>
     <Compile Include="Floor.cs">
       <DependentUpon>GCHome.tt</DependentUpon>
     </Compile>

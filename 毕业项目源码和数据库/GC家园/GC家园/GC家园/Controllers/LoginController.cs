@@ -20,14 +20,30 @@ namespace GC家园.Controllers
         [HttpPost]
         public ActionResult Index(string Count,string Password,int Role)
         {
-            if (Role==0||Role==1)
+            if (Role==1)
             {
                 if (GCHomeBLL.SelectAdmin(Count, Password,Role)!=null)
                 {
                     Session["Role"] = Role;
                     Session["Count"] = Count;
                     Session["Name"] = GCHomeBLL.SelectAdmin(Count, Password, Role).AdminName;
+                    Session["Adminst"] = GCHomeBLL.SelectAdmin(Count, Password, Role);
                     return RedirectToAction("Home", "Login");
+                }
+                else
+                {
+                    return Content("<script>alert('用户不存在');history.back()</script>");
+                }
+            }
+            else if (Role==0)
+            {
+                if (GCHomeBLL.SelectAdmin(Count, Password, Role) != null)
+                {
+                    Session["Role"] = Role;
+                    Session["Count"] = Count;
+                    Session["Name"] = GCHomeBLL.SelectAdmin(Count, Password, Role).AdminName;
+                    Session["Adminst"] = GCHomeBLL.SelectAdmin(Count, Password, Role);
+                    return RedirectToAction("Home1", "Login");
                 }
                 else
                 {
@@ -52,6 +68,11 @@ namespace GC家园.Controllers
         }
 
         public ActionResult Home() {
+            return View();
+        }
+
+        public ActionResult Home1()
+        {
             return View();
         }
 

@@ -33,5 +33,6 @@ namespace Models
         public virtual DbSet<Attendance> Attendance { get; set; }
         public virtual DbSet<Exchange> Exchange { get; set; }
         public virtual DbSet<Moveout> Moveout { get; set; }
+        public virtual DbSet<Fix> Fix { get; set; }
     }
 }

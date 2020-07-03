@@ -26,8 +26,16 @@ namespace BLL
             return GCHomeDAL.select();
         }
 
+        public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "") {
+            return GCHomeDAL.LikeSelect1(stus, State, StuName);
+        }
+
         public Admin SelectAdmin(string Count, string Password,int Role) {
             return GCHomeDAL.SelectAdmin(Count,Password,Role);
+        }
+
+        public List<Moveinto> SelectStudentByFloorID(int? FloorID) {
+            return GCHomeDAL.SelectStudentByFloorID(FloorID);
         }
 
         public Student SelectStudent(string Count, string Password)
@@ -37,6 +45,10 @@ namespace BLL
 
         public bool AddStudent(Student stu) {
             return GCHomeDAL.AddStudent(stu);
+        }
+
+        public List<Student> LikeStudent1(string StuNumber = "") {
+            return GCHomeDAL.LikeStudent1(StuNumber);
         }
 
         public int? ReturnPeople(int? FloorID, int? DormID) {
@@ -101,6 +113,10 @@ namespace BLL
             return GCHomeDAL.ReturnStuIDByStuNumber(StuNumber);
         }
 
+        public List<Moveinto> SelectMoveinto() {
+            return GCHomeDAL.SelectMoveinto();
+        }
+
         public Moveinto SelectMoveinto(int StuID) {
             return GCHomeDAL.SelectMoveinto(StuID);
         }
@@ -148,6 +164,10 @@ namespace BLL
 
         public Attendance AttendanSelectNew(int? StuID) {
             return GCHomeDAL.AttendanSelectNew(StuID);
+        }
+
+        public List<Attendance> AttendanSelectNew1(int? StuID) {
+            return GCHomeDAL.AttendanSelectNew1(StuID);
         }
 
         public bool AddAttendace(Attendance ad) {
@@ -220,6 +240,10 @@ namespace BLL
 
         public bool EditAdmin(Admin adm) {
             return GCHomeDAL.EditAdmin(adm);
+        }
+
+        public List<Fix> SelectFix() {
+            return GCHomeDAL.SelectFix();
         }
      }
 }

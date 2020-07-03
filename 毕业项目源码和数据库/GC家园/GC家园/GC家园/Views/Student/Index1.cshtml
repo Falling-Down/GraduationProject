@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_LayoutAdminGCHome.cshtml";
+}
+@using Models
+@model PagedList.IPagedList<Student>
+@using PagedList.Mvc;
+<div style="width:90%;margin:10px auto">
+    <div class="">
+        <form action="/Student/Index1" method="get" id="nb">
+            <div class="form-inline  col-lg-9">
+                <select class="form-control col-lg-offset-4" name="State">
+                    @if (ViewBag.State == 1)
+                    {
+                        <option value="">--请选择--</option>
+                        <option value="1" selected="selected">已入住</option>
+                        <option value="2">已迁出</option>
+                    }
+                    else if (ViewBag.State == 2)
+                    {
+                        <option value="">--请选择--</option>
+                        <option value="1">已入住</option>
+                        <option value="2" selected="selected">已迁出</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected">--请选择--</option>
+                        <option value="1">已入住</option>
+                        <option value="2">已迁出</option>
+                    }
+                </select>
+                <input type="text" placeholder="请输入姓名" class="form-control " style="width: 250px" name="StuName" value="@ViewBag.StuName" />
+                <a href="#" class="btn btn-info" onclick="nbclass()">查询</a>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>登录账号</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>入住状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="nb">
+            @if (Model != null)
+            {
+                foreach (var item in Model.OrderBy(p=>p.OccupancyStatus))
+                {
+                    <tr>
+                        <td>@item.StuNumber</td>
+                        <td>@item.StuName</td>
+                        <td>@item.StuCount</td>
+                        <td>
+                            @if (item.StuSex == 1)
+                            {
+                                @:男
+                            }
+                            else
+                            {
+                                @:女
+                            }
+                        </td>
+                        <td>@item.StuAge</td>
+                        <td>
+                            @if (item.OccupancyStatus == 1)
+                            {
+                                @:已入住
+                            }
+                            else
+                            {
+                                @:已迁出
+                            }
+                        </td>
+                        <td>
+                            @if (item.OccupancyStatus == 1)
+                            {
+                                <a href="/Student/AttendanceFunAdminAddIndex?StuNumber=@item.StuNumber" class="btn btn-primary">缺勤添加</a>
+                            }
+                            else
+                            {
+                                @:无操作
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("Index1", new { page, State = ViewBag.State, StuName = ViewBag.StuName }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+</div>
+
+<script>
+    function nbclass() {
+        $("#nb").submit();
+    }
+</script>

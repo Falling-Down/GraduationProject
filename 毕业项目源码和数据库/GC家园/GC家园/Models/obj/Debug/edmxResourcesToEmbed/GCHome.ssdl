@@ -8,11 +8,11 @@
     <Property Name="FloorID" Type="int" />
     <Property Name="AdminCount" Type="nvarchar" MaxLength="50" />
     <Property Name="AdminPwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
     <Property Name="AdminSex" Type="int" />
     <Property Name="AdminAge" Type="int" />
     <Property Name="AdminKinds" Type="int" />
     <Property Name="IsDelete" Type="int" />
-    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Attendance">
     <Key>
@@ -32,8 +32,8 @@
     <Property Name="FloorID" Type="int" />
     <Property Name="DormName" Type="nvarchar" MaxLength="50" />
     <Property Name="DormPeople" Type="int" />
-    <Property Name="IsDelete" Type="int" />
     <Property Name="MoveinDormPeople" Type="int" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="Exchange">
     <Key>
@@ -45,6 +45,17 @@
     <Property Name="OldDormID" Type="int" />
     <Property Name="NewFloorID" Type="int" />
     <Property Name="NewDormID" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Fix">
+    <Key>
+      <PropertyRef Name="FixID" />
+    </Key>
+    <Property Name="FixID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="FixReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="XsReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="FixState" Type="int" />
     <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="Floor">
@@ -93,7 +104,7 @@
     <Property Name="OccupancyStatus" Type="int" />
     <Property Name="IsDelete" Type="int" />
   </EntityType>
-  <Association Name="FK__Admin__FloorID__3F466844">
+  <Association Name="FK__Admin__FloorID__0E6E26BF">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
     <ReferentialConstraint>
@@ -105,7 +116,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Attendanc__StuID__5165187F">
+  <Association Name="FK__Attendanc__StuID__797309D9">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -117,7 +128,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Dorm__FloorID__49C3F6B7">
+  <Association Name="FK__Dorm__FloorID__7C4F7684">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
     <ReferentialConstraint>
@@ -129,7 +140,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Exchange__NewDor__5BE2A6F2">
+  <Association Name="FK__Exchange__NewDor__07C12930">
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
     <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
     <ReferentialConstraint>
@@ -141,7 +152,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Exchange__NewFlo__5AEE82B9">
+  <Association Name="FK__Exchange__NewFlo__06CD04F7">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
     <ReferentialConstraint>
@@ -153,7 +164,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Exchange__OldDor__59FA5E80">
+  <Association Name="FK__Exchange__OldDor__05D8E0BE">
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
     <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
     <ReferentialConstraint>
@@ -165,7 +176,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Exchange__OldFlo__59063A47">
+  <Association Name="FK__Exchange__OldFlo__04E4BC85">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
     <ReferentialConstraint>
@@ -177,7 +188,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Exchange__StuID__5812160E">
+  <Association Name="FK__Exchange__StuID__03F0984C">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
     <ReferentialConstraint>
@@ -189,7 +200,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Moveinto__DormID__4E88ABD4">
+  <Association Name="FK__Fix__StuID__18EBB532">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Fix" Type="Self.Fix" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Fix">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__DormID__01142BA1">
     <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
     <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -201,7 +224,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Moveinto__FloorI__4D94879B">
+  <Association Name="FK__Moveinto__FloorI__00200768">
     <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
     <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -213,7 +236,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Moveinto__StuID__4CA06362">
+  <Association Name="FK__Moveinto__StuID__7F2BE32F">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -225,7 +248,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Moveout__StuID__5EBF139D">
+  <Association Name="FK__Moveout__StuID__0B91BA14">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Moveout" Type="Self.Moveout" Multiplicity="*" />
     <ReferentialConstraint>
@@ -242,55 +265,60 @@
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fix" EntityType="Self.Fix" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moveout" EntityType="Self.Moveout" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="Self.FK__Admin__FloorID__3F466844">
+    <AssociationSet Name="FK__Admin__FloorID__0E6E26BF" Association="Self.FK__Admin__FloorID__0E6E26BF">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Admin" EntitySet="Admin" />
     </AssociationSet>
-    <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="Self.FK__Attendanc__StuID__5165187F">
+    <AssociationSet Name="FK__Attendanc__StuID__797309D9" Association="Self.FK__Attendanc__StuID__797309D9">
       <End Role="Student" EntitySet="Student" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="Self.FK__Dorm__FloorID__49C3F6B7">
+    <AssociationSet Name="FK__Dorm__FloorID__7C4F7684" Association="Self.FK__Dorm__FloorID__7C4F7684">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Dorm" EntitySet="Dorm" />
     </AssociationSet>
-    <AssociationSet Name="FK__Exchange__NewDor__5BE2A6F2" Association="Self.FK__Exchange__NewDor__5BE2A6F2">
+    <AssociationSet Name="FK__Exchange__NewDor__07C12930" Association="Self.FK__Exchange__NewDor__07C12930">
       <End Role="Dorm" EntitySet="Dorm" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Exchange__NewFlo__5AEE82B9" Association="Self.FK__Exchange__NewFlo__5AEE82B9">
+    <AssociationSet Name="FK__Exchange__NewFlo__06CD04F7" Association="Self.FK__Exchange__NewFlo__06CD04F7">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Exchange__OldDor__59FA5E80" Association="Self.FK__Exchange__OldDor__59FA5E80">
+    <AssociationSet Name="FK__Exchange__OldDor__05D8E0BE" Association="Self.FK__Exchange__OldDor__05D8E0BE">
       <End Role="Dorm" EntitySet="Dorm" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Exchange__OldFlo__59063A47" Association="Self.FK__Exchange__OldFlo__59063A47">
+    <AssociationSet Name="FK__Exchange__OldFlo__04E4BC85" Association="Self.FK__Exchange__OldFlo__04E4BC85">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Exchange__StuID__5812160E" Association="Self.FK__Exchange__StuID__5812160E">
+    <AssociationSet Name="FK__Exchange__StuID__03F0984C" Association="Self.FK__Exchange__StuID__03F0984C">
       <End Role="Student" EntitySet="Student" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="Self.FK__Moveinto__DormID__4E88ABD4">
+    <AssociationSet Name="FK__Fix__StuID__18EBB532" Association="Self.FK__Fix__StuID__18EBB532">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Fix" EntitySet="Fix" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__DormID__01142BA1" Association="Self.FK__Moveinto__DormID__01142BA1">
       <End Role="Dorm" EntitySet="Dorm" />
       <End Role="Moveinto" EntitySet="Moveinto" />
     </AssociationSet>
-    <AssociationSet Name="FK__Moveinto__FloorI__4D94879B" Association="Self.FK__Moveinto__FloorI__4D94879B">
+    <AssociationSet Name="FK__Moveinto__FloorI__00200768" Association="Self.FK__Moveinto__FloorI__00200768">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Moveinto" EntitySet="Moveinto" />
     </AssociationSet>
-    <AssociationSet Name="FK__Moveinto__StuID__4CA06362" Association="Self.FK__Moveinto__StuID__4CA06362">
+    <AssociationSet Name="FK__Moveinto__StuID__7F2BE32F" Association="Self.FK__Moveinto__StuID__7F2BE32F">
       <End Role="Student" EntitySet="Student" />
       <End Role="Moveinto" EntitySet="Moveinto" />
     </AssociationSet>
-    <AssociationSet Name="FK__Moveout__StuID__5EBF139D" Association="Self.FK__Moveout__StuID__5EBF139D">
+    <AssociationSet Name="FK__Moveout__StuID__0B91BA14" Association="Self.FK__Moveout__StuID__0B91BA14">
       <End Role="Student" EntitySet="Student" />
       <End Role="Moveout" EntitySet="Moveout" />
     </AssociationSet>
