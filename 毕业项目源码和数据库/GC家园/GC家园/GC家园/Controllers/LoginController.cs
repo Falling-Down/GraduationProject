@@ -57,7 +57,8 @@ namespace GC家园.Controllers
                     Session["Role"] = 2;
                     Session["Count"] = Count;
                     Session["Name"] = GCHomeBLL.SelectStudent(Count, Password).StuName;
-                    return RedirectToAction("Home", "Login");
+                    Session["StuNumber"] = GCHomeBLL.SelectStudent(Count, Password).StuNumber;
+                    return RedirectToAction("Index", "Qianduan");
                 }
                 else
                 {

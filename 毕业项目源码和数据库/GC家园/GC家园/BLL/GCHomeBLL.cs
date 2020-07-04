@@ -26,6 +26,10 @@ namespace BLL
             return GCHomeDAL.select();
         }
 
+        public Student select(int StuID) {
+            return GCHomeDAL.select(StuID);
+        }
+
         public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "") {
             return GCHomeDAL.LikeSelect1(stus, State, StuName);
         }
@@ -244,6 +248,10 @@ namespace BLL
 
         public List<Fix> SelectFix() {
             return GCHomeDAL.SelectFix();
+        }
+
+        public List<Fix> SelectFix(int StuID) {
+            return GCHomeDAL.SelectFix(StuID);
         }
      }
 }

@@ -105,6 +105,10 @@
     <EntitySetMapping Name="Fix">
       <EntityTypeMapping TypeName="GCHomeModel.Fix">
         <MappingFragment StoreEntitySet="Fix">
+          <ScalarProperty Name="XsDate" ColumnName="XsDate" />
+          <ScalarProperty Name="FixDate" ColumnName="FixDate" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
           <ScalarProperty Name="XsReason" ColumnName="XsReason" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="FixState" ColumnName="FixState" />

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "AttendanCenterIndex";
+    Layout = "~/Views/Shared/_LayoutStudentGCHome.cshtml";
+}
+@using Models
+@{
+    List<Attendance> Attendanlist = ViewBag.AttendanList;
+}
+<div style="width:80%;margin:0px auto;margin-bottom:27.5%">
+    <table class="table table-bordered" style="transform:translateY(20px);font-size:smaller">
+        <thead class="thead-light">
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>晚归日期</th>
+                <th>晚归原因</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Attendanlist as List<Attendance>)
+            {
+                <tr style="line-height:40px">
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@string.Format("{0:D}", item.AttendanceDate)</td>
+                    <td>@item.AttendanceReason</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

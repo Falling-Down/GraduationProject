@@ -23,6 +23,18 @@ namespace DAL
             }
         }
 
+        public Student select(int StuID)
+        {
+            try
+            {
+                return db.Student.FirstOrDefault(p=>p.StuID==StuID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Student> selectStudent()
         {
             try
@@ -64,7 +76,7 @@ namespace DAL
         {
             try
             {
-                return db.Student.FirstOrDefault(p => p.StuCount == Count && p.StuPwd == Password);
+                return db.Student.FirstOrDefault(p => p.StuCount == Count && p.StuPwd == Password&&p.OccupancyStatus==1);
             }
             catch (Exception)
             {
@@ -865,6 +877,11 @@ namespace DAL
 
         public List<Fix> SelectFix() {
             return db.Fix.ToList();
+        }
+
+        public List<Fix> SelectFix(int StuID)
+        {
+            return db.Fix.Where(p=>p.StuID==StuID).ToList();
         }
     }
 }

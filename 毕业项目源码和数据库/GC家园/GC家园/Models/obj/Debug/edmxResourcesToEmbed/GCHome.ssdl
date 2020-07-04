@@ -53,10 +53,14 @@
     </Key>
     <Property Name="FixID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StuID" Type="int" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
     <Property Name="FixReason" Type="nvarchar" MaxLength="100" />
     <Property Name="XsReason" Type="nvarchar" MaxLength="100" />
     <Property Name="FixState" Type="int" />
     <Property Name="IsDelete" Type="int" />
+    <Property Name="FixDate" Type="date" />
+    <Property Name="XsDate" Type="date" />
   </EntityType>
   <EntityType Name="Floor">
     <Key>
@@ -200,7 +204,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Fix__StuID__18EBB532">
+  <Association Name="FK__Fix__StuID__1BC821DD">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Fix" Type="Self.Fix" Multiplicity="*" />
     <ReferentialConstraint>
@@ -302,7 +306,7 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="Exchange" EntitySet="Exchange" />
     </AssociationSet>
-    <AssociationSet Name="FK__Fix__StuID__18EBB532" Association="Self.FK__Fix__StuID__18EBB532">
+    <AssociationSet Name="FK__Fix__StuID__1BC821DD" Association="Self.FK__Fix__StuID__1BC821DD">
       <End Role="Student" EntitySet="Student" />
       <End Role="Fix" EntitySet="Fix" />
     </AssociationSet>

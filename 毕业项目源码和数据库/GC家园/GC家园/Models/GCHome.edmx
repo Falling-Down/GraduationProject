@@ -58,10 +58,14 @@
           </Key>
           <Property Name="FixID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StuID" Type="int" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="FixReason" Type="nvarchar" MaxLength="100" />
           <Property Name="XsReason" Type="nvarchar" MaxLength="100" />
           <Property Name="FixState" Type="int" />
           <Property Name="IsDelete" Type="int" />
+          <Property Name="FixDate" Type="date" />
+          <Property Name="XsDate" Type="date" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -205,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fix__StuID__18EBB532">
+        <Association Name="FK__Fix__StuID__1BC821DD">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="Fix" Type="Self.Fix" Multiplicity="*" />
           <ReferentialConstraint>
@@ -307,7 +311,7 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="Exchange" EntitySet="Exchange" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fix__StuID__18EBB532" Association="Self.FK__Fix__StuID__18EBB532">
+          <AssociationSet Name="FK__Fix__StuID__1BC821DD" Association="Self.FK__Fix__StuID__1BC821DD">
             <End Role="Student" EntitySet="Student" />
             <End Role="Fix" EntitySet="Fix" />
           </AssociationSet>
@@ -668,6 +672,10 @@
           <Property Name="IsDelete" Type="Int32" />
           <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Fix" ToRole="Student" />
           <Property Name="XsReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FixDate" Type="DateTime" Precision="0" />
+          <Property Name="XsDate" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK__Fix__StuID__160F4887">
           <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
@@ -791,6 +799,10 @@
           <EntitySetMapping Name="Fix">
             <EntityTypeMapping TypeName="GCHomeModel.Fix">
               <MappingFragment StoreEntitySet="Fix">
+                <ScalarProperty Name="XsDate" ColumnName="XsDate" />
+                <ScalarProperty Name="FixDate" ColumnName="FixDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="XsReason" ColumnName="XsReason" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="FixState" ColumnName="FixState" />

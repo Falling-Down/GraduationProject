@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "SelfCenter";
+    Layout = "~/Views/Shared/_LayoutStudentGCHome.cshtml";
+}
+@using Models
+@{ 
+    Student stu = ViewBag.Sst;
+    Moveinto moin = ViewBag.Mst;
+}
+<table class="table" style="width:50%;margin:0px auto;border-color:black;border-width:2px">
+    <tbody style="font-size:smaller">
+        <tr>
+            <td style="width:40%">姓名</td>
+            <td style="width:60%">@stu.StuName</td>
+        </tr>
+        <tr>
+            <td>学号</td>
+            <td>@stu.StuNumber</td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                @if (stu.StuSex == 0)
+                {
+                    @:女
+                }
+                else
+                {
+                    @:男
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>账号</td>
+            <td>@stu.StuCount</td>
+        </tr>
+        <tr>
+            <td>入住状态</td>
+            <td>
+                @if (stu.OccupancyStatus==1)
+                {
+                    @:已入住
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>楼宇</td>
+            <td>@moin.Floor.FloorName</td>
+        </tr>
+        <tr>
+            <td>寝室</td>
+            <td>@moin.Dorm.DormName</td>
+        </tr>
+    </tbody>
+</table>
+<a href="" class="btn btn-primary" style="margin-left:40%;width:150px;margin-bottom:10.6%">修改密码</a>
+

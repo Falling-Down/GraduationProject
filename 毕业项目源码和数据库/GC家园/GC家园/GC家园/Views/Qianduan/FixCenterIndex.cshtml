@@ -1,23 +1,22 @@
 ﻿
 @{
-    ViewBag.Title = "FixFun";
-    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+    ViewBag.Title = "FixCenterIndex";
+    Layout = "~/Views/Shared/_LayoutStudentGCHome.cshtml";
 }
-@using Models;
-@{
+@using Models
+@{ 
     List<Fix> fixlist = ViewBag.FixList;
-    List<Moveinto> movelist = ViewBag.MoveinList;
 }
-<div style="width:90%;margin:10px auto">
-    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
-        <thead>
+<div style="width:80%;margin:0px auto;margin-bottom:27.5%">
+    <table class="table table-bordered" style="transform:translateY(20px);font-size:smaller">
+        <thead class="thead-light">
             <tr>
                 <th>学号</th>
                 <th>姓名</th>
-                <th>楼宇</th>
-                <th>宿舍</th>
+                <th>地址</th>
+                <th>联系方式</th>
                 <th>上报原因</th>
-                <th>申诉理由</th>
+                <th>上报时间</th>
                 <th>受理状态</th>
                 <th>操作</th>
             </tr>
@@ -25,17 +24,21 @@
         <tbody>
             @foreach (var item in fixlist as List<Fix>)
             {
-                <tr>
+                <tr style="line-height:40px">
                     <td>@item.Student.StuNumber</td>
                     <td>@item.Student.StuName</td>
                     <td>@item.Adress</td>
                     <td>@item.Phone</td>
                     <td>@item.FixReason</td>
-                    <td>@item.XsReason</td>
+                    <td>@string.Format("{0:D}",item.FixDate)</td>
                     <td>
                         @if (item.FixState == 0)
                         {
                             @:未受理
+                        }
+                        else if(item.FixState==1)
+                        {
+                            @:正在处理
                         }
                         else
                         {
@@ -45,7 +48,8 @@
                     <td>
                         @if (item.FixState == 0)
                         {
-                            <a href="" class="btn btn-primary">受理</a>
+                            <a href="" class="btn btn-light" onclick="return confirm('确定要取消上报吗')">取消上报</a>
+                            <a href="" class="btn btn-light" onclick="return confirm('确定要上诉吗')">上诉</a>
                         }
                         else
                         {

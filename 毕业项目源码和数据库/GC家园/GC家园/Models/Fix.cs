@@ -20,6 +20,10 @@ namespace Models
         public Nullable<int> FixState { get; set; }
         public Nullable<int> IsDelete { get; set; }
         public string XsReason { get; set; }
+        public string Adress { get; set; }
+        public string Phone { get; set; }
+        public Nullable<System.DateTime> FixDate { get; set; }
+        public Nullable<System.DateTime> XsDate { get; set; }
     
         public virtual Student Student { get; set; }
     }

@@ -336,6 +336,10 @@
     <Property Name="IsDelete" Type="Int32" />
     <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Fix" ToRole="Student" />
     <Property Name="XsReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FixDate" Type="DateTime" Precision="0" />
+    <Property Name="XsDate" Type="DateTime" Precision="0" />
   </EntityType>
   <Association Name="FK__Fix__StuID__160F4887">
     <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
