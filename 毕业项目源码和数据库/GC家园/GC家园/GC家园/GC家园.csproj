@@ -243,6 +243,9 @@
     <Content Include="Views\Qianduan\AttendanCenter.cshtml" />
     <Content Include="Views\Qianduan\AttendanCenterIndex.cshtml" />
     <Content Include="Views\Student\Fixtishi.cshtml" />
+    <Content Include="Views\Student\Fixtishi1.cshtml" />
+    <Content Include="Views\Qianduan\AddSxReason.cshtml" />
+    <Content Include="Views\Qianduan\Sxtishi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

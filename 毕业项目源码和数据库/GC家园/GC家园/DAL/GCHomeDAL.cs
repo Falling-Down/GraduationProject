@@ -945,5 +945,32 @@ namespace DAL
             }
             return false;
         }
+
+        public bool UpdateFixState1(int FixID)
+        {
+            Fix fx = db.Fix.Find(FixID);
+            fx.FixState = 2;
+            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateFixXsReason(string XsReason, int FixID)
+        {
+            Fix fx = db.Fix.Find(FixID);
+            fx.XsReason = XsReason;
+            fx.XsDate = DateTime.Now;
+            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -717,6 +717,11 @@ namespace GC家园.Controllers
             return View();
         }
 
+        public ActionResult Fixtishi1()
+        {
+            return View();
+        }
+
         public ActionResult UpdateFixState(int FixID) {
             if (GCHomeBLL.UpdateFixState(FixID))
             {
@@ -724,5 +729,16 @@ namespace GC家园.Controllers
             }
             return View();
         }
+
+        public ActionResult UpdateFixState1(int FixID)
+        {
+            if (GCHomeBLL.UpdateFixState1(FixID))
+            {
+                return RedirectToAction("Fixtishi1");
+            }
+            return View();
+        }
+
+        public ActionResult UpdateFixState2(int fix)
     }
 }

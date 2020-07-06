@@ -333,5 +333,13 @@ namespace BLL
         {
             return GCHomeDAL.UpdateFixState(FixID);
         }
+
+        public bool UpdateFixState1(int FixID) {
+            return GCHomeDAL.UpdateFixState1(FixID);
+        }
+
+        public bool UpdateFixXsReason(string XsReason, int FixID) {
+            return GCHomeDAL.UpdateFixXsReason(XsReason,FixID);
+        }
     }
 }

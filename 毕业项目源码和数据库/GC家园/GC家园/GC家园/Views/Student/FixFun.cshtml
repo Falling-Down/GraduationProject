@@ -31,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.OrderByDescending(p => p.FixState))
+            @foreach (var item in Model.OrderBy(p => p.FixState))
             {
                 <tr>
                     <td>@item.Student.StuNumber</td>
@@ -63,11 +63,19 @@
                         }
                         else if (item.FixState == 0)
                         {
-                            <a href="" class="btn btn-primary">完毕</a>
+                            <a href="/Student/UpdateFixState1?FixID=@item.FixID" class="btn btn-primary">完毕</a>
                         }
                         else
                         {
-                            <a href="/Student/UpdateFixState?FixID=@item.FixID" class="btn btn-danger">二次受理</a>
+                            if (item.XsReason == null || item.XsReason == "")
+                            {
+                                @:无需操作
+                            }
+                            else
+                            {
+                                <a href="/Student/UpdateFixState2?FixID=@item.FixID" class="btn btn-danger">二次受理</a>
+                            }
+
                         }
                     </td>
                 </tr>

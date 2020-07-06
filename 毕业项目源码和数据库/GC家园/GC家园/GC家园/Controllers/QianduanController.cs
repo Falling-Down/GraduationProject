@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models;
 using BLL;
+using PagedList;
 
 namespace GC家园.Controllers
 {
@@ -45,12 +46,16 @@ namespace GC家园.Controllers
             return View();
         }
 
-        public ActionResult FixCenterIndex()
+        public ActionResult FixCenterIndex(int? page)
         {
             int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
             if (StuID!=0)
             {
-                ViewBag.FixList = GCHomeBLL.SelectFix(StuID);
+                List<Fix> fx = GCHomeBLL.SelectFix(StuID);
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
             return View();
         }
@@ -60,12 +65,16 @@ namespace GC家园.Controllers
             return View();
         }
 
-        public ActionResult AttendanCenterIndex()
+        public ActionResult AttendanCenterIndex(int? page)
         {
             int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
             if (StuID != 0)
             {
-                ViewBag.AttendanList = GCHomeBLL.AttendanSelectNew1(StuID);
+                List<Attendance> atlist = GCHomeBLL.AttendanSelectNew1(StuID);
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
             return View();
         }
@@ -74,6 +83,25 @@ namespace GC家园.Controllers
             if (GCHomeBLL.DelFix(FixID))
             {
                 return RedirectToAction("FixCenterIndex", "Qianduan");
+            }
+            return View();
+        }
+
+        public ActionResult AddSxReason(int FixID) {
+            ViewBag.FixID = FixID;
+            return View();
+        }
+
+        public ActionResult Sxtishi()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSxReason(string XsReason,int FixID) {
+            if (GCHomeBLL.UpdateFixXsReason(XsReason,FixID))
+            {
+                return RedirectToAction("Sxtishi");
             }
             return View();
         }
