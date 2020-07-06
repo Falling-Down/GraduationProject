@@ -263,12 +263,15 @@ namespace GC家园.Controllers
             }
         }
 
-        public ActionResult AttendanceFun()
+        public ActionResult AttendanceFun(int? page)
         {
             try
             {
-                ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
-                return View();
+                List<Attendance> alist = GCHomeBLL.AttendanSelect();
+                var pageSize = 3;
+                var pageNumber = page ?? 1;
+                IPagedList<Attendance> pagedList = alist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
             catch (Exception)
             {
@@ -278,31 +281,40 @@ namespace GC家园.Controllers
         }
 
         [HttpPost]
-        public ActionResult AttendanceFun(string NumberOrName)
+        public ActionResult AttendanceFun(int? page,string NumberOrName)
         {
             try
             {
                 int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+                List<Attendance> alist = new List<Attendance>();
                 if (a == null)
                 {
-                    ViewBag.AttendanList = GCHomeBLL.AttendanSelect();
+                    alist = GCHomeBLL.AttendanSelect();
                     ViewBag.Name = NumberOrName;
                 }
                 else
                 {
-                    List<Attendance> alist = new List<Attendance>();
+                    
                     foreach (var item in a)
                     {
-                        if (GCHomeBLL.AttendanSelectNew(item) != null)
+                        if (GCHomeBLL.AttendanSelectNew1(item) != null)
                         {
-                            Attendance ad = GCHomeBLL.AttendanSelectNew(item);
-                            alist.Add(ad);
+                            List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item);
+                            foreach (var item3 in at)
+                            {
+                                if (item3.StuID==item)
+                                {
+                                    alist.Add(item3);
+                                }
+                            }
                         }
                     }
-                    ViewBag.AttendanList = alist;
                     ViewBag.Name = NumberOrName;
                 }
-                return View();
+                var pageSize = 3;
+                var pageNumber = page ?? 1;
+                IPagedList<Attendance> pagedList = alist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
             catch (Exception)
             {
@@ -544,6 +556,7 @@ namespace GC家园.Controllers
         {
             try
             {
+
                 ViewBag.StuList = GCHomeBLL.StuSelect();
                 ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect(StuNumber);
                 ViewBag.StuNumber = StuNumber;
@@ -555,6 +568,7 @@ namespace GC家园.Controllers
                 return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
+
 
         public ActionResult AddMoveout(int id)
         {
@@ -685,14 +699,29 @@ namespace GC家园.Controllers
             return View();
         }
 
-        public ActionResult FixFun()
+        public ActionResult FixFun(int? page,string Adress="")
         {
-            ViewBag.FixList = GCHomeBLL.SelectFix();
-            ViewBag.MoveinList = GCHomeBLL.SelectMoveinto();
-            return View();
+            ViewBag.Adress = Adress;
+            List<Fix> fx = GCHomeBLL.SelectFix(Adress);
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
+            IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
+            return View(pagedList);
         }
 
         public ActionResult UpdatePwd() {
+            return View();
+        }
+
+        public ActionResult Fixtishi() {
+            return View();
+        }
+
+        public ActionResult UpdateFixState(int FixID) {
+            if (GCHomeBLL.UpdateFixState(FixID))
+            {
+                return RedirectToAction("Fixtishi");
+            }
             return View();
         }
     }

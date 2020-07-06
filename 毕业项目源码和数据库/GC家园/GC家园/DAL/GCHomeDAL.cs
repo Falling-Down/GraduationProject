@@ -56,6 +56,11 @@ namespace DAL
             return db.Student.Where(p => p.OccupancyStatus == 1 && (p.StuNumber.Contains(StuNumber) || p.StuNumber == "")).ToList();
         }
 
+        public List<Student> LikeStudent2(string StuNumber = "")
+        {
+            return db.Student.Where(p => p.OccupancyStatus == 2 && (p.StuNumber.Contains(StuNumber) || p.StuNumber == "")).ToList();
+        }
+
         public Admin SelectAdmin(string Count, string Password,int Role) {
             try
             {
@@ -552,6 +557,24 @@ namespace DAL
             }
         }
 
+        public bool AddFix(Fix fx)
+        {
+            try
+            {
+                db.Fix.Add(fx);
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<Exchange> ExchangeSelect()
         {
             try
@@ -693,8 +716,7 @@ namespace DAL
             try
             {
                 Attendance ad = db.Attendance.Find(id);
-                ad.IsDelete = 1;
-                db.Entry(ad).State = System.Data.Entity.EntityState.Modified;
+                db.Attendance.Remove(ad);
                 int result = db.SaveChanges();
                 if (result > 0)
                 {
@@ -713,10 +735,16 @@ namespace DAL
         {
             try
             {
-                if (db.Student.FirstOrDefault(p => p.StuNumber == StuNumber) != null)
+                if (db.Student.FirstOrDefault(p => p.StuNumber==StuNumber) != null)
                 {
-                    int StuID = db.Student.FirstOrDefault(p => p.StuNumber == StuNumber).StuID;
-                    return db.Moveout.Where(p => p.StuID == StuID).ToList();
+                    int StuID = db.Student.FirstOrDefault(p => p.StuNumber==StuNumber).StuID;
+                    foreach (var item in db.Moveout.ToList())
+                    {
+                        if (StuID==item.StuID)
+                        {
+                            return db.Moveout.Where(p => p.StuID == StuID).ToList();
+                        }
+                    }
                 }
                 return db.Moveout.OrderByDescending(p => p.MoveoutID).ToList();
             }
@@ -734,9 +762,20 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                List<Admin> admin = new List<Admin>() { };
+                return admin;
             }
+        }
+
+        public bool DelAdmin(int AdminID) {
+            Admin ad = db.Admin.Find(AdminID);
+            db.Admin.Remove(ad);
+            int result = db.SaveChanges();
+            if (result>0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public List<Admin> LikeAdmin(string AdminName = "")
@@ -875,13 +914,36 @@ namespace DAL
             }
         }
 
-        public List<Fix> SelectFix() {
-            return db.Fix.ToList();
+        public List<Fix> SelectFix(string Adress="") {
+            return db.Fix.Where(p=>p.Adress.Contains(Adress)||p.Adress=="").ToList();
         }
 
         public List<Fix> SelectFix(int StuID)
         {
             return db.Fix.Where(p=>p.StuID==StuID).ToList();
+        }
+
+        public bool DelFix(int FixID) {
+            Fix fx = db.Fix.Find(FixID);
+            db.Fix.Remove(fx);
+            int result = db.SaveChanges();
+            if (result>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateFixState(int FixID) {
+            Fix fx = db.Fix.Find(FixID);
+            fx.FixState = 0;
+            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+            int result = db.SaveChanges();
+            if (result>0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

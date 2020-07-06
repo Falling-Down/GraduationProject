@@ -84,25 +84,26 @@
     </div>
 </section>
 
-<form action="/form/" method="post" class="smart-green" style="margin-top:20px">
+<form action="/Qianduan/FixCenter" method="post" class="smart-green" style="margin-top:20px">
     <h1>
         报修信息
         <span>请留下你的信息.</span>
     </h1>
     <label>
         <span>位置 :</span>
-        <input id="name" type="text" name="name" class="error" placeholder="请输入楼栋及寝室号" />
+        <input id="Adress" type="text" name="Adress" class="error" placeholder="请输入楼栋及寝室号" />
     </label>
 
     <label>
         <span>联系方式 :</span>
-        <input id="email" type="email" value="" name="email" placeholder="请输入联系方式" />
+        <input id="Phone" type="text" value="" name="Phone" placeholder="请输入联系方式" />
     </label>
 
     <label>
         <span>报修原因 :</span>
-        <textarea id="message" name="message"  placeholder="请输入你的建议"></textarea>
+        <textarea id="FixReason" name="FixReason"  placeholder="请输入你的建议"></textarea>
     </label>
+    <input type="hidden" value="@ViewBag.StuID" name="StuID"/>
     <label>
         <span>&nbsp;</span>
         <input type="submit" class="button" value="提交" />

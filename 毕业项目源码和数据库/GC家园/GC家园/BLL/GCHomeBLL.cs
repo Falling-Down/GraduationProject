@@ -14,77 +14,99 @@ namespace BLL
         GCHomeDAL GCHomeDAL = new GCHomeDAL();
         ImportExcel im = new ImportExcel();
         SaveExcelToDB sa = new SaveExcelToDB();
-        public DataTable GetExcelDataTable(string filePath) {
+        public DataTable GetExcelDataTable(string filePath)
+        {
             return im.GetExcelDataTable(filePath);
         }
 
-        public string InsertDataToDB(DataTable dt) {
+        public string InsertDataToDB(DataTable dt)
+        {
             return sa.InsertDataToDB(dt);
         }
 
-        public List<Student> select() {
+        public List<Student> select()
+        {
             return GCHomeDAL.select();
         }
 
-        public Student select(int StuID) {
+        public Student select(int StuID)
+        {
             return GCHomeDAL.select(StuID);
         }
 
-        public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "") {
+        public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "")
+        {
             return GCHomeDAL.LikeSelect1(stus, State, StuName);
         }
 
-        public Admin SelectAdmin(string Count, string Password,int Role) {
-            return GCHomeDAL.SelectAdmin(Count,Password,Role);
+        public List<Student> LikeStudent2(string StuNumber = "")
+        {
+            return GCHomeDAL.LikeStudent2(StuNumber);
         }
 
-        public List<Moveinto> SelectStudentByFloorID(int? FloorID) {
+        public Admin SelectAdmin(string Count, string Password, int Role)
+        {
+            return GCHomeDAL.SelectAdmin(Count, Password, Role);
+        }
+
+        public List<Moveinto> SelectStudentByFloorID(int? FloorID)
+        {
             return GCHomeDAL.SelectStudentByFloorID(FloorID);
         }
 
         public Student SelectStudent(string Count, string Password)
         {
-            return GCHomeDAL.SelectStudent(Count,Password);
+            return GCHomeDAL.SelectStudent(Count, Password);
         }
 
-        public bool AddStudent(Student stu) {
+        public bool AddStudent(Student stu)
+        {
             return GCHomeDAL.AddStudent(stu);
         }
 
-        public List<Student> LikeStudent1(string StuNumber = "") {
+        public List<Student> LikeStudent1(string StuNumber = "")
+        {
             return GCHomeDAL.LikeStudent1(StuNumber);
         }
 
-        public int? ReturnPeople(int? FloorID, int? DormID) {
-            return GCHomeDAL.ReturnPeople(FloorID,DormID);
+        public int? ReturnPeople(int? FloorID, int? DormID)
+        {
+            return GCHomeDAL.ReturnPeople(FloorID, DormID);
         }
 
-        public int? ReturnMoinPeople(int? FloorID, int? DormID) {
-            return GCHomeDAL.ReturnMoinPeople(FloorID,DormID);
+        public int? ReturnMoinPeople(int? FloorID, int? DormID)
+        {
+            return GCHomeDAL.ReturnMoinPeople(FloorID, DormID);
         }
 
-        public int? ReturnMoinPeople1(int? FloorID, int? DormID) {
-            return GCHomeDAL.ReturnMoinPeople1(FloorID,DormID);
+        public int? ReturnMoinPeople1(int? FloorID, int? DormID)
+        {
+            return GCHomeDAL.ReturnMoinPeople1(FloorID, DormID);
         }
 
-        public int? UpdateMoinPeople(int? FloorID, int? DormID) {
-            return GCHomeDAL.UpdateMoinPeople(FloorID,DormID);
+        public int? UpdateMoinPeople(int? FloorID, int? DormID)
+        {
+            return GCHomeDAL.UpdateMoinPeople(FloorID, DormID);
         }
 
-        public List<Student> StuSelect() {
+        public List<Student> StuSelect()
+        {
             return GCHomeDAL.StuSelect();
         }
 
-        public List<Student> selectStudent() {
+        public List<Student> selectStudent()
+        {
             return GCHomeDAL.selectStudent();
         }
 
-        public List<Student> LikeStudent(string StuNumber="") {
+        public List<Student> LikeStudent(string StuNumber = "")
+        {
             return GCHomeDAL.LikeStudent(StuNumber);
         }
 
-        public List<Student> LikeSelect(int? State, string StuName="") {
-            return GCHomeDAL.LikeSelect(State,StuName);
+        public List<Student> LikeSelect(int? State, string StuName = "")
+        {
+            return GCHomeDAL.LikeSelect(State, StuName);
         }
 
         public Student SelectStu(int StuID)
@@ -92,56 +114,68 @@ namespace BLL
             return GCHomeDAL.SelectStu(StuID);
         }
 
-            public Student EditStu(int StuID)
+        public Student EditStu(int StuID)
         {
             return GCHomeDAL.EditStu(StuID);
         }
 
-        public bool EditStudent(Student stu) {
+        public bool EditStudent(Student stu)
+        {
             return GCHomeDAL.EditStudent(stu);
         }
 
-        public int StuNumberOrNot(string StuNumber) {
+        public int StuNumberOrNot(string StuNumber)
+        {
             return GCHomeDAL.StuNumberOrNot(StuNumber);
         }
 
-        public List<Floor> FloorSelect() {
+        public List<Floor> FloorSelect()
+        {
             return GCHomeDAL.FloorSelect();
         }
 
-        public List<Dorm> DormSelect(int FloorID) {
+        public List<Dorm> DormSelect(int FloorID)
+        {
             return GCHomeDAL.DormSelect(FloorID);
         }
 
-        public int ReturnStuIDByStuNumber(string StuNumber) {
+        public int ReturnStuIDByStuNumber(string StuNumber)
+        {
             return GCHomeDAL.ReturnStuIDByStuNumber(StuNumber);
         }
 
-        public List<Moveinto> SelectMoveinto() {
+        public List<Moveinto> SelectMoveinto()
+        {
             return GCHomeDAL.SelectMoveinto();
         }
 
-        public Moveinto SelectMoveinto(int StuID) {
+        public Moveinto SelectMoveinto(int StuID)
+        {
             return GCHomeDAL.SelectMoveinto(StuID);
         }
 
-        public bool AddMoveinto(Moveinto moin) {
+        public bool AddMoveinto(Moveinto moin)
+        {
             return GCHomeDAL.AddMoveinto(moin);
         }
 
-        public bool UpdateState(int? StuID) {
+        public bool UpdateState(int? StuID)
+        {
             return GCHomeDAL.UpdateState(StuID);
         }
 
-        public int[] AttendanReturnStuID(string NumberOrName) {
+        public int[] AttendanReturnStuID(string NumberOrName)
+        {
             return GCHomeDAL.AttendanReturnStuID(NumberOrName);
         }
 
-        public List<Attendance> AttendanSelect() {
+        public List<Attendance> AttendanSelect()
+        {
             return GCHomeDAL.AttendanSelect();
         }
 
-        public bool StuNumberNewOrnot(string StuNumber) {
+        public bool StuNumberNewOrnot(string StuNumber)
+        {
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
@@ -150,108 +184,154 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot1(StuNumber);
         }
 
-        public bool ExchangeMoveinDormPeople(Exchange ex) {
+        public bool ExchangeMoveinDormPeople(Exchange ex)
+        {
             return GCHomeDAL.ExchangeMoveinDormPeople(ex);
         }
 
-        public bool ExchangePeople(Exchange ex) {
+        public bool ExchangePeople(Exchange ex)
+        {
             return GCHomeDAL.ExchangePeople(ex);
         }
 
-        public int ajaxOrnotStuNumberandMoin(string StuNumber) {
+        public int ajaxOrnotStuNumberandMoin(string StuNumber)
+        {
             return GCHomeDAL.ajaxOrnotStuNumberandMoin(StuNumber);
         }
 
-        public Moveinto ajaxFloorAndDorm(string StuNumber) {
+        public Moveinto ajaxFloorAndDorm(string StuNumber)
+        {
             return GCHomeDAL.ajaxFloorAndDorm(StuNumber);
         }
 
-        public Attendance AttendanSelectNew(int? StuID) {
+        public Attendance AttendanSelectNew(int? StuID)
+        {
             return GCHomeDAL.AttendanSelectNew(StuID);
         }
 
-        public List<Attendance> AttendanSelectNew1(int? StuID) {
+        public List<Attendance> AttendanSelectNew1(int? StuID)
+        {
             return GCHomeDAL.AttendanSelectNew1(StuID);
         }
 
-        public bool AddAttendace(Attendance ad) {
+        public bool AddAttendace(Attendance ad)
+        {
             return GCHomeDAL.AddAttendace(ad);
         }
 
-        public bool UpdateMoinFloorAndDorm(Exchange ex) {
+        public bool UpdateMoinFloorAndDorm(Exchange ex)
+        {
             return GCHomeDAL.UpdateMoinFloorAndDorm(ex);
         }
 
-        public List<Exchange> ExchangeSelect() {
+        public List<Exchange> ExchangeSelect()
+        {
             return GCHomeDAL.ExchangeSelect();
         }
 
-        public bool AddExchange(Exchange ex) {
+        public bool AddExchange(Exchange ex)
+        {
             return GCHomeDAL.AddExchange(ex);
         }
 
-        public bool DelAttendance(int id) {
+        public bool DelAttendance(int id)
+        {
             return GCHomeDAL.DelAttendance(id);
         }
 
-        public List<Moveout> MoveoutSelect(string StuNumber) {
+        public List<Moveout> MoveoutSelect(string StuNumber)
+        {
             return GCHomeDAL.MoveoutSelect(StuNumber);
         }
 
-        public bool AddMoveout(Moveout moout){
+        public bool AddMoveout(Moveout moout)
+        {
             return GCHomeDAL.AddMoveout(moout);
         }
 
-        public bool UpdateStuOccState(int? StuID){
+        public bool UpdateStuOccState(int? StuID)
+        {
             return GCHomeDAL.UpdateStuOccState(StuID);
         }
 
-        public bool UpdateDormMoveinDormPeople(int? StuID) {
+        public bool UpdateDormMoveinDormPeople(int? StuID)
+        {
             return GCHomeDAL.UpdateDormMoveinDormPeople(StuID);
         }
 
-        public List<Admin> SelectAdmin() {
+        public List<Admin> SelectAdmin()
+        {
             return GCHomeDAL.SelectAdmin();
         }
 
-        public List<Admin> LikeAdmin(string AdminName = "") {
+        public bool DelAdmin(int AdminID)
+        {
+            return GCHomeDAL.DelAdmin(AdminID);
+        }
+
+        public List<Admin> LikeAdmin(string AdminName = "")
+        {
             return GCHomeDAL.LikeAdmin(AdminName);
         }
 
-        public bool AddFloor(Floor fr) {
+        public bool AddFloor(Floor fr)
+        {
             return GCHomeDAL.AddFloor(fr);
         }
 
-        public bool AjaxFloorName(string FloorName) {
+        public bool AjaxFloorName(string FloorName)
+        {
             return GCHomeDAL.AjaxFloorName(FloorName);
         }
 
-        public bool AjaxDorm(int FloorID, string DormName) {
-            return GCHomeDAL.AjaxDorm(FloorID,DormName);
+        public bool AjaxDorm(int FloorID, string DormName)
+        {
+            return GCHomeDAL.AjaxDorm(FloorID, DormName);
         }
 
-        public bool AddDorm(Dorm dm) {
+        public bool AddDorm(Dorm dm)
+        {
             return GCHomeDAL.AddDorm(dm);
         }
 
-        public bool AddAdmin(Admin ad) {
+        public bool AddAdmin(Admin ad)
+        {
             return GCHomeDAL.AddAdmin(ad);
         }
 
-        public Admin EditAdm(int AdminID) {
+        public Admin EditAdm(int AdminID)
+        {
             return GCHomeDAL.EditAdm(AdminID);
         }
 
-        public bool EditAdmin(Admin adm) {
+        public bool EditAdmin(Admin adm)
+        {
             return GCHomeDAL.EditAdmin(adm);
         }
 
-        public List<Fix> SelectFix() {
-            return GCHomeDAL.SelectFix();
+        public List<Fix> SelectFix(string Adress = "")
+        {
+            return GCHomeDAL.SelectFix(Adress);
         }
 
-        public List<Fix> SelectFix(int StuID) {
+        public List<Fix> SelectFix(int StuID)
+        {
             return GCHomeDAL.SelectFix(StuID);
         }
-     }
+
+        public bool DelFix(int FixID)
+        {
+            return GCHomeDAL.DelFix(FixID);
+        }
+
+        public bool AddFix(Fix fx)
+        {
+            return GCHomeDAL.AddFix(fx);
+        }
+
+        public bool UpdateFixState(int FixID)
+        {
+            return GCHomeDAL.UpdateFixState(FixID);
+        }
+    }
 }

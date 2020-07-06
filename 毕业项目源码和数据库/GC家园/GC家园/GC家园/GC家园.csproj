@@ -242,6 +242,7 @@
     <Content Include="Views\Qianduan\FixCenterIndex.cshtml" />
     <Content Include="Views\Qianduan\AttendanCenter.cshtml" />
     <Content Include="Views\Qianduan\AttendanCenterIndex.cshtml" />
+    <Content Include="Views\Student\Fixtishi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,6 +28,20 @@ namespace GC家园.Controllers
         }
 
         public ActionResult FixCenter() {
+            int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+            ViewBag.StuID = StuID;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult FixCenter(Fix fx) {
+            fx.IsDelete = 0;
+            fx.FixDate = DateTime.Now;
+            fx.FixState = 1;
+            if (GCHomeBLL.AddFix(fx))
+            {
+                return RedirectToAction("FixCenterIndex","Qianduan");
+            }
             return View();
         }
 
@@ -52,6 +66,14 @@ namespace GC家园.Controllers
             if (StuID != 0)
             {
                 ViewBag.AttendanList = GCHomeBLL.AttendanSelectNew1(StuID);
+            }
+            return View();
+        }
+
+        public ActionResult DelFix(int FixID) {
+            if (GCHomeBLL.DelFix(FixID))
+            {
+                return RedirectToAction("FixCenterIndex", "Qianduan");
             }
             return View();
         }

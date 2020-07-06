@@ -55,6 +55,22 @@ namespace GC家园.Controllers
             }
         }
 
+        public ActionResult DelAdmin(int AdminID) {
+            try
+            {
+                if (GCHomeBLL.DelAdmin(AdminID))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
         public ActionResult DormFun()
         {
             try
@@ -65,7 +81,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -116,7 +132,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -134,7 +150,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
 
@@ -168,7 +184,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }
     }

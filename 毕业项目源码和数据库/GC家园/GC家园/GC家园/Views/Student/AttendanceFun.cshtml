@@ -4,9 +4,8 @@
     Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
 }
 @using Models
-@{
-    List<Attendance> Attendanlist = ViewBag.AttendanList;
-}
+@model PagedList.IPagedList<Attendance>
+@using PagedList.Mvc;
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <style>
@@ -35,9 +34,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (Attendanlist!=null)
+            @if (Model != null)
             {
-                foreach (var item in Attendanlist as List<Attendance>)
+                foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.Student.StuNumber</td>
@@ -50,7 +49,11 @@
             }
         </tbody>
     </table>
-
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("AttendanceFun", new { page,NumberOrName=ViewBag.Name }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
 </div>
 
 <div style="width:50%;height:auto;margin:70px auto" id="second" class="hidden">
