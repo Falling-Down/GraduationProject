@@ -112,27 +112,35 @@ namespace GC家园.Controllers
 
         public ActionResult Index1(int? page, int? State, string StuName = "")
         {
-            Admin ad = Session["Adminst"] as Admin;
-            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
-            List<Student> stu = GCHomeBLL.select();
-            List<Student> stus = new List<Student> { };
-            foreach (var item in moin)
+            try
             {
-                foreach (var item1 in stu)
+                Admin ad = Session["Adminst"] as Admin;
+                List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+                List<Student> stu = GCHomeBLL.select();
+                List<Student> stus = new List<Student> { };
+                foreach (var item in moin)
                 {
-                    if (item.StuID == item1.StuID)
+                    foreach (var item1 in stu)
                     {
-                        stus.Add(item1);
+                        if (item.StuID == item1.StuID)
+                        {
+                            stus.Add(item1);
+                        }
                     }
                 }
+                List<Student> stulist = GCHomeBLL.LikeSelect1(stus, State, StuName);
+                ViewBag.State = State;
+                ViewBag.StuName = StuName;
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
-            List<Student> stulist = GCHomeBLL.LikeSelect1(stus, State, StuName);
-            ViewBag.State = State;
-            ViewBag.StuName = StuName;
-            var pageSize = 5;
-            var pageNumber = page ?? 1;
-            IPagedList<Student> pagedList = stulist.ToPagedList(pageNumber, pageSize);
-            return View(pagedList);
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
         [HttpPost]
@@ -212,7 +220,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -326,40 +334,48 @@ namespace GC家园.Controllers
         [HttpPost]
         public ActionResult AttendanceFunAdmin(int? page, string NumberOrName)
         {
-            Admin ad = Session["Adminst"] as Admin;
-            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
-            int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
-            List<Attendance> alist = new List<Attendance>();
-            if (a == null)
+            try
             {
-                ViewBag.Name = NumberOrName;
-                return RedirectToAction("AttendanceFunAdmin", "Student");
-            }
-            else
-            {
-                foreach (var item in a)
+                Admin ad = Session["Adminst"] as Admin;
+                List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+                int[] a = GCHomeBLL.AttendanReturnStuID(NumberOrName);
+                List<Attendance> alist = new List<Attendance>();
+                if (a == null)
                 {
-                    foreach (var item1 in moin)
+                    ViewBag.Name = NumberOrName;
+                    return RedirectToAction("AttendanceFunAdmin", "Student");
+                }
+                else
+                {
+                    foreach (var item in a)
                     {
-                        if (item1.StuID == item)
+                        foreach (var item1 in moin)
                         {
-                            if (GCHomeBLL.AttendanSelectNew(item) != null)
+                            if (item1.StuID == item)
                             {
-                                List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item);
-                                foreach (var item3 in at)
+                                if (GCHomeBLL.AttendanSelectNew(item) != null)
                                 {
-                                    alist.Add(item3);
+                                    List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item);
+                                    foreach (var item3 in at)
+                                    {
+                                        alist.Add(item3);
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                ViewBag.Name = NumberOrName;
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Attendance> pagedList = alist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
-            ViewBag.Name = NumberOrName;
-            var pageSize = 5;
-            var pageNumber = page ?? 1;
-            IPagedList<Attendance> pagedList = alist.ToPagedList(pageNumber, pageSize);
-            return View(pagedList);
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
         [HttpPost]
@@ -376,7 +392,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -398,7 +414,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return 2;
             }
         }
 
@@ -673,24 +689,32 @@ namespace GC家园.Controllers
 
         public ActionResult AttendanceFunAdmin(int? page)
         {
-            Admin ad = Session["Adminst"] as Admin;
-            List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
-            List<Attendance> atlist = new List<Attendance> { };
-            foreach (var item in moin)
+            try
             {
-                List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item.StuID);
-                if (at != null)
+                Admin ad = Session["Adminst"] as Admin;
+                List<Moveinto> moin = GCHomeBLL.SelectStudentByFloorID(ad.FloorID);
+                List<Attendance> atlist = new List<Attendance> { };
+                foreach (var item in moin)
                 {
-                    foreach (var item1 in at)
+                    List<Attendance> at = GCHomeBLL.AttendanSelectNew1(item.StuID);
+                    if (at != null)
                     {
-                        atlist.Add(item1);
+                        foreach (var item1 in at)
+                        {
+                            atlist.Add(item1);
+                        }
                     }
                 }
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
             }
-            var pageSize = 5;
-            var pageNumber = page ?? 1;
-            IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
-            return View(pagedList);
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
         public ActionResult AttendanceFunAdminAddIndex(string StuNumber)
@@ -701,16 +725,20 @@ namespace GC家园.Controllers
 
         public ActionResult FixFun(int? page,string Adress="")
         {
-            ViewBag.Adress = Adress;
-            List<Fix> fx = GCHomeBLL.SelectFix(Adress);
-            var pageSize = 5;
-            var pageNumber = page ?? 1;
-            IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
-            return View(pagedList);
-        }
+            try
+            {
+                ViewBag.Adress = Adress;
+                List<Fix> fx = GCHomeBLL.SelectFix(Adress);
+                var pageSize = 5;
+                var pageNumber = page ?? 1;
+                IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
+                return View(pagedList);
+            }
+            catch (Exception)
+            {
 
-        public ActionResult UpdatePwd() {
-            return View();
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
         public ActionResult Fixtishi() {
@@ -722,23 +750,58 @@ namespace GC家园.Controllers
             return View();
         }
 
-        public ActionResult UpdateFixState(int FixID) {
-            if (GCHomeBLL.UpdateFixState(FixID))
-            {
-                return RedirectToAction("Fixtishi");
-            }
+        public ActionResult Fixtishi2()
+        {
             return View();
+        }
+
+        public ActionResult UpdateFixState(int FixID) {
+            try
+            {
+                if (GCHomeBLL.UpdateFixState(FixID))
+                {
+                    return RedirectToAction("Fixtishi");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
         public ActionResult UpdateFixState1(int FixID)
         {
-            if (GCHomeBLL.UpdateFixState1(FixID))
+            try
             {
-                return RedirectToAction("Fixtishi1");
+                if (GCHomeBLL.UpdateFixState1(FixID))
+                {
+                    return RedirectToAction("Fixtishi1");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
         }
 
-        public ActionResult UpdateFixState2(int fix)
+        public ActionResult UpdateFixState2(int FixID) {
+            try
+            {
+                if (GCHomeBLL.UpdateFixState2(FixID))
+                {
+                    return RedirectToAction("Fixtishi2");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
     }
 }

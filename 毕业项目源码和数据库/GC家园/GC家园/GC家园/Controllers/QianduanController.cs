@@ -19,45 +19,80 @@ namespace GC家园.Controllers
         }
 
         public ActionResult SelfCenter() {
-            int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
-            if (StuID!=0)
+            try
             {
-                ViewBag.Sst = GCHomeBLL.select(StuID);
-                ViewBag.Mst = GCHomeBLL.SelectMoveinto(StuID);
+                int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+                if (StuID != 0)
+                {
+                    ViewBag.Sst = GCHomeBLL.select(StuID);
+                    ViewBag.Mst = GCHomeBLL.SelectMoveinto(StuID);
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
+           
         }
 
         public ActionResult FixCenter() {
-            int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
-            ViewBag.StuID = StuID;
-            return View();
+            try
+            {
+                int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+                ViewBag.StuID = StuID;
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
+           
         }
 
         [HttpPost]
         public ActionResult FixCenter(Fix fx) {
-            fx.IsDelete = 0;
-            fx.FixDate = DateTime.Now;
-            fx.FixState = 1;
-            if (GCHomeBLL.AddFix(fx))
+            try
             {
-                return RedirectToAction("FixCenterIndex","Qianduan");
+                fx.IsDelete = 0;
+                fx.FixDate = DateTime.Now;
+                fx.FixState = 1;
+                if (GCHomeBLL.AddFix(fx))
+                {
+                    return RedirectToAction("FixCenterIndex", "Qianduan");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
+            
         }
 
         public ActionResult FixCenterIndex(int? page)
         {
-            int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
-            if (StuID!=0)
+            try
             {
-                List<Fix> fx = GCHomeBLL.SelectFix(StuID);
-                var pageSize = 5;
-                var pageNumber = page ?? 1;
-                IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
-                return View(pagedList);
+                int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+                if (StuID != 0)
+                {
+                    List<Fix> fx = GCHomeBLL.SelectFix(StuID);
+                    var pageSize = 5;
+                    var pageNumber = page ?? 1;
+                    IPagedList<Fix> pagedList = fx.ToPagedList(pageNumber, pageSize);
+                    return View(pagedList);
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
         }
 
         public ActionResult AttendanCenter()
@@ -67,24 +102,40 @@ namespace GC家园.Controllers
 
         public ActionResult AttendanCenterIndex(int? page)
         {
-            int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
-            if (StuID != 0)
+            try
             {
-                List<Attendance> atlist = GCHomeBLL.AttendanSelectNew1(StuID);
-                var pageSize = 5;
-                var pageNumber = page ?? 1;
-                IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
-                return View(pagedList);
+                int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+                if (StuID != 0)
+                {
+                    List<Attendance> atlist = GCHomeBLL.AttendanSelectNew1(StuID);
+                    var pageSize = 5;
+                    var pageNumber = page ?? 1;
+                    IPagedList<Attendance> pagedList = atlist.ToPagedList(pageNumber, pageSize);
+                    return View(pagedList);
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
         }
 
         public ActionResult DelFix(int FixID) {
-            if (GCHomeBLL.DelFix(FixID))
+            try
             {
-                return RedirectToAction("FixCenterIndex", "Qianduan");
+                if (GCHomeBLL.DelFix(FixID))
+                {
+                    return RedirectToAction("FixCenterIndex", "Qianduan");
+                }
+                return View();
             }
-            return View();
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
         }
 
         public ActionResult AddSxReason(int FixID) {
@@ -99,11 +150,43 @@ namespace GC家园.Controllers
 
         [HttpPost]
         public ActionResult AddSxReason(string XsReason,int FixID) {
-            if (GCHomeBLL.UpdateFixXsReason(XsReason,FixID))
+            try
             {
-                return RedirectToAction("Sxtishi");
+                if (GCHomeBLL.UpdateFixXsReason(XsReason, FixID))
+                {
+                    return RedirectToAction("Sxtishi");
+                }
+                return View();
             }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult UpdatePwdStudent() {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePwdStudent(string OldPwd,string NewPwd)
+        {
+            try
+            {
+                int StuID = GCHomeBLL.ReturnStuIDByStuNumber(Session["StuNumber"].ToString());
+                string StuCount = Session["Count"].ToString();
+                if (GCHomeBLL.UpdatePwdStudent(OldPwd, NewPwd, StuID, StuCount))
+                {
+                    return RedirectToAction("SelfCenter");
+                }
+                return Content("<script>alert('账户与密码不一致！');history.go(-1);</script>");
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
             }
         }
 
@@ -51,7 +51,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return Content("<script>alert('暂无数据！');history.go(-1);</script>");
             }
         }
 
@@ -97,7 +97,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -114,7 +114,7 @@ namespace GC家园.Controllers
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -186,6 +186,33 @@ namespace GC家园.Controllers
 
                 return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
+        }
+
+        public ActionResult UpdatePwdAdmin() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePwdAdmin(string OldPwd,string NewPwd) {
+            try
+            {
+                int Role = int.Parse(Session["Role"].ToString());
+                string AdminCount = Session["Count"].ToString();
+                if (GCHomeBLL.UpdatePwdAdmin(OldPwd, NewPwd, Role, AdminCount))
+                {
+                    return RedirectToAction("Updatetishi");
+                }
+                return Content("<script>alert('您的输入有误');history.go(-1);</script>");
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult Updatetishi() {
+            return View();
         }
     }
 }

@@ -69,21 +69,31 @@
                         <ul class="nav nav-sidebar">
                             @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Index1")
                             {
-                                
+
                                 <li class="active"><a href="/Student/Index1">学生管理</a></li>
                             }
                             else
                             {
                                 <li><a href="/Student/Index1">学生管理</a></li>
                             }
-                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && (ViewContext.RouteData.Values["action"].ToString() == "AttendanceFunAdmin"||ViewContext.RouteData.Values["action"].ToString() == "AttendanceFunAdminAddIndex"))
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && (ViewContext.RouteData.Values["action"].ToString() == "AttendanceFunAdmin" || ViewContext.RouteData.Values["action"].ToString() == "AttendanceFunAdminAddIndex"))
                             {
                                 <li class="active"><a href="/Student/AttendanceFunAdmin">学生缺勤管理</a></li>
                             }
                             else
                             {
                                 <li><a href="/Student/AttendanceFunAdmin">学生缺勤管理</a></li>
-                            }                              
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "UpdatePwdAdmin")
+                            {
+                                <li class="active"><a href="/Admin/UpdatePwdAdmin">修改密码</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Admin/UpdatePwdAdmin">修改密码</a></li>
+                            }
                         </ul>
                     }
                 }

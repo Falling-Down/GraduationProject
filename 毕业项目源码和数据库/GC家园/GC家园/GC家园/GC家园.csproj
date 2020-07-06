@@ -234,7 +234,6 @@
     <Content Include="Views\Student\AttendanceFunAdmin.cshtml" />
     <Content Include="Views\Student\AttendanceFunAdminAddIndex.cshtml" />
     <Content Include="Views\Student\ExchangeFun1.cshtml" />
-    <Content Include="Views\Student\UpdatePwd.cshtml" />
     <Content Include="Views\Shared\_LayoutStudentGCHome.cshtml" />
     <Content Include="Views\Qianduan\Index.cshtml" />
     <Content Include="Views\Qianduan\SelfCenter.cshtml" />
@@ -246,6 +245,10 @@
     <Content Include="Views\Student\Fixtishi1.cshtml" />
     <Content Include="Views\Qianduan\AddSxReason.cshtml" />
     <Content Include="Views\Qianduan\Sxtishi.cshtml" />
+    <Content Include="Views\Student\Fixtishi2.cshtml" />
+    <Content Include="Views\Qianduan\UpdatePwdStudent.cshtml" />
+    <Content Include="Views\Admin\UpdatePwdAdmin.cshtml" />
+    <Content Include="Views\Admin\Updatetishi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

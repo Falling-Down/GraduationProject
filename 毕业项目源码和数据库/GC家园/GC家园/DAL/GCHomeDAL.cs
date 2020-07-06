@@ -103,7 +103,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -119,7 +119,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return null;
             }
         }
 
@@ -136,7 +136,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return null;
             }
         }
 
@@ -153,7 +153,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return null;
             }
         }
 
@@ -174,7 +174,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return null;
             }
         }
 
@@ -210,22 +210,32 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                List<Student> stlist = new List<Student>() { };
+                return stlist;
             }
         }
 
         public List<Student> LikeSelect1(List<Student> stus, int? State, string StuName = "") {
-            if (State == 1)
+            try
             {
-                return stus.Where(p => p.OccupancyStatus == 1 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
+                if (State == 1)
+                {
+                    return stus.Where(p => p.OccupancyStatus == 1 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
+                }
+                else if (State == 2)
+                {
+                    return stus.Where(p => p.OccupancyStatus == 2 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
+                }
+                else
+                {
+                    return stus.Where(p => p.StuName.Contains(StuName) || p.StuName == null || p.StuName == "").OrderBy(p => p.StuNumber).ToList();
+                }
             }
-            else if (State == 2)
+            catch (Exception)
             {
-                return stus.Where(p => p.OccupancyStatus == 2 && (p.StuName.Contains(StuName) || p.StuName == "")).ToList();
-            }
-            else
-            {
-                return stus.Where(p => p.StuName.Contains(StuName) || p.StuName == null || p.StuName == "").OrderBy(p => p.StuNumber).ToList();
+
+                List<Student> stlist = new List<Student>() { };
+                return stlist;
             }
         }
 
@@ -259,7 +269,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -280,7 +290,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -292,8 +302,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                Moveinto mo = new Moveinto() { };
+                return mo;
             }
         }
 
@@ -358,8 +368,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                Moveinto move = new Moveinto() { };
+                return move;
             }
         }
 
@@ -377,7 +387,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -397,7 +407,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -420,8 +430,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                int[] a = new int[] { };
+                return a;
             }
         }
 
@@ -445,8 +455,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                Attendance ad = new Attendance() { };
+                return ad;
             }
         }
 
@@ -458,8 +468,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                List<Attendance> alist = new List<Attendance>() { };
+                return alist;
             }
         }
 
@@ -475,7 +485,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -492,7 +502,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -514,7 +524,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return 0;
             }
         }
 
@@ -533,7 +543,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -553,7 +563,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -571,7 +581,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
         }
 
@@ -583,8 +593,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                List<Exchange> elist = new List<Exchange>() { };
+                return elist;
             }
         }
 
@@ -602,7 +612,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -623,7 +633,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -644,7 +654,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -665,7 +675,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -686,7 +696,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -707,7 +717,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -727,7 +737,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -750,8 +760,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                List<Moveout> mlist = new List<Moveout>() { };
+                return mlist;
             }
         }
 
@@ -768,14 +778,22 @@ namespace DAL
         }
 
         public bool DelAdmin(int AdminID) {
-            Admin ad = db.Admin.Find(AdminID);
-            db.Admin.Remove(ad);
-            int result = db.SaveChanges();
-            if (result>0)
+            try
             {
-                return true;
+                Admin ad = db.Admin.Find(AdminID);
+                db.Admin.Remove(ad);
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public List<Admin> LikeAdmin(string AdminName = "")
@@ -786,8 +804,8 @@ namespace DAL
             }
             catch (Exception)
             {
-
-                throw;
+                List<Admin> alist = new List<Admin>() { };
+                return alist;
             }
         }
 
@@ -805,7 +823,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -821,7 +839,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -841,7 +859,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -859,7 +877,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -878,7 +896,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -910,7 +928,7 @@ namespace DAL
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -924,53 +942,156 @@ namespace DAL
         }
 
         public bool DelFix(int FixID) {
-            Fix fx = db.Fix.Find(FixID);
-            db.Fix.Remove(fx);
-            int result = db.SaveChanges();
-            if (result>0)
+            try
             {
-                return true;
+                Fix fx = db.Fix.Find(FixID);
+                db.Fix.Remove(fx);
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public bool UpdateFixState(int FixID) {
-            Fix fx = db.Fix.Find(FixID);
-            fx.FixState = 0;
-            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
-            int result = db.SaveChanges();
-            if (result>0)
+            try
             {
-                return true;
+                Fix fx = db.Fix.Find(FixID);
+                fx.FixState = 0;
+                db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public bool UpdateFixState1(int FixID)
         {
-            Fix fx = db.Fix.Find(FixID);
-            fx.FixState = 2;
-            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
-            int result = db.SaveChanges();
-            if (result > 0)
+            try
             {
-                return true;
+                Fix fx = db.Fix.Find(FixID);
+                fx.FixState = 2;
+                db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool UpdateFixState2(int FixID)
+        {
+            try
+            {
+                Fix fx = db.Fix.Find(FixID);
+                fx.FixState = 3;
+                db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public bool UpdateFixXsReason(string XsReason, int FixID)
         {
-            Fix fx = db.Fix.Find(FixID);
-            fx.XsReason = XsReason;
-            fx.XsDate = DateTime.Now;
-            db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
-            int result = db.SaveChanges();
-            if (result > 0)
+            try
             {
-                return true;
+                Fix fx = db.Fix.Find(FixID);
+                fx.XsReason = XsReason;
+                fx.XsDate = DateTime.Now;
+                db.Entry(fx).State = System.Data.Entity.EntityState.Modified;
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool UpdatePwdStudent(string OldPwd, string NewPwd,int StuID,string StuCount) {
+            try
+            {
+                if (db.Student.FirstOrDefault(p => p.StuID == StuID && p.StuCount == StuCount && p.StuPwd == OldPwd) != null)
+                {
+                    Student stu = db.Student.Find(StuID);
+                    stu.StuPwd = NewPwd;
+                    db.Entry(stu).State = System.Data.Entity.EntityState.Modified;
+                    int result = db.SaveChanges();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool UpdatePwdAdmin(string OldPwd, string NewPwd, int Role, string AdminCount)
+        {
+            try
+            {
+                Admin ad = db.Admin.FirstOrDefault(p => p.AdminKinds == Role && p.AdminCount == AdminCount && p.AdminPwd == OldPwd);
+                Admin ad1 = db.Admin.Find(ad.AdminID);
+                if (ad1 != null)
+                {
+                    ad1.AdminPwd = NewPwd;
+                    db.Entry(ad1).State = System.Data.Entity.EntityState.Modified;
+                    int result = db.SaveChanges();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
     }
 }

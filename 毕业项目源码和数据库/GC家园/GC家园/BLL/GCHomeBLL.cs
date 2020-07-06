@@ -338,8 +338,20 @@ namespace BLL
             return GCHomeDAL.UpdateFixState1(FixID);
         }
 
+        public bool UpdateFixState2(int FixID) {
+            return GCHomeDAL.UpdateFixState2(FixID);
+        }
+
         public bool UpdateFixXsReason(string XsReason, int FixID) {
             return GCHomeDAL.UpdateFixXsReason(XsReason,FixID);
+        }
+
+        public bool UpdatePwdStudent(string OldPwd, string NewPwd, int StuID, string StuCount) {
+            return GCHomeDAL.UpdatePwdStudent(OldPwd,NewPwd,StuID,StuCount);
+        }
+
+        public bool UpdatePwdAdmin(string OldPwd, string NewPwd, int Role, string AdminCount) {
+            return GCHomeDAL.UpdatePwdAdmin(OldPwd,NewPwd,Role,AdminCount);
         }
     }
 }

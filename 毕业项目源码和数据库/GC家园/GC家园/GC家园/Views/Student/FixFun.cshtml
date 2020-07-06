@@ -65,6 +65,10 @@
                         {
                             <a href="/Student/UpdateFixState1?FixID=@item.FixID" class="btn btn-primary">完毕</a>
                         }
+                        else if (item.FixState == 3)
+                        {
+                            @:无需操作
+                        }
                         else
                         {
                             if (item.XsReason == null || item.XsReason == "")

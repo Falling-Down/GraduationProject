@@ -96,7 +96,7 @@ FixReason nvarchar(100),--上报原因
 FixDate date,--上报时间
 XsReason nvarchar(100),--申诉理由
 XsDate date,--申诉时间
-FixState int,--处理状态(0未受理1正在处理2已受理)
+FixState int,--处理状态(0未受理1正在处理2已受理3二次处理)
 IsDelete int --是否删除(0未删除1已删除)
 )
 alter table fix add XsDate date
