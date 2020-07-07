@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Models;
 using BLL;
 using PagedList;
+using q.Filter;
 
 namespace GC家园.Controllers
 {
+    [Login]
     public class QianduanController : Controller
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();

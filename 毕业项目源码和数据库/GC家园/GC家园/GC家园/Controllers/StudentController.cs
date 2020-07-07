@@ -10,9 +10,11 @@ using Newtonsoft.Json;
 using PagedList;
 using System.Data;
 using System.IO;
+using q.Filter;
 
 namespace GC家园.Controllers
 {
+    [Login]
     public class StudentController : Controller
     {
         GCHomeBLL GCHomeBLL = new GCHomeBLL();

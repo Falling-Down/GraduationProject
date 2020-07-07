@@ -430,7 +430,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                int[] a = new int[] { };
+                int[] a = new int[10] ;
                 return a;
             }
         }
