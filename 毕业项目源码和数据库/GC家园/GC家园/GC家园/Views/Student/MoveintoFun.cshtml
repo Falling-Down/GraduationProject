@@ -91,12 +91,12 @@
                 type: "post",
                 url: "/Student/AjaxDorm",
                 data: { FloorID: FloorID },
-                dataType: "Json",
+                //dataType: "Json",
                 success: function (data) {
                     var msg = jQuery.parseJSON(data);
                     console.log(msg);
                     var select = $("#DormID");
-                    select.html("");
+                    select.empty();
                     for (var i = 0; i < msg.length; i++) {
                         var option = $('<option>' + msg[i].DormName + '</option>');
                         option.val(msg[i].DormID);
@@ -105,7 +105,7 @@
                 },
                 error: function () {
                     var select = $("#DormID");
-                    select.html("");
+                    select.empty();
                 }
             })
         }
