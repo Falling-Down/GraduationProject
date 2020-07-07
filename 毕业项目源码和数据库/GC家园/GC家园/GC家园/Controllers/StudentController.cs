@@ -385,7 +385,7 @@ namespace GC家园.Controllers
         {
             try
             {
-                if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
+                if (GCHomeBLL.StuNumberNewOrnot(StuNumber))
                 {
                     return 1;
                 }
