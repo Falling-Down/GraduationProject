@@ -616,6 +616,25 @@ namespace DAL
             }
         }
 
+        public bool DelMoveout(int MoveoutID) {
+            try
+            {
+                Moveout moveout = db.Moveout.Find(MoveoutID);
+                db.Moveout.Remove(moveout);
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
         public bool UpdateStuOccState(int? StuID)
         {
             try
@@ -727,6 +746,25 @@ namespace DAL
             {
                 Attendance ad = db.Attendance.Find(id);
                 db.Attendance.Remove(ad);
+                int result = db.SaveChanges();
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public bool DelExchange(int ExchangeID) {
+            try
+            {
+                Exchange ex = db.Exchange.Find(ExchangeID);
+                db.Exchange.Remove(ex);
                 int result = db.SaveChanges();
                 if (result > 0)
                 {

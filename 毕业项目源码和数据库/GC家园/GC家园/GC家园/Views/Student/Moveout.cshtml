@@ -7,6 +7,7 @@
 @{
     List<Moveout> Moveoutlist = ViewBag.MoveoutList;
     List<Student> Stulist = ViewBag.StuList;
+    List<Moveinto> Moveintolist = ViewBag.MoveintoList;
 }
 
 <button class="btn btn-success" style="margin-left:60px" onclick="change()">学生迁出</button>
@@ -24,8 +25,11 @@
             <tr>
                 <th>学号</th>
                 <th>姓名</th>
+                <th>原入住楼宇</th>
+                <th>原入住寝室</th>
                 <th>迁出时间</th>
                 <th>备注</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -34,8 +38,17 @@
                 <tr>
                     <td>@item.Student.StuNumber</td>
                     <td>@item.Student.StuName</td>
+                    @foreach (var item1 in Moveintolist as List<Moveinto>)
+                    {
+                        if (item1.StuID == item.StuID)
+                        {
+                            <td>@item1.Floor.FloorName</td>
+                            <td>@item1.Dorm.DormName</td>
+                        }
+                    }
                     <td>@string.Format("{0:D}", item.MoveoutDate)</td>
                     <td>@item.MoveoutMark</td>
+                    <td><a href="/Student/DelMoveout?MoveoutID=@item.MoveoutID" class="btn btn-danger" onclick="return confirm('确定要删除')">删除</a></td>
                 </tr>
             }
         </tbody>

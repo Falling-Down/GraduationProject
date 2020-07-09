@@ -570,13 +570,29 @@ namespace GC家园.Controllers
             }
         }
 
+        public ActionResult DelExchange(int ExchangeID) {
+            try
+            {
+                if (GCHomeBLL.DelExchange(ExchangeID))
+                {
+                    return RedirectToAction("ExchangeFun");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
         public ActionResult Moveout(string StuNumber)
         {
             try
             {
-
                 ViewBag.StuList = GCHomeBLL.StuSelect();
                 ViewBag.MoveoutList = GCHomeBLL.MoveoutSelect(StuNumber);
+                ViewBag.MoveintoList = GCHomeBLL.SelectMoveinto();
                 ViewBag.StuNumber = StuNumber;
                 return View();
             }
@@ -621,6 +637,22 @@ namespace GC家园.Controllers
             }
             catch (Exception)
             {
+                return Content("<script>alert('暂无数据');history.go(-1);</script>");
+            }
+        }
+
+        public ActionResult DelMoveout(int MoveoutID) {
+            try
+            {
+                if (GCHomeBLL.DelMoveout(MoveoutID))
+                {
+                    return RedirectToAction("Moveout");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
                 return Content("<script>alert('暂无数据');history.go(-1);</script>");
             }
         }

@@ -80,6 +80,7 @@
                 <th>原宿舍</th>
                 <th>现楼宇</th>
                 <th>现宿舍</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -92,6 +93,7 @@
                     <td>@item.Dorm1.DormName</td>
                     <td>@item.Floor.FloorName</td>
                     <td>@item.Dorm.DormName</td>
+                    <td><a href="/Student/DelExchange?ExchangeID=@item.ExchangeID" class="btn btn-danger" onclick="return confirm('确定要删除吗？')">删除</a></td>
                 </tr>
             }
         </tbody>

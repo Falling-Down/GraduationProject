@@ -249,6 +249,14 @@ namespace BLL
             return GCHomeDAL.AddMoveout(moout);
         }
 
+        public bool DelMoveout(int MoveoutID) {
+            return GCHomeDAL.DelMoveout(MoveoutID);
+        }
+
+        public bool DelExchange(int ExchangeID) {
+            return GCHomeDAL.DelExchange(ExchangeID);
+        }
+
         public bool UpdateStuOccState(int? StuID)
         {
             return GCHomeDAL.UpdateStuOccState(StuID);
