@@ -489,6 +489,23 @@ namespace DAL
             }
         }
 
+        public bool ajaxOrnotStuCount(string StuCount)
+        {
+            try
+            {
+                if (db.Student.FirstOrDefault(p => p.StuCount == StuCount) != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
         public bool StuNumberNewOrnot1(string StuNumber)
         {
             try

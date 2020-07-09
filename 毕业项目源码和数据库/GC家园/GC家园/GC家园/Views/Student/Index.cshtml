@@ -139,7 +139,7 @@
                     <div class="form-inline a_1">
                         <label>学号：</label>
                         <input type="text" class="form-control" name="StuNumber" id="StuNumber" onblur="lose()" />
-                        <p style="color:red" id="fill"></p>
+                        <p style="color:red" class="fill"></p>
                     </div>
                     <div class="form-inline a_1">
                         <label>姓名：</label>
@@ -147,7 +147,8 @@
                     </div>
                     <div class="form-inline a_1">
                         <label>登录账号：</label>
-                        <input type="text" class="form-control" style="margin-top:10px" name="StuCount" id="StuCount" />
+                        <input type="text" class="form-control" style="margin-top:10px" name="StuCount" id="StuCount" onblur="Countlose()" />
+                        <p style="color:red" class="fillCount"></p>
                     </div>
                     <div class="form-inline a_1">
                         <label>登录密码：</label>
@@ -186,7 +187,8 @@
                     <input type="hidden" name="IsDelete" id="IsDelete" />
                     <div class="form-inline a_1">
                         <label>学号：</label>
-                        <input type="text" class="form-control" name="StuNumber" id="StuNumber" onblur="lose()"/>
+                        <input type="text" class="form-control StuNumber" name="StuNumber" id="StuNumber" onblur="Editlose()" />
+                        <p style="color:red" class="fill"></p>
                     </div>
                     <div class="form-inline a_1">
                         <label>姓名：</label>
@@ -194,7 +196,8 @@
                     </div>
                     <div class="form-inline a_1">
                         <label>登录账号：</label>
-                        <input type="text" class="form-control" style="margin-top:10px" name="StuCount" id="StuCount" />
+                        <input type="text" class="form-control StuCount" style="margin-top:10px" name="StuCount" id="StuCount" onblur="EditCountlose()" />
+                        <p style="color:red" class="fillCount"></p>
                     </div>
                     <div class="form-inline a_1">
                         <label>登录密码：</label>
@@ -299,11 +302,65 @@
                 data: { "StuNumber": StuNumber },
                 success: function (data) {
                     if (data == 1) {
-                        $("#fill").html("学号是唯一的!请重新输入");
+                        $(".fill:eq(0)").html("学号是唯一的!请重新输入");
                         $("#StuNumber").val("");
                     }
                     else {
-                        $("#fill").html("");
+                        $(".fill:eq(0)").html("");
+                    }
+                }
+            })
+        }
+
+        function Editlose() {
+            var StuNumber = $(".StuNumber").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/ajaxOrnotStuNumber",
+                data: { "StuNumber": StuNumber },
+                success: function (data) {
+                    if (data == 1) {
+                        $(".fill:eq(1)").html("学号是唯一的!请重新输入");
+                        $(".StuNumber").val("");
+                    }
+                    else {
+                        $(".fill:eq(1)").html("");
+                    }
+                }
+            })
+        }
+
+        function Countlose() {
+            var StuCount = $("#StuCount").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/ajaxOrnotStuCount",
+                data: { "StuCount": StuCount },
+                success: function (data) {
+                    if (data == 1) {
+                        $(".fillCount:eq(0)").html("已有该账号!请重新输入");
+                        $("#StuCount").val("");
+                    }
+                    else {
+                        $(".fillCount:eq(0)").html("");
+                    }
+                }
+            })
+        }
+
+        function EditCountlose() {
+            var StuCount = $(".StuCount").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/ajaxOrnotStuCount",
+                data: { "StuCount": StuCount },
+                success: function (data) {
+                    if (data == 1) {
+                        $(".fillCount:eq(1)").html("已有该账号!请重新输入");
+                        $(".StuCount").val("");
+                    }
+                    else {
+                        $(".fillCount:eq(1)").html("");
                     }
                 }
             })
@@ -314,7 +371,7 @@
 <script type="text/javascript">
     $("#AddValidate").validate({
         rules: {
-            StuNumber: { required: true, maxlength: 30 },
+            StuNumber: { required: true, maxlength: 12, number: true },
             StuName: { required: true },
             StuCount: { required: true },
             StuPwd: { required: true },
@@ -323,7 +380,7 @@
             StuAge: { required: true }
         },
         messages: {
-            StuNumber: { required: "学号必填", maxlength: "账号输入内容不能超过30字" },
+            StuNumber: { required: "学号必填", maxlength: "输入内容不能超过12字",number:"只能为数字" },
             StuName: { required: "姓名必填" },
             StuCount: { required: "账号必填" },
             StuPwd: { required: "密码必填" },
@@ -335,7 +392,7 @@
 
     $("#EditValidate").validate({
         rules: {
-            StuNumber: { required: true, maxlength: 30 },
+            StuNumber: { required: true, maxlength: 12,number: true },
             StuName: { required: true },
             StuCount: { required: true },
             StuPwd: { required: true },
@@ -344,7 +401,7 @@
             StuAge: { required: true }
         },
         messages: {
-            StuNumber: { required: "学号必填", maxlength: "账号输入内容不能超过30字" },
+            StuNumber: { required: "学号必填", maxlength: "输入内容不能超过12字",number:"只能为数字" },
             StuName: { required: "姓名必填" },
             StuCount: { required: "账号必填" },
             StuPwd: { required: "密码必填" },

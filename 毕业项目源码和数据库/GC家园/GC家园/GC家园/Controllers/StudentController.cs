@@ -385,7 +385,25 @@ namespace GC家园.Controllers
         {
             try
             {
-                if (GCHomeBLL.StuNumberNewOrnot1(StuNumber))
+                if (GCHomeBLL.StuNumberNewOrnot(StuNumber))
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+
+        [HttpPost]
+        public int ajaxOrnotStuCount(string StuCount)
+        {
+            try
+            {
+                if (GCHomeBLL.ajaxOrnotStuCount(StuCount))
                 {
                     return 1;
                 }

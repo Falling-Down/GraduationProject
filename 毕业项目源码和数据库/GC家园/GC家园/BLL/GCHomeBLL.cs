@@ -179,6 +179,10 @@ namespace BLL
             return GCHomeDAL.StuNumberNewOrnot(StuNumber);
         }
 
+        public bool ajaxOrnotStuCount(string StuCount) {
+            return GCHomeDAL.ajaxOrnotStuCount(StuCount);
+        }
+
         public bool StuNumberNewOrnot1(string StuNumber)
         {
             return GCHomeDAL.StuNumberNewOrnot1(StuNumber);
