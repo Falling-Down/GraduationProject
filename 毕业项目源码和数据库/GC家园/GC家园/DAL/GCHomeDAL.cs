@@ -618,6 +618,7 @@ namespace DAL
         public bool AddMoveout(Moveout moout) {
             try
             {
+                moout.IsDelete = 0;
                 db.Moveout.Add(moout);
                 int result = db.SaveChanges();
                 if (result > 0)
