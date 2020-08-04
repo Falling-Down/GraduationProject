@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "FixFun";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+@model PagedList.IPagedList<Fix>
+@using PagedList.Mvc;
+<div style="width:95%;margin:10px auto">
+    <div class="">
+        <form action="" method="post">
+            <div class="form-inline ">
+                <input type="text" placeholder="请输入位置" class="form-control col-lg-offset-4" style="width:250px" name="Adress" value="@ViewBag.Adress" />
+                <button class="btn btn-info">查询</button>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>位置</th>
+                <th>联系方式</th>
+                <th>上报原因</th>
+                <th>上报时间</th>
+                <th>申诉理由</th>
+                <th>申诉时间</th>
+                <th>受理状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(p => p.FixState))
+            {
+                <tr>
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@item.Adress</td>
+                    <td>@item.Phone</td>
+                    <td>@item.FixReason</td>
+                    <td>@string.Format("{0:D}", item.FixDate)</td>
+                    <td>@item.XsReason</td>
+                    <td>@string.Format("{0:D}", item.XsDate)</td>
+                    <td>
+                        @if (item.FixState == 0)
+                        {
+                            @:正在处理
+                        }
+                        else if (item.FixState == 1)
+                        {
+                            @:未受理
+                        }
+                        else
+                        {
+                            @:已受理
+                        }
+                    </td>
+                    <td>
+                        @if (item.FixState == 1)
+                        {
+                            <a href="/Student/UpdateFixState?FixID=@item.FixID" class="btn btn-primary">受理</a>
+                        }
+                        else if (item.FixState == 0)
+                        {
+                            <a href="/Student/UpdateFixState1?FixID=@item.FixID" class="btn btn-primary">完毕</a>
+                        }
+                        else if (item.FixState == 3)
+                        {
+                            @:无需操作
+                        }
+                        else
+                        {
+                            if (item.XsReason == null || item.XsReason == "")
+                            {
+                                @:无需操作
+                            }
+                            else
+                            {
+                                <a href="/Student/UpdateFixState2?FixID=@item.FixID" class="btn btn-danger">二次受理</a>
+                            }
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("FixFun", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+</div>
+

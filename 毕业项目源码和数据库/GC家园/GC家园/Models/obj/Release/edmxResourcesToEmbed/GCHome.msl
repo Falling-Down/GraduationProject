@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GCHomeModelStoreContainer" CdmEntityContainer="GCHomeEntitiesDB">
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="GCHomeModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="StuNumber" ColumnName="StuNumber" />
+          <ScalarProperty Name="StuName" ColumnName="StuName" />
+          <ScalarProperty Name="StuCount" ColumnName="StuCount" />
+          <ScalarProperty Name="StuPwd" ColumnName="StuPwd" />
+          <ScalarProperty Name="StuSex" ColumnName="StuSex" />
+          <ScalarProperty Name="StuAge" ColumnName="StuAge" />
+          <ScalarProperty Name="OccupancyStatus" ColumnName="OccupancyStatus" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="GCHomeModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AdminKinds" ColumnName="AdminKinds" />
+          <ScalarProperty Name="AdminAge" ColumnName="AdminAge" />
+          <ScalarProperty Name="AdminSex" ColumnName="AdminSex" />
+          <ScalarProperty Name="AdminPwd" ColumnName="AdminPwd" />
+          <ScalarProperty Name="AdminCount" ColumnName="AdminCount" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dorm">
+      <EntityTypeMapping TypeName="GCHomeModel.Dorm">
+        <MappingFragment StoreEntitySet="Dorm">
+          <ScalarProperty Name="MoveinDormPeople" ColumnName="MoveinDormPeople" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="DormPeople" ColumnName="DormPeople" />
+          <ScalarProperty Name="DormName" ColumnName="DormName" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="DormID" ColumnName="DormID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Floor">
+      <EntityTypeMapping TypeName="GCHomeModel.Floor">
+        <MappingFragment StoreEntitySet="Floor">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="FloorMark" ColumnName="FloorMark" />
+          <ScalarProperty Name="FloorTime" ColumnName="FloorTime" />
+          <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moveinto">
+      <EntityTypeMapping TypeName="GCHomeModel.Moveinto">
+        <MappingFragment StoreEntitySet="Moveinto">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="MoveintoPeople" ColumnName="MoveintoPeople" />
+          <ScalarProperty Name="MoveintoTime" ColumnName="MoveintoTime" />
+          <ScalarProperty Name="DormID" ColumnName="DormID" />
+          <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="MoveintoID" ColumnName="MoveintoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendance">
+      <EntityTypeMapping TypeName="GCHomeModel.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AttendanceReason" ColumnName="AttendanceReason" />
+          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exchange">
+      <EntityTypeMapping TypeName="GCHomeModel.Exchange">
+        <MappingFragment StoreEntitySet="Exchange">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="NewDormID" ColumnName="NewDormID" />
+          <ScalarProperty Name="NewFloorID" ColumnName="NewFloorID" />
+          <ScalarProperty Name="OldDormID" ColumnName="OldDormID" />
+          <ScalarProperty Name="OldFloorID" ColumnName="OldFloorID" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="ExchangeID" ColumnName="ExchangeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moveout">
+      <EntityTypeMapping TypeName="GCHomeModel.Moveout">
+        <MappingFragment StoreEntitySet="Moveout">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="MoveoutMark" ColumnName="MoveoutMark" />
+          <ScalarProperty Name="MoveoutDate" ColumnName="MoveoutDate" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="MoveoutID" ColumnName="MoveoutID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fix">
+      <EntityTypeMapping TypeName="GCHomeModel.Fix">
+        <MappingFragment StoreEntitySet="Fix">
+          <ScalarProperty Name="XsDate" ColumnName="XsDate" />
+          <ScalarProperty Name="FixDate" ColumnName="FixDate" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="XsReason" ColumnName="XsReason" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="FixState" ColumnName="FixState" />
+          <ScalarProperty Name="FixReason" ColumnName="FixReason" />
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="FixID" ColumnName="FixID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

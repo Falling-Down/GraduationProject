@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GCHomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FloorID" Type="int" />
+    <Property Name="AdminCount" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminPwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminSex" Type="int" />
+    <Property Name="AdminAge" Type="int" />
+    <Property Name="AdminKinds" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="AttendanceID" />
+    </Key>
+    <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="AttendanceDate" Type="date" />
+    <Property Name="AttendanceReason" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Dorm">
+    <Key>
+      <PropertyRef Name="DormID" />
+    </Key>
+    <Property Name="DormID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FloorID" Type="int" />
+    <Property Name="DormName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DormPeople" Type="int" />
+    <Property Name="MoveinDormPeople" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="OldFloorID" Type="int" />
+    <Property Name="OldDormID" Type="int" />
+    <Property Name="NewFloorID" Type="int" />
+    <Property Name="NewDormID" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Fix">
+    <Key>
+      <PropertyRef Name="FixID" />
+    </Key>
+    <Property Name="FixID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="FixReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="XsReason" Type="nvarchar" MaxLength="100" />
+    <Property Name="FixState" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+    <Property Name="FixDate" Type="date" />
+    <Property Name="XsDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Floor">
+    <Key>
+      <PropertyRef Name="FloorID" />
+    </Key>
+    <Property Name="FloorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FloorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FloorTime" Type="date" />
+    <Property Name="FloorMark" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Moveinto">
+    <Key>
+      <PropertyRef Name="MoveintoID" />
+    </Key>
+    <Property Name="MoveintoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="FloorID" Type="int" />
+    <Property Name="DormID" Type="int" />
+    <Property Name="MoveintoTime" Type="date" />
+    <Property Name="MoveintoPeople" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Moveout">
+    <Key>
+      <PropertyRef Name="MoveoutID" />
+    </Key>
+    <Property Name="MoveoutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuID" Type="int" />
+    <Property Name="MoveoutDate" Type="date" />
+    <Property Name="MoveoutMark" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StuID" />
+    </Key>
+    <Property Name="StuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuCount" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuPwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="StuSex" Type="int" />
+    <Property Name="StuAge" Type="int" />
+    <Property Name="OccupancyStatus" Type="int" />
+    <Property Name="IsDelete" Type="int" />
+  </EntityType>
+  <Association Name="FK__Admin__FloorID__0E6E26BF">
+    <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Attendanc__StuID__797309D9">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Dorm__FloorID__7C4F7684">
+    <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Dorm">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__NewDor__07C12930">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="NewDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__NewFlo__06CD04F7">
+    <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="NewFloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__OldDor__05D8E0BE">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="OldDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__OldFlo__04E4BC85">
+    <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="OldFloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__StuID__03F0984C">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Exchange" Type="Self.Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fix__StuID__1BC821DD">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Fix" Type="Self.Fix" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Fix">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__DormID__01142BA1">
+    <End Role="Dorm" Type="Self.Dorm" Multiplicity="0..1" />
+    <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__FloorI__00200768">
+    <End Role="Floor" Type="Self.Floor" Multiplicity="0..1" />
+    <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__StuID__7F2BE32F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Moveinto" Type="Self.Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveout__StuID__0B91BA14">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Moveout" Type="Self.Moveout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Moveout">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GCHomeModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dorm" EntityType="Self.Dorm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fix" EntityType="Self.Fix" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Moveinto" EntityType="Self.Moveinto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Moveout" EntityType="Self.Moveout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Admin__FloorID__0E6E26BF" Association="Self.FK__Admin__FloorID__0E6E26BF">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Attendanc__StuID__797309D9" Association="Self.FK__Attendanc__StuID__797309D9">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Dorm__FloorID__7C4F7684" Association="Self.FK__Dorm__FloorID__7C4F7684">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Dorm" EntitySet="Dorm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__NewDor__07C12930" Association="Self.FK__Exchange__NewDor__07C12930">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__NewFlo__06CD04F7" Association="Self.FK__Exchange__NewFlo__06CD04F7">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__OldDor__05D8E0BE" Association="Self.FK__Exchange__OldDor__05D8E0BE">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__OldFlo__04E4BC85" Association="Self.FK__Exchange__OldFlo__04E4BC85">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__StuID__03F0984C" Association="Self.FK__Exchange__StuID__03F0984C">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fix__StuID__1BC821DD" Association="Self.FK__Fix__StuID__1BC821DD">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Fix" EntitySet="Fix" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__DormID__01142BA1" Association="Self.FK__Moveinto__DormID__01142BA1">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__FloorI__00200768" Association="Self.FK__Moveinto__FloorI__00200768">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__StuID__7F2BE32F" Association="Self.FK__Moveinto__StuID__7F2BE32F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveout__StuID__0B91BA14" Association="Self.FK__Moveout__StuID__0B91BA14">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Moveout" EntitySet="Moveout" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,11 @@
+﻿.modal-footer {
+    text-align: center;
+    margin: 5px 0px 30px 0;
+}
+    .modal-footer .btn {
+        margin: 0px 20px;
+        width: 85px;
+    }
+.a_1 {
+    margin-top:5px;
+}

@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "MoveintoFun1";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+@model PagedList.IPagedList<Student>
+@using PagedList.Mvc;
+    <div style="width:90%;margin:10px auto" id="first">
+        <div class="">
+            <div class="form-inline">
+                <form action="/Student/MoveintoFun1" method="post">
+                    <input type="text" placeholder="请输入学号" class="form-control col-lg-offset-4" style="width:250px" name="StuNumber" value="@ViewBag.StuNumber" />
+                    <button type="submit" class="btn btn-info">查询</button>
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>入住状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.StuNumber</td>
+                        <td>@item.StuName</td>
+                        <td>
+                            @if (item.StuSex == 0)
+                            {
+                                @:女
+                            }
+                            else
+                            {
+                                @:男
+                            }
+                        </td>
+                        <td>@item.StuAge</td>
+                        <td>未入住</td>
+                        <td><a href="/Student/MoveintoFun?StuNumber=@item.StuNumber" class="btn btn-primary">学生入住</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        共 @Model.TotalItemCount 条，
+        每页 @Model.PageSize 条，
+        共 @Model.PageCount 页，
+        当前第 @Model.PageNumber 页
+        @Html.PagedListPager(Model, page => Url.Action("MoveintoFun1", new { page, StuNumber = ViewBag.StuNumber }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+    </div>
+

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Important";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+@{ 
+    Student stu = ViewBag.Sst;
+    Moveinto into = ViewBag.Mst;
+}
+<style>
+    * {
+        margin:0px;
+        padding:0px;
+    }
+</style>
+<div style="background-image:url('/images/下载.png');background-size: contain;height:600px">
+    <div style="width:40%;height:auto;transform:translateY(80%);margin-left:10%;">
+        <h2>个人信息</h2>
+        <div class="form-group" style="width:100%;height:20px;margin-top:20px">
+            <label for="firstname" class="col-sm-2 control-label">学生学号</label>
+            <div class="col-sm-9">
+                <label>@stu.StuNumber</label>
+            </div>
+        </div>
+        <div class="form-group" style="width:100%;height:20px">
+            <label for="lastname" class="col-sm-2 control-label">学生姓名</label>
+            <div class="col-sm-9">
+                <label>@stu.StuName</label>
+            </div>
+        </div>
+        <div class="form-group" style="width:100%;height:20px">
+            <label for="lastname" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-9">
+                @if (stu.StuSex == 1)
+                {
+                    <label>男</label>
+                }
+                else
+                {
+                    <label>女</label>
+                }
+            </div>
+        </div>
+        <div class="form-group" style="width:100%;height:20px">
+            <label for="lastname" class="col-sm-2 control-label">年龄</label>
+            <div class="col-sm-9">
+                <label>@stu.StuAge</label>
+            </div>
+        </div>
+    </div>
+    <div style="width:62%;height:auto;transform:translate(100%,-20%);">
+        <h2>入住信息</h2>
+        @if (stu.OccupancyStatus == 1)
+        {
+            <div class="form-group" style="width:100%;height:20px;margin-top:20px">
+                <label for="firstname" class="col-sm-2 control-label">楼宇</label>
+                <div class="col-sm-9">
+                    <label>@into.Floor.FloorName</label>
+                </div>
+            </div>
+            <div class="form-group" style="width:100%;height:20px">
+                <label for="lastname" class="col-sm-2 control-label">宿舍</label>
+                <div class="col-sm-9">
+                    <label>@into.Dorm.DormName</label>
+                </div>
+            </div>
+            <div class="form-group" style="width:100%;height:20px">
+                <label for="lastname" class="col-sm-2 control-label">寝室规格</label>
+                <div class="col-sm-9">
+                    <label> @ViewBag.People 人寝</label>
+                </div>
+            </div>
+            <div class="form-group" style="width:100%;height:20px">
+                <label for="lastname" class="col-sm-2 control-label">入住时间</label>
+                <div class="col-sm-9">
+                    <label>@string.Format("{0:D}", into.MoveintoTime) </label>
+                </div>
+            </div>
+            <div class="form-group" style="width:100%;height:50px">
+                <label for="lastname" class="col-sm-2 control-label">登记人</label>
+                <div class="col-sm-9">
+                    <label>@into.MoveintoPeople</label>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group" style="width:100%;height:20px;margin-top:20px">
+                <label for="firstname" class="col-sm-2 control-label">暂无入住信息</label>
+                <div class="col-sm-9">
+                    <label></label>
+                </div>
+            </div>
+        }
+    </div>
+</div>

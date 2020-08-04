@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+        
+
+    <title></title>
+
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+
+
+
+    <link href="~/Content/cover.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">GC家园</h3>
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <li class="active"><a href="#">首页</a></li>
+                                <li><a href="#">关于</a></li>
+                                <li><a href="#">联系我们</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="inner cover">
+                    <div class="inner_cover_my_tag">
+                        <h4>Welcome to GCHome</h4>
+                        <h1>Please Login in</h1>
+                        <a class="btn-md" data-toggle="modal" data-target="#Login"><span>登录</span></a>
+                    </div>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Do your best</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel" >模态框（Modal）标题</h4>
+                    </div>*@
+                <form method="post" action="">
+                    <div class="modal-body">
+                        <input type="text" class="form-control" placeholder="请输入用户名" name="Count" />
+                        <input type="password" class="form-control" placeholder="请输入密码" name="Password" />
+                        <select class="form-control" style="text-align: center; text-align-last: center; color: #989AA1;" name="Role">
+                            <option value="0">楼宇管理员</option>
+                            <option value="1">系统管理员</option>
+                            <option value="2">学生</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+

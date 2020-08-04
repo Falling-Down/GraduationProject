@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "AttendanCenterIndex";
+    Layout = "~/Views/Shared/_LayoutStudentGCHome.cshtml";
+}
+@using Models
+@model PagedList.IPagedList<Attendance>
+@using PagedList.Mvc;
+    <style>
+        .pagination > li > a, .pagination > li > span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+            z-index: 3;
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .pagination > li:first-child > a, .pagination > li:first-child > span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .pagination > li:last-child > a, .pagination > li:last-child > span {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .pagination > li:first-child > a, .pagination > li:first-child > span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+    </style>
+<div style="width:80%;margin:0px auto;margin-bottom:27.5%">
+    <table class="table table-bordered" style="transform:translateY(20px);font-size:smaller">
+        <thead class="thead-light">
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>晚归日期</th>
+                <th>晚归原因</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="line-height:40px">
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@string.Format("{0:D}", item.AttendanceDate)</td>
+                    <td>@item.AttendanceReason</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("AttendanCenterIndex", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+</div>
+

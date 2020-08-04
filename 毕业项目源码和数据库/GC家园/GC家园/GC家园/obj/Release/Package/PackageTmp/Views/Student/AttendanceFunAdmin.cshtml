@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "AttendanceFunAdmin";
+    Layout = "~/Views/Shared/_LayoutAdminGCHome.cshtml";
+}
+@using Models
+@model PagedList.IPagedList<Attendance>
+@using PagedList.Mvc;
+<div style="width:90%;margin:10px auto" id="first">
+    <div class="">
+        <div class="form-inline">
+            <form action="/Student/AttendanceFunAdmin" method="post">
+                <input type="text" placeholder="请输入学号/姓名" class="form-control col-lg-offset-4" style="width:250px" name="NumberOrName" value="@ViewBag.Name" />
+                <button type="submit" class="btn btn-info">查询</button>
+            </form>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>晚归日期</th>
+                <th>晚归原因</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Student.StuNumber</td>
+                        <td>@item.Student.StuName</td>
+                        <td>@string.Format("{0:D}", item.AttendanceDate) </td>
+                        <td>@item.AttendanceReason</td>
+                        <td><a href="/Student/DelAttendanceAdmin/@item.AttendanceID" class="btn btn-default" onclick="return confirm('确定删除吗')">删除</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("AttendanceFunAdmin", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+</div>
+

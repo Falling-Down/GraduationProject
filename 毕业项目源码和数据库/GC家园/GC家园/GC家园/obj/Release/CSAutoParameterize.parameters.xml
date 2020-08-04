@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="GCHomeEntitiesDB-Web.config Connection String" description="GCHomeEntitiesDB 由应用程序在 web.config 中用来访问数据库的连接字符串。" defaultValue="metadata=res://*/GCHome.csdl|res://*/GCHome.ssdl|res://*/GCHome.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.;initial catalog=GCHome;user id=sa;password=12345;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\毕业项目\\毕业项目源码和数据库\\GC家园\\GC家园\\GC家园\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GCHomeEntitiesDB']/@connectionString" />
+  </parameter>
+</parameters>

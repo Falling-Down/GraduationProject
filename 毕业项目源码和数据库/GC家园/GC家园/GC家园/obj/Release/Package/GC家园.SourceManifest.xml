@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\毕业项目\毕业项目源码和数据库\GC家园\GC家园\GC家园\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

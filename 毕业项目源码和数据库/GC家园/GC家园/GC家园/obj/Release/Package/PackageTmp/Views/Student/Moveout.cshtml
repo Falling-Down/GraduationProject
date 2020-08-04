@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Moveout";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+@using Models
+@{
+    List<Moveout> Moveoutlist = ViewBag.MoveoutList;
+    List<Student> Stulist = ViewBag.StuList;
+    List<Moveinto> Moveintolist = ViewBag.MoveintoList;
+}
+
+<button class="btn btn-success" style="margin-left:60px" onclick="change()">学生迁出</button>
+<div style="width:90%;margin:10px auto" id="first">
+    <div class="">
+        <form action="/Student/Moveout" method="post">
+            <div class="form-inline">
+                <input type="text" placeholder="请输入学号" class="form-control  col-lg-offset-4" style="width:250px" name="StuNumber" value="@ViewBag.StuNumber" />
+                <button class="btn btn-info">查询</button>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>原入住楼宇</th>
+                <th>原入住寝室</th>
+                <th>迁出时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Moveoutlist as List<Moveout>)
+            {
+                <tr>
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    @foreach (var item1 in Moveintolist as List<Moveinto>)
+                    {
+                        if (item1.StuID == item.StuID)
+                        {
+                            <td>@item1.Floor.FloorName</td>
+                            <td>@item1.Dorm.DormName</td>
+                        }
+                    }
+                    <td>@string.Format("{0:D}", item.MoveoutDate)</td>
+                    <td>@item.MoveoutMark</td>
+                    <td><a href="/Student/DelMoveout?MoveoutID=@item.MoveoutID" class="btn btn-danger" onclick="return confirm('确定要删除')">删除</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="width:90%;margin:10px auto" id="second" class="hidden">
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>入住状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Stulist as List<Student>)
+            {
+                <tr>
+                    <td>@item.StuNumber</td>
+                    <td>@item.StuName</td>
+                    <td>
+                        @if (item.StuSex == 1)
+                        {
+                            @:男
+                        }
+                        else
+                        {
+                            @:女
+                        }
+                    </td>
+                    <td>@item.StuAge</td>
+                    <td>
+                        @if (item.OccupancyStatus == 0)
+                        {
+                            @:未入住
+                        }
+                        else if (item.OccupancyStatus == 1)
+                        {
+                            @:已入住
+                        }
+                    </td>
+                    <td><a href="/Student/AddMoveout/@item.StuID" class="btn btn-info">迁出</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        function change() {
+            if ($("#first").is(":visible")) {
+                $("#first").addClass("hidden");
+                $("#second").addClass("show").removeClass("hidden");
+                return;
+            }
+            if ($("#first").is(":hidden")) {
+                $("#first").addClass("show").removeClass("hidden");
+                $("#second").addClass("hidden").removeClass("show");
+
+            }
+        }
+    </script>
+}
+

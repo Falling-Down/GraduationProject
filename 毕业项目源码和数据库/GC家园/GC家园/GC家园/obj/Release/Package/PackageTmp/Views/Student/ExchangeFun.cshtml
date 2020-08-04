@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "ExchangeFun";
+    Layout = "~/Views/Shared/_LayoutGCHome.cshtml";
+}
+
+@using Models
+@{
+    List<Floor> Floorlist = ViewBag.FloorList;
+    List<Exchange> Exchangelist = ViewBag.ExchangeList;
+}
+@using Models
+@model PagedList.IPagedList<Student>
+@using PagedList.Mvc;
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<style>
+    label.error {
+        color: red;
+    }
+</style>
+<button class="btn bg-primary " style="margin-left:60px" onclick="change()">寝室调换信息</button>
+<div style="width:90%;margin:10px auto" id="first" >
+    <div class="">
+        <div class="form-inline">
+            <form action="/Student/ExchangeFun" method="post">
+                <input type="text" placeholder="请输入学号" class="form-control col-lg-offset-4" style="width:250px" name="StuNumber" value="@ViewBag.StuNumber" />
+                <button type="submit" class="btn btn-info">查询</button>
+            </form>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>入住状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StuNumber</td>
+                    <td>@item.StuName</td>
+                    <td>
+                        @if (item.StuSex == 0)
+                        {
+                            @:女
+                        }
+                        else
+                        {
+                            @:男
+                        }
+                    </td>
+                    <td>@item.StuAge</td>
+                    <td>已入住</td>
+                    <td><a href="/Student/ExchangeFun1?StuNumber=@item.StuNumber" class="btn btn-info">寝室调换</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    共 @Model.TotalItemCount 条，
+    每页 @Model.PageSize 条，
+    共 @Model.PageCount 页，
+    当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("ExchangeFun", new { page, StuNumber = ViewBag.StuNumber }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 5 })
+</div>
+<div style="width:90%;margin:10px auto" id="second" class="hidden">
+
+    <table class="table table-bordered table-striped" style="transform:translateY(20px)">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>原楼宇</th>
+                <th>原宿舍</th>
+                <th>现楼宇</th>
+                <th>现宿舍</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Exchangelist as List<Exchange>)
+            {
+                <tr>
+                    <td>@item.Student.StuNumber</td>
+                    <td>@item.Student.StuName</td>
+                    <td>@item.Floor1.FloorName</td>
+                    <td>@item.Dorm1.DormName</td>
+                    <td>@item.Floor.FloorName</td>
+                    <td>@item.Dorm.DormName</td>
+                    <td><a href="/Student/DelExchange?ExchangeID=@item.ExchangeID" class="btn btn-danger" onclick="return confirm('确定要删除吗？')">删除</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        function change() {
+            if ($("#first").is(":visible")) {
+                $("#first").addClass("hidden");
+                $("#second").addClass("show").removeClass("hidden");
+                return;
+            }
+            if ($("#first").is(":hidden")) {
+                $("#first").addClass("show").removeClass("hidden");
+                $("#second").addClass("hidden").removeClass("show");
+
+            }
+        }
+
+        function lose() {
+            var StuNumber = $("#StuNumber").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/ajaxOrnotStuNumberandMoin",
+                data: { "StuNumber": StuNumber },
+                async: false,
+                success: function (data) {
+                    console.log("123");
+                    if (data == 0) {
+                        $("#fill").html("没有该学生!请重新输入");
+                        $("#OldFloorName").html("");
+                        $("#OldDormName").html("");
+                        $("#StuNumber").val("");
+                    }
+                    else if (data == 1) {
+                        $("#fill").html("该学生暂未入住!请重新输入");
+                        $("#OldFloorName").html("");
+                        $("#OldDormName").html("");
+                        $("#StuNumber").val("");
+                    }
+                    else {
+                        $("#fill").html("");
+                        $.ajax({
+                            type: "post",
+                            url: "/Student/ajaxFloorAndDorm",
+                            data: { "StuNumber": StuNumber },
+                            dataType: "Json",
+                            async: false,
+                            success: function (data) {
+                                console.log(data);
+                                var msg = jQuery.parseJSON(data);
+                                $("#OldFloorName").html(msg.Floor.FloorName);
+                                $("#OldDormName").html(msg.Dorm.DormName);
+                                $("#OldFloorID").val(msg.FloorID);
+                                $("#OldDormID").val(msg.DormID);
+                                console.log(msg.FloorID)
+                                console.log(msg.DormID);
+                            }
+                        })
+                    }
+                }
+            })
+        }
+
+        function Newchange() {
+            var FloorID = $("#NewFloorID").val();
+            $.ajax({
+                type: "post",
+                url: "/Student/AjaxDorm",
+                data: { FloorID: FloorID },
+                dataType: "Json",
+                success: function (data) {
+                    var msg = jQuery.parseJSON(data);
+                    console.log(msg);
+                    var select = $("#NewDormID");
+                    select.html("");
+                    for (var i = 0; i < msg.length; i++) {
+                        var option = $('<option>' + msg[i].DormName + '</option>');
+                        option.val(msg[i].DormID);
+                        select.append(option);
+                    }
+                },
+                error: function () {
+                    var select = $("#NewDormID");
+                    select.html("");
+                }
+            })
+        }
+    </script>
+}
+
+<script type="text/javascript">
+    $("#AddValidate").validate({
+        rules: {
+            StuNumber: { required: true },
+            NewFloorID: { required: true },
+            NewDormID: { required: true }
+        },
+        messages: {
+            StuNumber: { required: "学号必填" },
+            NewFloorID: { required: "请选择现楼宇" },
+            NewDormID: { required: "请选择现宿舍" }
+        }
+    })
+</script>

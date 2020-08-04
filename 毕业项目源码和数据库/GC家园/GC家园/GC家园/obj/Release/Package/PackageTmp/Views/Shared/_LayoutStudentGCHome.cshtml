@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style.default.css" rel="stylesheet" id="theme-stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg py-lg-0">
+            <div class="container">
+                <a href="#" class="navbar-brand text-uppercase font-weight-bold">GC家园</a>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto d-lg-flex align-items-lg-center">
+                        @if (ViewContext.RouteData.Values["controller"].ToString() == "Qianduan" && ViewContext.RouteData.Values["action"].ToString() == "Index")
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/Index" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4 active">首页 </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/Index" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4">首页 </a>
+                            </li>
+                        }
+                        @if (ViewContext.RouteData.Values["controller"].ToString() == "Qianduan" && ViewContext.RouteData.Values["action"].ToString() == "FixCenter")
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/FixCenter" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4 active">寝室报修 </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/FixCenter" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4">寝室报修 </a>
+                            </li>
+                        }
+                        @if (ViewContext.RouteData.Values["controller"].ToString() == "Qianduan" && ViewContext.RouteData.Values["action"].ToString() == "AttendanCenter")
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/AttendanCenter" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4 active">缺勤记录 </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="/Qianduan/AttendanCenter" class="nav-link font-weight-bold text-uppercase px-lg-3 py-lg-4">缺勤记录 </a>
+                            </li>
+                        }
+                        <li class="nav-item mt-4 mt-lg-0">
+                            <a href="/Login/SignOut" class="btn btn-outline-primary nav-btn btn-sm" onclick="return confirm('确定要注销吗？')">注销</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    @RenderBody()
+    <footer style="background: #eee" class="pt-5">
+        <div class="bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left mb-1 mb-lg-0">
+                        <p class="small text-gray mb-0">©2020 一起加油</p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <p class="small text-gray mb-0">愿你有梦为马&nbsp;&nbsp;&nbsp;随处可栖</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

@@ -1,3 +1,5 @@
+create database GCHome
+use GCHome
 create table Student( --学生表
 StuID int primary key identity(1,1), --学生ID
 StuNumber nvarchar(50), --学生学号

@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+</head>
+
+<body class="user-select">
+    <section class="container-fluid">
+        <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">GC家园</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li class="dropdown">
+                                <a href="#">
+                                    @if (Session["Name"] != null)
+                                    {
+                                        @Session["Name"].ToString()
+                                    }
+                                </a>
+                            </li>
+                            <li><a href="/Login/SignOut" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+                        </ul>
+                        <form action="/Student/Important" method="post" class="navbar-form navbar-right" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" autocomplete="off" placeholder="请输入学生学号" maxlength="15" name="StuNumber" value="@ViewBag.tishi">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">搜索</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="row">
+            <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+                @if (Session["Count"] == null)
+                {
+                    <ul class="nav nav-sidebar">
+                        <li class="active"><a href="/Login/Home">首页</a></li>
+                    </ul>
+                }
+                else
+                {
+                    if (Session["Role"].ToString() == "1" || Session["Role"].ToString() == null)
+                    {
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Login" && ViewContext.RouteData.Values["action"].ToString() == "Home")
+                            {
+                                <li class="active"><a href="/Login/Home">首页</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Login/Home">首页</a></li>
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Index")
+                            {
+                                <li class="active"><a href="/Student/Index">学生管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/Index">学生管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun1" || ViewContext.RouteData.Values["action"].ToString() == "MoveintoFun")
+                            {
+                                <li class="active"><a href="/Student/MoveintoFun1">学生入住管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/MoveintoFun1">学生入住管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "AttendanceFun")
+                            {
+                                <li class="active"><a href="/Student/AttendanceFun">学生缺勤管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/AttendanceFun">学生缺勤管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && (ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun" || ViewContext.RouteData.Values["action"].ToString() == "ExchangeFun1"))
+                            {
+                                <li class="active"><a href="/Student/ExchangeFun">学生寝室调换</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/ExchangeFun">学生寝室调换</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Moveout" || ViewContext.RouteData.Values["action"].ToString() == "AddMoveout")
+                            {
+                                <li class="active"><a href="/Student/Moveout">学生迁出记录</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/Moveout">学生迁出记录</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "FixFun")
+                            {
+                                <li class="active"><a href="/Student/FixFun">学生上报中心</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/FixFun">学生上报中心</a></li>
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Index")
+                            {
+                                <li class="active"><a href="/Admin/Index">楼宇管理员管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Admin/Index">楼宇管理员管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "FloorFun")
+                            {
+                                <li class="active"><a href="/Admin/FloorFun">楼宇管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Admin/FloorFun">楼宇管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "DormFun")
+                            {
+                                <li class="active"><a href="/Admin/DormFun">宿舍管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Admin/DormFun">宿舍管理</a></li>
+                            }
+                        </ul>
+                    }
+                    if (Session["Role"].ToString() == "0")
+                    {
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Login" && ViewContext.RouteData.Values["action"].ToString() == "Home1")
+                            {
+                                <li class="active"><a href="/Login/Home1">首页</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Login/Home1">首页</a></li>
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Index1")
+                            {
+                                <li class="active"><a href="/Student/Index1">学生管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/Index1">学生管理</a></li>
+                            }
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "AttendanceFunAdmin")
+                            {
+                                <li class="active"><a href="/Student/AttendanceFunAdmin">学生缺勤管理</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/AttendanceFunAdmin">学生缺勤管理</a></li>
+                            }
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "UpdatePwd")
+                            {
+                                <li class="active"><a href="/Student/UpdatePwd">修改密码</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Student/UpdatePwd">修改密码</a></li>
+                            }
+                        </ul>
+                    }
+                    if (Session["Role"].ToString() == "2")
+                    {
+                        <ul class="nav nav-sidebar">
+                            <li class="active"><a href="/Login/Home">首页</a></li>
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            <li><a href="/Student/Moveout">我的缺勤记录</a></li>
+                        </ul>
+                    }
+                }
+            </aside>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+                @RenderBody()
+            </div>
+
+        </div>
+    </section>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script type="text/javascript">
+
+    //$(".row ul").on("click", "li", function () {
+    //    alert();
+    //    $(".row ul li").removeClass("active");
+    //    $(this).addClass("active");
+    //});
+
+    
+        $('.row ul li').click(function () {
+            $(".row ul li").removeClass("active");
+        $(this).addClass("active");
+    })
+
+
+        //function nbclass() {
+        //    $.ajax({
+        //    type: "post",
+        //    url: "/Student/Index",
+        //        success: function (data) {
+        //          $("#main").html(data);
+        //      }
+        //})
+        //}
+    </script>

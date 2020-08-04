@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GCHomeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StuID" />
+    </Key>
+    <Property Name="StuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StuSex" Type="Int32" />
+    <Property Name="StuAge" Type="Int32" />
+    <Property Name="OccupancyStatus" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Student" ToRole="Moveinto" />
+    <NavigationProperty Name="Attendance" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Student" ToRole="Attendance" />
+    <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Student" ToRole="Exchange" />
+    <NavigationProperty Name="Moveout" Relationship="GCHomeModel.FK__Moveout__StuID__5EBF139D" FromRole="Student" ToRole="Moveout" />
+    <NavigationProperty Name="Fix" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Student" ToRole="Fix" />
+  </EntityType>
+  <EntityContainer Name="GCHomeEntitiesDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Student" EntityType="Self.Student" />
+    <EntitySet Name="Admin" EntityType="GCHomeModel.Admin" />
+    <EntitySet Name="Dorm" EntityType="GCHomeModel.Dorm" />
+    <EntitySet Name="Floor" EntityType="GCHomeModel.Floor" />
+    <EntitySet Name="Moveinto" EntityType="GCHomeModel.Moveinto" />
+    <AssociationSet Name="FK__Admin__FloorID__3F466844" Association="GCHomeModel.FK__Admin__FloorID__3F466844">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Dorm__FloorID__49C3F6B7" Association="GCHomeModel.FK__Dorm__FloorID__49C3F6B7">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Dorm" EntitySet="Dorm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__DormID__4E88ABD4" Association="GCHomeModel.FK__Moveinto__DormID__4E88ABD4">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__FloorI__4D94879B" Association="GCHomeModel.FK__Moveinto__FloorI__4D94879B">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Moveinto__StuID__4CA06362" Association="GCHomeModel.FK__Moveinto__StuID__4CA06362">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Moveinto" EntitySet="Moveinto" />
+    </AssociationSet>
+    <EntitySet Name="Attendance" EntityType="GCHomeModel.Attendance" />
+    <AssociationSet Name="FK__Attendanc__StuID__5165187F" Association="GCHomeModel.FK__Attendanc__StuID__5165187F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <EntitySet Name="Exchange" EntityType="GCHomeModel.Exchange" />
+    <AssociationSet Name="FK__Exchange__StuID__5535A963" Association="GCHomeModel.FK__Exchange__StuID__5535A963">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__NewDor__5BE2A6F2" Association="GCHomeModel.FK__Exchange__NewDor__5BE2A6F2">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__OldDor__59FA5E80" Association="GCHomeModel.FK__Exchange__OldDor__59FA5E80">
+      <End Role="Dorm" EntitySet="Dorm" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__NewFlo__5AEE82B9" Association="GCHomeModel.FK__Exchange__NewFlo__5AEE82B9">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exchange__OldFlo__59063A47" Association="GCHomeModel.FK__Exchange__OldFlo__59063A47">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Exchange" EntitySet="Exchange" />
+    </AssociationSet>
+    <EntitySet Name="Moveout" EntityType="GCHomeModel.Moveout" />
+    <AssociationSet Name="FK__Moveout__StuID__5EBF139D" Association="GCHomeModel.FK__Moveout__StuID__5EBF139D">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Moveout" EntitySet="Moveout" />
+    </AssociationSet>
+    <EntitySet Name="Fix" EntityType="GCHomeModel.Fix" />
+    <AssociationSet Name="FK__Fix__StuID__160F4887" Association="GCHomeModel.FK__Fix__StuID__160F4887">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Fix" EntitySet="Fix" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FloorID" Type="Int32" />
+    <Property Name="AdminCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminSex" Type="Int32" />
+    <Property Name="AdminAge" Type="Int32" />
+    <Property Name="AdminKinds" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Admin__FloorID__3F466844" FromRole="Admin" ToRole="Floor" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Dorm">
+    <Key>
+      <PropertyRef Name="DormID" />
+    </Key>
+    <Property Name="DormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FloorID" Type="Int32" />
+    <Property Name="DormName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DormPeople" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Dorm" ToRole="Floor" />
+    <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Dorm" ToRole="Moveinto" />
+    <Property Name="MoveinDormPeople" Type="Int32" />
+    <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__NewDor__5BE2A6F2" FromRole="Dorm" ToRole="Exchange" />
+    <NavigationProperty Name="Exchange1" Relationship="GCHomeModel.FK__Exchange__OldDor__59FA5E80" FromRole="Dorm" ToRole="Exchange" />
+  </EntityType>
+  <EntityType Name="Floor">
+    <Key>
+      <PropertyRef Name="FloorID" />
+    </Key>
+    <Property Name="FloorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FloorTime" Type="DateTime" Precision="0" />
+    <Property Name="FloorMark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="GCHomeModel.FK__Admin__FloorID__3F466844" FromRole="Floor" ToRole="Admin" />
+    <NavigationProperty Name="Dorm" Relationship="GCHomeModel.FK__Dorm__FloorID__49C3F6B7" FromRole="Floor" ToRole="Dorm" />
+    <NavigationProperty Name="Moveinto" Relationship="GCHomeModel.FK__Moveinto__FloorI__4D94879B" FromRole="Floor" ToRole="Moveinto" />
+    <NavigationProperty Name="Exchange" Relationship="GCHomeModel.FK__Exchange__NewFlo__5AEE82B9" FromRole="Floor" ToRole="Exchange" />
+    <NavigationProperty Name="Exchange1" Relationship="GCHomeModel.FK__Exchange__OldFlo__59063A47" FromRole="Floor" ToRole="Exchange" />
+  </EntityType>
+  <EntityType Name="Moveinto">
+    <Key>
+      <PropertyRef Name="MoveintoID" />
+    </Key>
+    <Property Name="MoveintoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="FloorID" Type="Int32" />
+    <Property Name="DormID" Type="Int32" />
+    <Property Name="MoveintoTime" Type="DateTime" Precision="0" />
+    <Property Name="MoveintoPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Dorm" Relationship="GCHomeModel.FK__Moveinto__DormID__4E88ABD4" FromRole="Moveinto" ToRole="Dorm" />
+    <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Moveinto__FloorI__4D94879B" FromRole="Moveinto" ToRole="Floor" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Moveinto__StuID__4CA06362" FromRole="Moveinto" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK__Admin__FloorID__3F466844">
+    <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Admin" Role="Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Dorm__FloorID__49C3F6B7">
+    <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Dorm">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__DormID__4E88ABD4">
+    <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="DormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__FloorI__4D94879B">
+    <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Moveinto__StuID__4CA06362">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Moveinto" Role="Moveinto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Moveinto">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="AttendanceID" />
+    </Key>
+    <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
+    <Property Name="AttendanceReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Attendanc__StuID__5165187F" FromRole="Attendance" ToRole="Student" />
+    <Property Name="IsDelete" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__Attendanc__StuID__5165187F">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Attendance" Role="Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="OldFloorID" Type="Int32" />
+    <Property Name="OldDormID" Type="Int32" />
+    <Property Name="NewFloorID" Type="Int32" />
+    <Property Name="NewDormID" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Exchange__StuID__5535A963" FromRole="Exchange" ToRole="Student" />
+    <NavigationProperty Name="Dorm" Relationship="GCHomeModel.FK__Exchange__NewDor__5BE2A6F2" FromRole="Exchange" ToRole="Dorm" />
+    <NavigationProperty Name="Dorm1" Relationship="GCHomeModel.FK__Exchange__OldDor__59FA5E80" FromRole="Exchange" ToRole="Dorm" />
+    <NavigationProperty Name="Floor" Relationship="GCHomeModel.FK__Exchange__NewFlo__5AEE82B9" FromRole="Exchange" ToRole="Floor" />
+    <NavigationProperty Name="Floor1" Relationship="GCHomeModel.FK__Exchange__OldFlo__59063A47" FromRole="Exchange" ToRole="Floor" />
+  </EntityType>
+  <Association Name="FK__Exchange__StuID__5535A963">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__NewDor__5BE2A6F2">
+    <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="NewDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__OldDor__59FA5E80">
+    <End Type="GCHomeModel.Dorm" Role="Dorm" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dorm">
+        <PropertyRef Name="DormID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="OldDormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__NewFlo__5AEE82B9">
+    <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="NewFloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exchange__OldFlo__59063A47">
+    <End Type="GCHomeModel.Floor" Role="Floor" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Exchange" Role="Exchange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Exchange">
+        <PropertyRef Name="OldFloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Moveout">
+    <Key>
+      <PropertyRef Name="MoveoutID" />
+    </Key>
+    <Property Name="MoveoutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="MoveoutDate" Type="DateTime" Precision="0" />
+    <Property Name="MoveoutMark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Moveout__StuID__5EBF139D" FromRole="Moveout" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK__Moveout__StuID__5EBF139D">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Moveout" Role="Moveout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Moveout">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Fix">
+    <Key>
+      <PropertyRef Name="FixID" />
+    </Key>
+    <Property Name="FixID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuID" Type="Int32" />
+    <Property Name="FixReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FixState" Type="Int32" />
+    <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="GCHomeModel.FK__Fix__StuID__160F4887" FromRole="Fix" ToRole="Student" />
+    <Property Name="XsReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FixDate" Type="DateTime" Precision="0" />
+    <Property Name="XsDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK__Fix__StuID__160F4887">
+    <End Type="GCHomeModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="GCHomeModel.Fix" Role="Fix" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StuID" />
+      </Principal>
+      <Dependent Role="Fix">
+        <PropertyRef Name="StuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
